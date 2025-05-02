@@ -1,0 +1,93 @@
+<odoo>
+    <record id="setu_gate_entry_register_tree_view" model="ir.ui.view">
+        <field name="name">setu.gate.entry.register.tree.view</field>
+        <field name="model">setu.gate.entry.register</field>
+        <field name="arch" type="xml">
+            <tree create="1">
+                <field name="type"/>
+                <field name="date"/>
+                <field name="visitor_name"/>
+                <field name="visitor_contact"/>
+                <field name="visitor_company"/>
+                <field name="in_time_visitor"/>
+                <field name="out_time_visitor"/>
+                <field name="visitor_vehicle_no"/>
+                <field name="person_to_meet_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="setu_gate_entry_register_form_view" model="ir.ui.view">
+        <field name="name">setu.gate.entry.register.form.view</field>
+        <field name="model">setu.gate.entry.register</field>
+        <field name="arch" type="xml">
+            <form create="1" edit="1" string="Gate Entry Registration">
+                <header>
+                    <button type="object" name="in_button" string="In" class="btn-secondary"
+                            invisible="state in ['in', 'out', 'cancel']"/>
+                    <button type="object" name="out_button" string="Out" class="btn-secondary"
+                            invisible="state in ['on_way','out','cancel']"/>
+                    <button type="object" name="cancel_button" string="Cancel" class="btn-secondary"
+                            invisible="state == 'cancel'"/>
+                    <field name="state" widget="statusbar" class="o_field_statusbar"
+                           options="{'clickable': '0'}"
+                    />
+                </header>
+                <sheet>
+                    <div class="oe_title mb-3">
+                        <span class="o_form_label">Token No.</span>
+                        <h3 class="d-flex">
+                            <field name="name" readonly="1"/>
+                        </h3>
+                    </div>
+                    <group>
+                        <field name="type" invisible="1"/>
+                        <group string="Visitor Info" invisible="type not in ['inward', 'outward']">
+
+                            <field name="visitor_name" required="type in ['inward','outward']"/>
+                            <field name="visitor_contact" required="type in ['inward','outward']"/>
+                            <field name="visitor_email"/>
+                            <field name="visitor_company" required="type in ['inward','outward']"/>
+                            <field name="visitor_vehicle_no" required="type in ['inward','outward']"/>
+                            <field name="in_time_visitor"/>
+                            <field name="out_time_visitor"/>
+                            <field name="reason"/>
+                        </group>
+
+                        <group string="Visitor Info" invisible="type != 'visitor'">
+                            <field name="visitor_name" required="type == 'visitor'"/>
+                            <field name="visitor_contact" required="type == 'visitor'"/>
+                            <field name="visitor_email"/>
+                            <field name="un_visitor_count"/>
+                            <field name="visitor_vehicle_no"/>
+                            <field name="in_time_visitor"/>
+                            <field name="out_time_visitor"/>
+                            <field name="un_visitor_reason"/>
+                        </group>
+
+                        <group string="User Info">
+
+                            <field name="person_to_meet_id"/>
+                            <field name="date"
+                                   required="type in ['inward','outward']"/>
+                            <field name="company_id"
+                                   required="type in ['inward','outward']"/>
+                            <!--                            <field name="state" invisible="1" attrs="{'invisible': [('type', '!=', 'inward')]}"/>-->
+                            <!--                            <separator orientation="vertical" string="Product Info"/>-->
+                            <!--                            <field name="product_id"-->
+                            <!--                                   required="type in ['inward','outward']"/>-->
+                            <!--                            <field name="invoice_weight"-->
+                            <!--                                   required="type in ['inward','outward']"/>-->
+                            <!--                            <field name="no_of_bags"-->
+                            <!--                                   required="type in ['inward','outward']"/>-->
+                        </group>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+</odoo>

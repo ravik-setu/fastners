@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="setu_payment_schedule_booking_wizard_form_view" model="ir.ui.view">
+        <field name="name">setu.payment.schedule.booking.wizard.form.view</field>
+        <field name="model">setu.payment.schedule.booking.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <div>
+                    <p class="alert alert-info" role="alert">
+                        <b>Note :</b>
+                        <br/>
+                        - Payment schedule with 0 remaining value will not be included in the newly created Forward
+                        Booking.
+                        <br/>
+                        - If There is No Remaining Amount for the Selected Booking Than Booking Amount for Payment
+                        Schedule Considered as 0.
+                    </p>
+                </div>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="booking_type" required="True"/>
+                            <field name="total_remaining_amount" force_save="1"
+                                   readonly="forward_booking_id != False and booking_type == 'existing'"/>
+                        </group>
+                        <group>
+                            <field name="forward_booking_id" required="booking_type == 'existing'"
+                                   invisible="booking_type != 'existing' or not booking_type"
+                                   options="{'no_create_edit': True, 'no_quick_create': True}"
+                                   domain="[('state','=', 'running'),('currency_id','=',currency_id)]" force_save="1"/>
+                            <field name="currency_id" invisible="1"/>
+                        </group>
+                    </group>
+                    <group string="New Booking Details" invisible="booking_type == 'existing' or not booking_type">
+                        <group>
+                            <div class="o_td_label">
+                                <label for="start_date" string="Period"/>
+                            </div>
+                            <div class="d-flex">
+                                <field name="start_date" invisible="1"/>
+                                From
+                                <span style="margin-right:20px"/>
+                                <span style="margin-right:20px">
+                                    <field name="start_date" required="booking_type == 'new'"/>
+                                </span>
+                                to
+                                <span style="margin-right:50px"/>
+                                <span style="margin-right:20px">
+                                    <field name="end_date" required="booking_type == 'new'"/>
+                                </span>
+                            </div>
+                            <field name="bank_id" required="booking_type == 'new'"/>
+                        </group>
+                        <group>
+                            <field name="hash_rate"/>
+                            <field name="remarks"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Payment Schedule" name="payment_schedule">
+                            <field name="wizard_payment_schedule_line_ids" force_save="1">
+                                <tree editable="bottom" create="0">
+                                    <field name="order_id" readonly="True" force_save="1"/>
+                                    <field name="payment_schedule_id" readonly="True" force_save="1"/>
+                                    <field name="payment_date" readonly="True" force_save="1"/>
+                                    <field name="booking_amount" force_save="1"/>
+                                    <field name="remaining_amount" readonly="True" column_invisible="1" force_save="1"/>
+                                    <field name="currency_id" readonly="True" force_save="1"/>
+                                    <field name="company_id" column_invisible="1" force_save="1"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <footer>
+                    <button string="Save" class="btn-secondary" type="object" name="action_save_booking"
+                            data-hotkey="q"/>
+                    <button string="Discard" class="btn-primary" special="cancel" data-hotkey="x"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="setu_payment_schedule_booking_wizard_action_view" model="ir.actions.act_window">
+        <field name="name">Payment Schedule Booking</field>
+        <field name="res_model">setu.payment.schedule.booking.wizard</field>
+        <field name="view_mode">form</field>
+    </record>
+</odoo>

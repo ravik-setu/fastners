@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_setu_gate_entry_management,setu.gate.entry.details,model_setu_gate_entry_details,,1,1,1,1
+setu_gate_entry_management.access_setu_gate_entry_register,access_setu_gate_entry_register,setu_gate_entry_management.model_setu_gate_entry_register,base.group_user,1,1,1,1
+access_menu_access_control,access.menu.access.control,model_ir_ui_menu,base.group_user,1,0,0,0

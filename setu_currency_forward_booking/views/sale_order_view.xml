@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="setu_currency_forward_booking_sale_order_form_view" model="ir.ui.view">
+            <field name="name">setu.currency.forward.booking.sale.order.form.view</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group[@name='order_details']//field[@name='payment_term_id']" position="after">
+                    <field name="order_booking_rate" readonly="state != 'draft'"/>
+                </xpath>
+                <xpath expr="//page[@name='customer_signature']" position="after">
+                    <page name="payment_schedule" string="Payment Schedule">
+                        <field name="payment_schedule_ids">
+                            <tree create="false" editable="bottom">
+                                <!--                                <field name="picking_id"/>-->
+                                <field name="payment_date" readonly="forward_booking_ids == True"/>
+                                <field name="amount" readonly="1"/>
+                                <field name="currency_id" options="{'no_create': True, 'no_create_edit':True}"
+                                       readonly="1"/>
+                                <field name="company_id" options="{'no_create': True, 'no_create_edit':True}"
+                                       readonly="1"/>
+                                <field name="forward_booking_ids" widget="many2many_tags" readonly="1"/>
+                            </tree>
+                        </field>
+                        <div style="text-align:center;background-color:#D3D3D3;font-size:16px;font-weight:600;">
+                            <h4>Booking Details</h4>
+                        </div>
+                        <field name="payment_schedule_line_ids">
+                            <tree editable="bottom" create="false" delete="false">
+                                <field name="payment_date"/>
+                                <field name="forward_booking_id"/>
+                                <field name="amount"/>
+                            </tree>
+                        </field>
+                    </page>
+                </xpath>
+                <field name="delivery_status" position="before">
+                    <field name="delivery_delay"/>
+                </field>
+            </field>
+        </record>
+    </data>
+</odoo>

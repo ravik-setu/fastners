@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+         <record id="paperformat_for_visitor_gate_pass_report" model="report.paperformat">
+            <field name="name">Gate Pass</field>
+            <field name="format">A7</field>
+            <field name="page_height">0</field>
+            <field name="page_width">0</field>
+            <field name="orientation">Landscape</field>
+            <field name="margin_top">1</field>
+            <field name="margin_bottom">0</field>
+            <field name="margin_left">0</field>
+            <field name="margin_right">0</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">0</field>
+            <field name="dpi">115</field>
+        </record>
+
+        <record id="inter_warehouse_transfer_report_action" model="ir.actions.report">
+            <field name="name">Gate Pass Report</field>
+            <field name="model">setu.gate.entry.register</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">setu_gate_entry_management.setu_gate_pass_entry_report</field>
+            <field name="report_file">setu_gate_entry_management.setu_gate_pass_entry_report</field>
+            <field name="print_report_name">object.name</field>
+            <field name="paperformat_id" ref="setu_gate_entry_management.paperformat_for_visitor_gate_pass_report"/>
+            <field name="binding_model_id" ref="setu_gate_entry_management.model_setu_gate_entry_register"/>
+            <field name="binding_type">report</field>
+        </record>
+
+        <template id="setu_gate_pass_entry_report">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="doc">
+                    <t t-call="web.basic_layout">
+                        <div class="page" style="page-break-after: always;">
+                            <t t-if="doc.type=='visitor'">
+                                <t t-call="setu_gate_entry_management.visitor_gate_pass"/>
+                            </t>
+                            <t t-if="doc.type=='inward'">
+                                <t t-call="setu_gate_entry_management.inward_gate_pass"/>
+                            </t>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

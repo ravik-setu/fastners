@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <template id="inward_gate_pass">
+            <h5 class="text-center">Inward Pass</h5>
+            <table class="table table-bordered mb32" style="table-layout:auto">
+                <thead>
+                    <tr>
+                        <th class="text-center" colspan="4">Token :
+                            <t t-esc="doc.name"/>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td colspan="2">
+                            <b>Visitor Name :</b>
+                        </td>
+                        <td colspan="2">
+                            <t t-esc="doc.visitor_name"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <b>Visitor Company :</b>
+                        </td>
+                        <td colspan="2">
+                            <t t-esc="doc.visitor_company"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <b>Mobile No. :</b>
+                        </td>
+                        <td colspan="2">
+                            <t t-esc="doc.visitor_contact"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <b>Vehicle No. :</b>
+                        </td>
+                        <td colspan="2">
+                            <t t-esc="doc.visitor_vehicle_no"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <b>Description :</b>
+                        </td>
+                        <td colspan="2">
+                            <t t-esc="doc.un_visitor_reason"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <b>In Time :</b>
+                        </td>
+                        <td colspan="2">
+                            <t t-esc="doc.in_time_visitor"/>
+                        </td>
+                        <!--                        <td style="width:25%">-->
+                        <!--                            <b>Out Time :</b>-->
+                        <!--                        </td>-->
+                        <!--                        <td style="width:25%">-->
+                        <!--                            <t t-esc="doc.out_time_visitor"/>-->
+                        <!--                        </td>-->
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <b>Appointee :</b>
+                        </td>
+                        <td colspan="2">
+                            <t t-esc="doc.person_to_meet_id.name"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <b>Appointee Signature:</b>
+                        </td>
+                        <td colspan="2">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4" t-att-style="border_left">
+                            <div style="width:100%;text-align:center;">
+                                <div t-field="doc.name"
+                                     t-options="{'widget': 'barcode', 'img_style': 'width:50%;height:50%','humanreadable': 1}"/>
+                            </div>
+
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </template>
+    </data>
+</odoo>

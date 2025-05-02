@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="setu_entry_journal_seq_in" model="ir.sequence">
+            <field name="name">Entry Journal Sequence For Inward</field>
+            <field name="code">setu.entry.inward</field>
+            <field name="prefix"> %(day)s/%(month)s/%(year)s - </field>
+            <field name="padding">2</field>
+            <field name="number_increment">1</field>
+            <field name="company_id" eval="False"/>
+    </record>
+
+    <record id="setu_entry_journal_seq_out" model="ir.sequence">
+            <field name="name">Entry Journal Sequence For Outward</field>
+            <field name="code">setu.entry.outward</field>
+            <field name="prefix"> %(day)s/%(month)s/%(year)s - </field>
+            <field name="padding">2</field>
+            <field name="number_increment">1</field>
+            <field name="company_id" eval="False"/>
+    </record>
+
+    <record id="setu_entry_journal_seq_visitor" model="ir.sequence">
+            <field name="name">Entry Journal Sequence For Visitor</field>
+            <field name="code">setu.entry.visitor</field>
+            <field name="prefix"> %(day)s/%(month)s/%(year)s - </field>
+            <field name="padding">2</field>
+            <field name="number_increment">1</field>
+            <field name="company_id" eval="False"/>
+    </record>
+</odoo>

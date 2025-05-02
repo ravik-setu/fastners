@@ -1,0 +1,15 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_setu_forward_booking_user,setu.forward.booking,model_setu_forward_booking,setu_currency_forward_booking.group_setu_forward_booking_user,1,1,1,0
+access_setu_forward_booking,setu.forward.booking,model_setu_forward_booking,setu_currency_forward_booking.group_setu_forward_booking_manager,1,1,1,1
+access_setu_bank_income_details,setu.bank.income.details,model_setu_bank_income_details,,1,1,1,0
+access_setu_bank_charges_details,setu.bank.charges.details,model_setu_bank_charges_details,,1,1,1,1
+access_setu_bank_received_amount_details,setu.bank.received.amount.details,model_setu_bank_received_amount_details,,1,1,1,1
+access_setu_bank_charges,setu.bank.charges,model_setu_bank_charges,,1,1,1,1
+access_setu_payment_schedule_user,setu.payment.schedule,model_setu_payment_schedule,,1,1,1,1
+access_setu_forward_booking_wizard,setu.forward.booking.wizard,model_setu_forward_booking_wizard,,1,1,1,1
+access_setu_payment_schedule_booking_wizard,setu.payment.schedule.booking.wizard,model_setu_payment_schedule_booking_wizard,,1,1,1,1
+access_setu_payment_schedule_booking_line_wizard,setu.payment.schedule.booking.line.wizard,model_setu_payment_schedule_booking_line_wizard,,1,1,1,1
+access_setu_payment_schedule_lines_user,setu.payment.schedule.lines,model_setu_payment_schedule_lines,,1,1,1,1
+
+
+

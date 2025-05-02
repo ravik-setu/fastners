@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="setu_currency_forward_booking_view_account_payment_register_form" model="ir.ui.view">
+        <field name="name">setu.currency.forward.booking.account.payment.register.form</field>
+        <field name="model">account.payment.register</field>
+        <field name="inherit_id" ref="account.view_account_payment_register_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="inside">
+                <notebook>
+                    <page string="Forward Booking" name="forward_booking_details">
+                        <field name="forward_booking_ids">
+                            <tree editable="bottom">
+                                <field name="register_payment_id" column_invisible="True"/>
+                                <field name="currency_id" column_invisible="True"/>
+                                <field name="company_id" column_invisible="True"/>
+                                <field name="compute_booking_ids" column_invisible="True"/>
+                                <field name="forward_booking_id"
+                                       domain="[('state','=','running'),('currency_id','=',currency_id),('company_id','=',company_id),('id','in',compute_booking_ids)]"
+                                       groups="base.group_multi_currency" required="1" options="{'no_create': True, 'no_open': True}" force_save="1"/>
+                                <field name="remaining_amount"/>
+                                <field name="booking_amount" required="1" sum="Total Booking Amount"/>
+                            </tree>
+                        </field>
+                    </page>
+                </notebook>
+            </xpath>
+        </field>
+    </record>
+</odoo>

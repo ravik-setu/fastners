@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <template id="visitor_gate_pass">
+            <h5 class="text-center">Visitor Pass</h5>
+            <table class="table table-bordered" style="table-layout:auto">
+                <thead>
+                    <tr>
+                        <th class="text-center" colspan="4">Token :
+                            <t t-esc="doc.name"/>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td colspan="2">
+                            <b>Name :</b>
+                        </td>
+                        <td colspan="2">
+                            <t t-esc="doc.visitor_name"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <b>Vehicle No. :</b>
+                        </td>
+                        <td colspan="2">
+                            <t t-esc="doc.visitor_vehicle_no"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <b>Mobile No. :</b>
+                        </td>
+                        <td colspan="2">
+                            <t t-esc="doc.visitor_contact"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <b>No. Of Visitor :</b>
+                        </td>
+                        <td colspan="2">
+                            <t t-esc="doc.un_visitor_count"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <b>Reason :</b>
+                        </td>
+                        <td colspan="2">
+                            <t t-esc="doc.un_visitor_reason"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <b>In Time :</b>
+                        </td>
+                        <td colspan="2">
+                            <t t-esc="doc.in_time_visitor"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <b>Appointee :</b>
+                        </td>
+                        <td colspan="2">
+                            <t t-esc="doc.person_to_meet_id.name"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <b>Appointee Signature:</b>
+                        </td>
+                        <td colspan="2">
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <h6 class="text-center">Thank You For Visiting!</h6>
+        </template>
+    </data>
+</odoo>

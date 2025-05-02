@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="setu_currency_forward_booking_account_move_form_view" model="ir.ui.view">
+            <field name="name">setu.currency.forward.booking.account.move.form.view</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@name='journal_div']" position="after">
+                    <field name="order_booking_rate" readonly="1" invisible="move_type != 'out_invoice'"/>
+                    <field name="bank_income" invisible="1"/>
+                    <field name="forward_booking_ids" invisible="move_type != 'entry' or bank_income == False"
+                           widget="many2many_tags"
+                           readonly="state != 'draft'" required="move_type == 'entry' and bank_income == True"/>
+                </xpath>
+                <xpath expr="//page[@name='aml_tab']//tree/field[@name='name']" position="after">
+                    <field name="income_type" column_invisible="not parent.bank_income"/>
+                </xpath>
+            </field>
+        </record>
+        <record id="action_bank_income" model="ir.actions.act_window">
+            <field name="name">Bank Income</field>
+            <field name="res_model">account.move</field>
+            <field name="view_mode">tree,kanban,form,activity</field>
+            <field name="view_id" ref="account.view_move_tree"/>
+            <field name="search_view_id" ref="account.view_account_move_filter"/>
+            <field name="context">{'default_move_type': 'entry','default_bank_income':True}</field>
+            <field name="domain">[('bank_income', '=', True)]</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create a journal entry
+                </p>
+                <p>
+                    A journal entry consists of several journal items, each of
+                    which is either a debit or a credit transaction.
+                </p>
+            </field>
+        </record>
+        <menuitem
+                id="menu_bank_income"
+                name="Bank Income"
+                parent="account.menu_finance_entries_accounting_miscellaneous"
+                action="action_bank_income"
+                sequence="15"/>
+    </data>
+</odoo>

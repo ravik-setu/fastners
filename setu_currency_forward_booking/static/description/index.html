@@ -1,0 +1,1100 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Forward Booking | Currency Hedging | Setu Consulting Services Pvt. Ltd. | Odoo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="https://www.setuconsulting.com/css/fonts.css" rel="stylesheet">
+    <link href="https://www.setuconsulting.com/css/plugins.css" rel="stylesheet">
+    <!-- <link href="https://www.setuconsulting.com/css/style.css" rel="stylesheet"> -->
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="main.css">
+</head>
+<!-- odoo description page css -->
+<style>
+    h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5,
+    .h6 {
+        font-family: "Montserrat", sans-serif;
+        font-weight: 400;
+        line-height: 1.1;
+        color: #21272b;
+    }
+
+    ul {
+        color: #222020;
+    }
+
+    * {
+        font-family: "Montserrat", sans-serif;
+    }
+</style>
+
+<body>
+<div class="container">
+    <section class="index-banner shadow-sm position-relative mt40" style="border-top:4px solid #37bbf9; border-radius: 10px;">
+        <img class="w-100 h-100 position-absolute img-fluid mb16" src="images/etc/1-background.jpg" style="border-radius: 10px;" />
+        <div class="container p-md-4 p-4 position-relative">
+            <div class="row align-items-center">
+                <div class="col-md-2 text-center text-md-left">
+                    <img src="images/odoo_images/setu.png" alt="Setu Consulting Services Pvt. Ltd." title="Setu Consulting Services Pvt. Ltd." class="img img-fluid" >
+                </div>
+                <div class="col-md-4 text-center" style="margin-left: auto; padding-right: 10px; padding-left: 10px;">
+                    <img src="images/odoo15.png" width="80px" alt="Odoo 15 Certified" title="Odoo 15 Certified"> 
+                    <img src="images/odoo16.png" width="80px" alt="Odoo 16 Certified" title="Odoo 16 Certified"> 
+                    <img src="images/odoo17.png" width="80px" alt="Odoo 16 Certified" title="Odoo 17 Certified"> 
+                </div>
+                <div class="col-md-2 text-center text-md-left" style="margin-left: auto;padding-right: 10px; padding-left: 10px;">
+                    <h6 style="font-size:18px;margin:10px 0">
+                        <span class="btn btn-danger w-md-100 w-auto" style="color:#ffffff; background-color:#f62943; border-radius:0.5rem;"><i class="fa fa-check"></i> Community </span>
+                    </h6>
+                </div>
+                <div class="col-md-2 text-center text-md-left" style="padding-right: 10px; padding-left: 10px;">
+                    <h6 style="font-size:18px;margin:10px 0">
+                        <span class="btn btn-warning w-md-100 w-auto" style="color:#ffffff; background-color:#dab000; border-radius:0.5rem;"><i class="fa fa-check"></i> Enterprise </span>
+                    </h6>
+                </div>
+                <div class="col-md-2 text-center text-md-left" style="padding-right: 10px; padding-left: 10px;">
+                    <h6 style="font-size:18px;margin:10px 0">
+                        <span class="btn btn-success w-md-100 w-auto" style="color:#ffffff; background-color:#00c157; border-radius:0.5rem;"><i class="fa fa-check"></i> Odoo.sh</span>
+                    </h6>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="col-lg-12 col-md-12">
+        <div class="container p-4 position-relative">
+            <div class="row align-items-center">
+                <div class="row align-items-center">
+                    <div class="col-md-8 text-center text-md-left" style="margin-left: auto;padding-right: 10px; padding-left: 10px;">
+                        <h6 style="font-size:18px;">
+                            <span class="btn btn-primary" style="color:#ffffff; font-size: 38px; font-weight: bold; background-color:#0298FF; border-radius:0.5rem;">
+                                Currency Forward Booking | Currency Hedging
+                            </span>
+                        </h6>
+                    </div>
+                    <div class="col-md-4 text-center text-md-left" style="margin-left: auto;padding-right: 140px; padding-left: 10px;">
+                        <a href="mailto:apps@setuconsulting.com?subject=Currency Forward Booking V17.0 - Demo Request" target="_blank">
+                            <img src="images/requestdemo1.png" title="Request a Demo" alt="Request a Demo" width="200px" class="ml-4" >
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Key Features - START -->
+    <section class="index-banner shadow-sm position-relative mt40" style="border-top:4px solid #37bbf9; border-radius: 10px;"> 
+        <img class="w-100 h-100 position-absolute img-fluid mb16" src="images/etc/1-background.jpg" style="border-radius: 10px;" />
+        <div class="container p-md-3 p-4 position-relative">
+            <p class="text-justify " data-animate="fadeIn" data-animate-delay="400">
+                <font size="4" style="font-family: Roboto;font-weight: 500;">
+                    In the dynamic world of international transactions, fluctuating <span class="btn btn-warning" style="padding: 3px 3px 3px 3px; border-radius: 5px;"><strong>currency rates</strong></span> and complex <span class="btn btn-warning" style="padding: 3px 3px 3px 3px; border-radius: 5px;"><strong>cash management</strong></span> can lead to unforeseen losses. Without a structured system, managing these complexities can feel overwhelming. But what if you could lock in advantageous rates through proactive bank agreements, <span class="btn btn-warning" style="padding: 3px 3px 3px 3px; border-radius: 5px;"><strong>Currency Hedging against foreign exchange risk</strong></span> and safeguarding your business?
+                </font>
+            </p>
+            <p>
+                <strong>Introducing our Currency Forward Booking Application:</strong>
+            </p>
+        </div>
+        <div class="container position-relative p-4">
+            <section id="sh_hot_feature" style="background-color: transparent;">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6 mb-2">
+                            <div class="sh_icon d-flex justify-content-center align-items-center rounded shadow" style="padding: 15px;border: 1px solid #9ebdfb;border-bottom: 4px solid #9ebdfb;background-color: #ebf0fb;border-radius: 0.25rem !important; min-height: 83px;">
+                                <span style="color: #212121;font-weight: 600;vertical-align: middle;padding-left: 10px;text-align: center;">
+                                    <span class="btn-light" style="padding: 3px 3px 3px 3px; border-radius: 5px;"><strong>
+                                    Set future currency rates</strong></span> through discussions with banks.
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-2">
+                            <div class="sh_icon d-flex justify-content-center align-items-center rounded shadow" style="padding: 15px;border: 1px solid #9ebdfb;border-bottom: 4px solid #9ebdfb;background-color: #ebf0fb;border-radius: 0.25rem !important;min-height: 83px;">
+                                <span style="color: #212121;font-weight: 600;vertical-align: middle;padding-left: 10px;text-align: center;">
+                                    Minimize <span class="btn-light" style="padding: 3px 3px 3px 3px; border-radius: 5px;"><strong>currency risk exposure.</strong></span>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-2">
+                            <div class="sh_icon d-flex justify-content-center align-items-center rounded shadow" style="padding: 15px;border: 1px solid #9ebdfb;border-bottom: 4px solid #9ebdfb;background-color: #ebf0fb;border-radius: 0.25rem !important; min-height: 83px;">
+                                <span style="color: #212121;font-weight: 600;vertical-align: middle;padding-left: 10px;text-align: center;">
+                                    Ensure the <span class="btn-light" style="padding: 3px 3px 3px 3px; border-radius: 5px;"><strong>protection of your profit margins.</strong></span>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-2">
+                            <div class="sh_icon d-flex justify-content-center align-items-center rounded shadow" style="padding: 15px;border: 1px solid #9ebdfb;border-bottom: 4px solid #9ebdfb;background-color: #ebf0fb;border-radius: 0.25rem !important;min-height: 83px;">
+                                <span style="color: #212121;font-weight: 600;vertical-align: middle;padding-left: 10px;text-align: center;">
+                                    Track payments and balances in <span class="btn-light" style="padding: 3px 3px 3px 3px; border-radius: 5px;"><strong>real time.</strong></span>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-2">
+                            <div class="sh_icon d-flex justify-content-center align-items-center rounded shadow" style="padding: 15px;border: 1px solid #9ebdfb;border-bottom: 4px solid #9ebdfb;background-color: #ebf0fb;border-radius: 0.25rem !important; min-height: 83px;">
+                                <span style="color: #212121;font-weight: 600;vertical-align: middle;padding-left: 10px;text-align: center;">
+                                        <span class="btn-light" style="padding: 3px 3px 3px 3px; border-radius: 5px;"><strong>Simplify international transactions</strong></span> with integrated
+                                        <span class="btn-light" style="padding: 3px 3px 3px 3px; border-radius: 5px;"><strong>currency management.</strong>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-2">
+                            <div class="sh_icon d-flex justify-content-center align-items-center rounded shadow" style="padding: 15px;border: 1px solid #9ebdfb;border-bottom: 4px solid #9ebdfb;background-color: #ebf0fb;border-radius: 0.25rem !important; min-height: 83px;">
+                                <span style="color: #212121;font-weight: 600;vertical-align: middle;padding-left: 10px;text-align: center;">
+                                    <span class="btn-light" style="padding: 3px 3px 3px 3px; border-radius: 5px;"><strong>
+                                    Gain real-time insights</strong></span> into your financial dataAnalyze procurement trends.
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-2">
+                            <div class="sh_icon d-flex justify-content-center align-items-center rounded shadow" style="padding: 15px;border: 1px solid #9ebdfb;border-bottom: 4px solid #9ebdfb;background-color: #ebf0fb;border-radius: 0.25rem !important;min-height: 83px;">
+                                <span style="color: #212121;font-weight: 600;vertical-align: middle;padding-left: 10px;text-align: center;">
+                                    Improve your financial planning, empowering you to make
+                                    <span class="btn-light" style="padding: 3px 3px 3px 3px; border-radius: 5px;"><strong> better business decisions.</strong></span>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-2">
+                            <div class="sh_icon d-flex justify-content-center align-items-center rounded shadow" style="padding: 15px;border: 1px solid #9ebdfb;border-bottom: 4px solid #9ebdfb;background-color: #ebf0fb;border-radius: 0.25rem !important; min-height: 83px;">
+                                <span style="color: #212121;font-weight: 600;vertical-align: middle;padding-left: 10px;text-align: center;">
+                                    <span class="btn-light" style="padding: 3px 3px 3px 3px; border-radius: 5px;"><strong>
+                                    Ensure transparency</strong></span>  with detailed deal closure & cancellation information, preventing unexpected financial charges.
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+        <div class="container p-md-3 p-4 position-relative">
+            <p class="text-justify " data-animate="fadeIn" data-animate-delay="400">
+                <font size="4" style="font-family: Roboto;font-weight: 500;">
+                    Our solution is designed to optimize your 
+                    <span class="btn btn-warning" style="padding: 3px 3px 3px 3px; border-radius: 5px;"><strong>"Currency Hedging Strategy"</strong></span>, minimize risk, and streamline 
+                    <span class="btn btn-warning" style="padding: 3px 3px 3px 3px; border-radius: 5px;"><strong>"Cash Management"</strong></span> —ultimately supporting your global operations and improving financial planning.
+                </font>
+            </p>
+        </div>
+    </section>
+    <!-- Key Features - END -->
+
+    <!-- FEATURES - START -->
+    <section class="index-banner shadow-sm position-relative mt40" style="border-top:4px solid #37bbf9; border-radius: 10px; margin-top:20px">
+        <img class="w-100 h-100 position-absolute img-fluid mb16" src="images/etc/5-background.jpg" style="border-radius: 10px; opacity:0.1" />
+        <div class="container p-md-3 p-4 position-relative">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h2 class="text-center mb-3" style="font-family: Roboto;font-weight: 500">
+                        Features
+                        <p>
+                            <h4 class="text-center">Introducing our Currency Forward Booking Application:</h4>
+                        </p>
+                    </h2>
+                    <div class="text-center mb-3">
+                        <img src="images/line.png" alt="Store Management" width="40%" height="40%">
+                    </div>
+                    <div class="row text-left">
+                        <div class="col-lg-6">
+                            <div class="img_dec shadow mt-4" style="padding: 20px;align-items: center;display: inline-flex; border-radius: 10px;">
+                                <div class="sh_inner_box d-flex align-items-baseline">
+                                    <div class="sh_icon">
+                                        <span class="fa fa-hand-o-right" style="color:#1e266d; font-weight:600; font-size:18px; padding-right:10px"></span>
+                                    </div>
+                                    <div class="sh_dec">
+                                        <h5 style="font-size: 18px;line-height: 1.455;font-weight: 600;color: #1e266d;">Set Delivery Dates</h5>
+                                        <p style="color:#616060">
+                                            Input delivery dates directly in sales orders for precise payment scheduling.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="img_dec shadow mt-4" style="padding: 20px;align-items: center;display: inline-flex; border-radius: 10px;">
+                                <div class="sh_inner_box d-flex align-items-baseline">
+                                    <div class="sh_icon">
+                                        <span class="fa fa-hand-o-right" style="color:#1e266d; font-weight:600; font-size:18px; padding-right:10px"></span>
+                                    </div>
+                                    <div class="sh_dec">
+                                        <h5 style="font-size: 18px;line-height: 1.455;font-weight: 600;color: #1e266d;"> Payment Date Adjustment</h5>
+                                        <p style="color:#616060">
+                                            Easily manage and adjust for delays, ensuring that your commitments are met without disruptions.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="img_dec shadow mt-4" style="padding: 20px;align-items: center;display: inline-flex; border-radius: 10px;">
+                                <div class="sh_inner_box d-flex align-items-baseline">
+                                    <div class="sh_icon">
+                                        <span class="fa fa-hand-o-right" style="color:#1e266d; font-weight:600; font-size:18px; padding-right:10px"></span>
+                                    </div>
+                                    <div class="sh_dec">
+                                        <h5 style="font-size: 18px;line-height: 1.455;font-weight: 600;color: #1e266d;">Organized Payment Tracking</h5>
+                                        <p style="color:#616060">
+                                            Automatically generate and manage payment schedules through a dedicated section in sales orders, simplifying financial tracking.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="img_dec shadow mt-4" style="padding: 20px;align-items: center;display: inline-flex; border-radius: 10px;">
+                                <div class="sh_inner_box d-flex align-items-baseline">
+                                    <div class="sh_icon">
+                                        <span class="fa fa-hand-o-right" style="color:#1e266d; font-weight:600; font-size:18px; padding-right:10px"></span>
+                                    </div>
+                                    <div class="sh_dec">
+                                        <h5 style="font-size: 18px;line-height: 1.455;font-weight: 600;color: #1e266d;">Link Sales Orders with Currency Deals</h5>
+                                        <p style="color:#616060">
+                                            Seamlessly link your sales orders to currency deals, ensuring smooth alignment between orders and financial transactions.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12 mt-4">
+                            <p><h4 class="text-center">Streamlined Currency Deal Management:</h4></p>
+                            <div class="text-center mb-3">
+                                <img src="images/line.png" alt="Store Management" width="30%" height="30%">
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="img_dec shadow mt-4" style="padding: 20px;align-items: center; border-radius: 10px;">
+                                <div class="sh_inner_box d-flex align-items-baseline">
+                                    <div class="sh_icon">
+                                        <span class="fa fa-hand-o-right" style="color:#1e266d; font-weight:600; font-size:18px; padding-right:10px"></span>
+                                    </div>
+                                    <div class="sh_dec">
+                                        <h5 style="font-size: 18px;line-height: 1.455;font-weight: 600;color: #1e266d;">Define Deal Dates</h5>
+                                        <p style="color:#616060">
+                                            Set the date when the currency deal is locked in.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="img_dec shadow mt-4" style="padding: 20px;align-items: center; border-radius: 10px;">
+                                <div class="sh_inner_box d-flex align-items-baseline">
+                                    <div class="sh_icon">
+                                        <span class="fa fa-hand-o-right" style="color:#1e266d; font-weight:600; font-size:18px; padding-right:10px"></span>
+                                    </div>
+                                    <div class="sh_dec">
+                                        <h5 style="font-size: 18px;line-height: 1.455;font-weight: 600;color: #1e266d;">Establish Deal Time Frame</h5>
+                                        <p style="color:#616060">
+                                            Define the time frame for each currency deal to ensure alignment with your financial planning needs.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="img_dec shadow mt-4" style="padding: 20px;align-items: center; border-radius: 10px;">
+                                <div class="sh_inner_box d-flex align-items-baseline">
+                                    <div class="sh_icon">
+                                        <span class="fa fa-hand-o-right" style="color:#1e266d; font-weight:600; font-size:18px; padding-right:10px"></span>
+                                    </div>
+                                    <div class="sh_dec">
+                                        <h5 style="font-size: 18px;line-height: 1.455;font-weight: 600;color: #1e266d;">Monitor Remaining Amounts</h5>
+                                        <p style="color:#616060">
+                                            Keep track of the outstanding balance for each deal, with real-time updates as payments are made.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="img_dec shadow mt-4" style="padding: 20px;align-items: center; border-radius: 10px;">
+                                <div class="sh_inner_box d-flex align-items-baseline">
+                                    <div class="sh_icon">
+                                        <span class="fa fa-hand-o-right" style="color:#1e266d; font-weight:600; font-size:18px; padding-right:10px"></span>
+                                    </div>
+                                    <div class="sh_dec">
+                                        <h5 style="font-size: 18px;line-height: 1.455;font-weight: 600;color: #1e266d;">Define Total Deal Amount</h5>
+                                        <p style="color:#616060">
+                                            Define the total amount of foreign currency involved in each deal for a clear picture of your financial commitments.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="img_dec shadow mt-4" style="padding: 20px;align-items: center; border-radius: 10px;">
+                                <div class="sh_inner_box d-flex align-items-baseline">
+                                    <div class="sh_icon">
+                                        <span class="fa fa-hand-o-right" style="color:#1e266d; font-weight:600; font-size:18px; padding-right:10px"></span>
+                                    </div>
+                                    <div class="sh_dec">
+                                        <h5 style="font-size: 18px;line-height: 1.455;font-weight: 600;color: #1e266d;">Profit and Loss Summary</h5>
+                                        <p style="color:#616060">
+                                            Receive real-time updates on profit and loss as each payment is processed, ensuring you always have the most current financial overview.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12 mt-4">
+                            <p><h4 class="text-center">Cancellation & Closure Details</h4></p>
+                            <div class="text-center mb-3">
+                                <img src="images/line.png" alt="Store Management" width="30%" height="30%">
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="img_dec shadow mt-4" style="padding: 20px;align-items: center; border-radius: 10px;">
+                                <div class="sh_inner_box d-flex align-items-baseline">
+                                    <div class="sh_icon">
+                                        <span class="fa fa-hand-o-right" style="color:#1e266d; font-weight:600; font-size:18px; padding-right:10px"></span>
+                                    </div>
+                                    <div class="sh_dec">
+                                        <h5 style="font-size: 18px;line-height: 1.455;font-weight: 600;color: #1e266d;">Breakdown of Charges and Payments</h5>
+                                        <p style="color:#616060">
+                                            Access detailed information on any charges imposed by the bank for breaking a deal and the amount required to settle the deal if it is closed prematurely.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12 mt-4">
+                            <p><h4 class="text-center">Organized Deal Records and Tracking</h4></p>
+                            <div class="text-center mb-3">
+                                <img src="images/line.png" alt="Store Management" width="30%" height="30%">
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="img_dec shadow mt-4" style="padding: 20px;align-items: center; border-radius: 10px;">
+                                <div class="sh_inner_box d-flex align-items-baseline">
+                                    <div class="sh_icon">
+                                        <span class="fa fa-hand-o-right" style="color:#1e266d; font-weight:600; font-size:18px; padding-right:10px"></span>
+                                    </div>
+                                    <div class="sh_dec">
+                                        <h5 style="font-size: 18px;line-height: 1.455;font-weight: 600;color: #1e266d;">Payment Schedule Overview</h5>
+                                        <p style="color:#616060">
+                                            View all payment schedules linked to the currency deal in one place, making financial tracking straightforward.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="img_dec shadow mt-4" style="padding: 20px;align-items: center; border-radius: 10px;">
+                                <div class="sh_inner_box d-flex align-items-baseline">
+                                    <div class="sh_icon">
+                                        <span class="fa fa-hand-o-right" style="color:#1e266d; font-weight:600; font-size:18px; padding-right:10px"></span>
+                                    </div>
+                                    <div class="sh_dec">
+                                        <h5 style="font-size: 18px;line-height: 1.455;font-weight: 600;color: #1e266d;">Associate Received Payments linked with Currency Deals</h5>
+                                        <p style="color:#616060">
+                                            Track all received payments that are linked to the selected currency deal in one place for organized financial oversight.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="img_dec shadow mt-4" style="padding: 20px;align-items: center; border-radius: 10px;">
+                                <div class="sh_inner_box d-flex align-items-baseline">
+                                    <div class="sh_icon">
+                                        <span class="fa fa-hand-o-right" style="color:#1e266d; font-weight:600; font-size:18px; padding-right:10px"></span>
+                                    </div>
+                                    <div class="sh_dec">
+                                        <h5 style="font-size: 18px;line-height: 1.455;font-weight: 600;color: #1e266d;">Bank Charges Summary</h5>
+                                        <p style="color:#616060">
+                                            Review all bank charges related to the deal, providing insight into the cost of transactions.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12 mt-4">
+                            <p><h4 class="text-center">Centralized Currency Deal Dashboard Analytics</h4></p>
+                            <div class="text-center mb-3">
+                                <img src="images/line.png" alt="Store Management" width="30%" height="30%">
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="img_dec shadow mt-4" style="padding: 20px;align-items: center; border-radius: 10px;">
+                                <div class="sh_inner_box d-flex align-items-baseline">
+                                    <div class="sh_icon">
+                                        <span class="fa fa-hand-o-right" style="color:#1e266d; font-weight:600; font-size:18px; padding-right:10px"></span>
+                                    </div>
+                                    <div class="sh_dec">
+                                        <h5 style="font-size: 18px;line-height: 1.455;font-weight: 600;color: #1e266d;">Track & Monitor All Currency Deals in One View</h5>
+                                        <p style="color:#616060">
+                                            Access a single dashboard to track time frames, booking amounts, remaining balances, and profit and loss for every currency deal.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="img_dec shadow mt-4" style="padding: 20px;align-items: center; border-radius: 10px;">
+                                <div class="sh_inner_box d-flex align-items-baseline">
+                                    <div class="sh_icon">
+                                        <span class="fa fa-hand-o-right" style="color:#1e266d; font-weight:600; font-size:18px; padding-right:10px"></span>
+                                    </div>
+                                    <div class="sh_dec">
+                                        <h5 style="font-size: 18px;line-height: 1.455;font-weight: 600;color: #1e266d;">Analyze Deal Metrics</h5>
+                                        <p style="color:#616060">
+                                            <li>Gain insights into key financial details for each deal through comprehensive report.</li>
+                                        </p>
+                                        <p style="color:#616060">
+                                            <li>Evaluate performance by comparing booking amounts, exchange rates, and outcomes.</li>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="img_dec shadow mt-4" style="padding: 20px;align-items: center; border-radius: 10px;">
+                                <div class="sh_inner_box d-flex align-items-baseline">
+                                    <div class="sh_icon">
+                                        <span class="fa fa-hand-o-right" style="color:#1e266d; font-weight:600; font-size:18px; padding-right:10px"></span>
+                                    </div>
+                                    <div class="sh_dec">
+                                        <h5 style="font-size: 18px;line-height: 1.455;font-weight: 600;color: #1e266d;">Real-Time Financial Tracking</h5>
+                                        <p style="color:#616060">
+                                            <li>Stay updated with real-time insights into the status of each deal, helping you make strategic financial decisions swiftly.</li>
+                                        </p>
+                                        <p style="color:#616060">
+                                            <li>Track real-time profit and/or loss insights to optimize currency deal performance.</li>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- FEATURES - END -->
+
+    <!-- START -->
+    <section class="index-banner shadow-sm position-relative mt40" style="border-top:4px solid #37bbf9; border-radius: 10px; margin-top:20px">
+        <img class="w-100 h-100 position-absolute img-fluid mb16" src="images/etc/5-background.jpg" style="border-radius: 10px; opacity:0.1" />
+        <div class="container p-md-3 p-4 position-relative">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h2 class="text-center mb-3" style="font-family: Roboto;font-weight: 500">Forward Booking application enables end user to:</h2>
+                    <div class="text-center mb-3">
+                        <img src="images/line.png" alt="Store Management" width="40%" height="40%">
+                    </div>
+                    <div class="row text-left">
+                        <div class="col-lg-6">
+                            <div class="img_dec shadow mt-4" style="padding: 20px;align-items: center; border-radius: 10px;">
+                                <div class="sh_inner_box d-flex align-items-baseline">
+                                    <div class="sh_icon">
+                                        <span class="fa fa-hand-o-right" style="color:#1e266d; font-weight:600; font-size:18px; padding-right:10px"></span>
+                                    </div>
+                                    <div class="sh_dec">
+                                        <h5 style="font-size: 18px;line-height: 1.455;font-weight: 600;color: #1e266d;">Secure Favorable Exchange Rates</h5>
+                                        <p style="color:#616060">
+                                            by locking in advantageous rates through proactive bank agreements.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="img_dec shadow mt-4" style="padding: 20px;align-items: center; border-radius: 10px;">
+                                <div class="sh_inner_box d-flex align-items-baseline">
+                                    <div class="sh_icon">
+                                        <span class="fa fa-hand-o-right" style="color:#1e266d; font-weight:600; font-size:18px; padding-right:10px"></span>
+                                    </div>
+                                    <div class="sh_dec">
+                                        <h5 style="font-size: 18px;line-height: 1.455;font-weight: 600;color: #1e266d;">Stay on Top of Your Finances</h5>
+                                        <p style="color:#616060">
+                                            by aligning payments with your financial goals for better control.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="img_dec shadow mt-4" style="padding: 20px;align-items: center; border-radius: 10px;">
+                                <div class="sh_inner_box d-flex align-items-baseline">
+                                    <div class="sh_icon">
+                                        <span class="fa fa-hand-o-right" style="color:#1e266d; font-weight:600; font-size:18px; padding-right:10px"></span>
+                                    </div>
+                                    <div class="sh_dec">
+                                        <h5 style="font-size: 18px;line-height: 1.455;font-weight: 600;color: #1e266d;">Stabilize Financial Planning</h5>
+                                        <p style="color:#616060">
+                                            by pre-booking rates to ensure predictable cash flow.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="img_dec shadow mt-4" style="padding: 20px;align-items: center; border-radius: 10px;">
+                                <div class="sh_inner_box d-flex align-items-baseline">
+                                    <div class="sh_icon">
+                                        <span class="fa fa-hand-o-right" style="color:#1e266d; font-weight:600; font-size:18px; padding-right:10px"></span>
+                                    </div>
+                                    <div class="sh_dec">
+                                        <h5 style="font-size: 18px;line-height: 1.455;font-weight: 600;color: #1e266d;">Maximize Profit Margins</h5>
+                                        <p style="color:#616060">
+                                            by shielding profits from unfavorable exchange rates.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="img_dec shadow mt-4" style="padding: 20px;align-items: center; border-radius: 10px;">
+                                <div class="sh_inner_box d-flex align-items-baseline">
+                                    <div class="sh_icon">
+                                        <span class="fa fa-hand-o-right" style="color:#1e266d; font-weight:600; font-size:18px; padding-right:10px"></span>
+                                    </div>
+                                    <div class="sh_dec">
+                                        <h5 style="font-size: 18px;line-height: 1.455;font-weight: 600;color: #1e266d;">Mitigate Currency Risk</h5>
+                                        <p style="color:#616060">
+                                            by reducing exposure to market volatility and losses.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="img_dec shadow mt-4" style="padding: 20px;align-items: center; border-radius: 10px;">
+                                <div class="sh_inner_box d-flex align-items-baseline">
+                                    <div class="sh_icon">
+                                        <span class="fa fa-hand-o-right" style="color:#1e266d; font-weight:600; font-size:18px; padding-right:10px"></span>
+                                    </div>
+                                    <div class="sh_dec">
+                                        <h5 style="font-size: 18px;line-height: 1.455;font-weight: 600;color: #1e266d;">Ensure Financial Certainty</h5>
+                                        <p style="color:#616060">
+                                            with pre-agreed rates for stable forecasting.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="img_dec shadow mt-4" style="padding: 20px;align-items: center; border-radius: 10px;">
+                                <div class="sh_inner_box d-flex align-items-baseline">
+                                    <div class="sh_icon">
+                                        <span class="fa fa-hand-o-right" style="color:#1e266d; font-weight:600; font-size:18px; padding-right:10px"></span>
+                                    </div>
+                                    <div class="sh_dec">
+                                        <h5 style="font-size: 18px;line-height: 1.455;font-weight: 600;color: #1e266d;">Centralize Payment Management</h5>
+                                        <p style="color:#616060">
+                                            by streamlining payments and bank fee oversight.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="img_dec shadow mt-4" style="padding: 20px;align-items: center; border-radius: 10px;">
+                                <div class="sh_inner_box d-flex align-items-baseline">
+                                    <div class="sh_icon">
+                                        <span class="fa fa-hand-o-right" style="color:#1e266d; font-weight:600; font-size:18px; padding-right:10px"></span>
+                                    </div>
+                                    <div class="sh_dec">
+                                        <h5 style="font-size: 18px;line-height: 1.455;font-weight: 600;color: #1e266d;">Boost Better Business Decisions</h5>
+                                        <p style="color:#616060">
+                                            with advanced analytics, empowering you to make strategic, informed financial choices.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- END -->
+    <!-- SCREENSHOT - START -->
+    <div class="col-sm-6 col-md-12 px-2">
+       <h2 class="w-100 text-center my-3">Screenshots</h2>
+        <div class="text-center w-100 mb-4">
+            <img src="images/line.png" alt="Setu Consulting" width="30%" height="100%">
+       </div>
+    </div>
+    <section id="sec-visual-customization" class="row mb-5 mt-6 p-3 py-5 bg-light shadow justify-content-center" style="border-radius:20px">
+        <img class="img-fluid shadow" style="border-radius: 5px;" src="images/screenshots/Slide1.PNG" alt="SETU Forward Booking | Currency Hedging">
+    </section>
+    <section id="sec-visual-customization" class="row mb-5 mt-6 p-3 py-5 bg-light shadow justify-content-center" style="border-radius:20px">
+        <img class="img-fluid shadow" style="border-radius: 5px;" src="images/screenshots/Slide2.PNG" alt="SETU Forward Booking | Currency Hedging">
+    </section>
+    <section id="sec-visual-customization" class="row mb-5 mt-6 p-3 py-5 bg-light shadow justify-content-center" style="border-radius:20px">
+        <img class="img-fluid shadow" style="border-radius: 5px;" src="images/screenshots/Slide3.PNG" alt="SETU Forward Booking | Currency Hedging">
+    </section>
+    <section id="sec-visual-customization" class="row mb-5 mt-6 p-3 py-5 bg-light shadow justify-content-center" style="border-radius:20px">
+        <img class="img-fluid shadow" style="border-radius: 5px;" src="images/screenshots/Slide4.PNG" alt="SETU Forward Booking | Currency Hedging">
+    </section>
+    <section id="sec-visual-customization" class="row mb-5 mt-6 p-3 py-5 bg-light shadow justify-content-center" style="border-radius:20px">
+        <img class="img-fluid shadow" style="border-radius: 5px;" src="images/screenshots/Slide5.PNG" alt="SETU Forward Booking | Currency Hedging">
+    </section>
+    <section id="sec-visual-customization" class="row mb-5 mt-6 p-3 py-5 bg-light shadow justify-content-center" style="border-radius:20px">
+        <img class="img-fluid shadow" style="border-radius: 5px;" src="images/screenshots/Slide6.PNG" alt="SETU Forward Booking | Currency Hedging">
+    </section>
+    <section id="sec-visual-customization" class="row mb-5 mt-6 p-3 py-5 bg-light shadow justify-content-center" style="border-radius:20px">
+        <img class="img-fluid shadow" style="border-radius: 5px;" src="images/screenshots/Slide7.PNG" alt="SETU Forward Booking | Currency Hedging">
+    </section>
+    <section id="sec-visual-customization" class="row mb-5 mt-6 p-3 py-5 bg-light shadow justify-content-center" style="border-radius:20px">
+        <img class="img-fluid shadow" style="border-radius: 5px;" src="images/screenshots/Slide8.PNG" alt="SETU Forward Booking | Currency Hedging">
+    </section>
+    <section id="sec-visual-customization" class="row mb-5 mt-6 p-3 py-5 bg-light shadow justify-content-center" style="border-radius:20px">
+        <img class="img-fluid shadow" style="border-radius: 5px;" src="images/screenshots/Slide9.PNG" alt="SETU Forward Booking | Currency Hedging">
+    </section>
+    <!-- SCREENSHOT - END -->
+</div>
+
+<!-- ProcureMate Pro Solution START-->
+<section class="index-banner shadow-sm position-relative mt40" style="border-top:4px solid #37bbf9; border-radius: 10px; margin-top: 20px;">
+    <div class="container p-md-4 p-4 position-relative">   
+        <div class="col-lg-12">
+            <div class="row text-center">
+                <div class="col-lg-6">
+                    <div style="padding: 20px;width: 100%;">
+                        <div class="sh_dec">
+                            <a href="mailto:sales@procuremate.pro" target="_blank" style="color:#ffffff; font-weight:600;">
+                                <img src="images/procuremate-setu-consulting-odoo-erp-consultant.jpg" width="50%" height="50%">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div style="padding: 20px;width: 100%;">
+                        <div class="w-100 w-md-75 w-lg-100 my-1 pl-3 text-nowrap text-truncate btn btn-info rounded" style="vertical-align: middle;margin-top:15px">
+                            <i class="fa fa-envelope fa-fw" style="font-size:1.2rem;"></i>
+                            <a href="mailto:sales@procuremate.pro" target="_blank" style="color:#ffffff; font-weight:600;">sales@procuremate.pro</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    <div class="img_dec shadow mt-4" style="padding: 20px;align-items: center;display: inline-flex; border-radius: 10px;">
+                        <div class="sh_inner_box d-flex align-items-baseline">
+                            <div class="sh_dec">
+                                <h5 style="font-size: 20px;line-height: 1.455;font-weight: 600;color: #1e266d;">
+                                    Revolutionizing Procurement Management with a Comprehensive Tender Management System<br>
+                                    For more details send mail on sales@procuremate.pro
+                                </h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="procuremate" class="row carousel slide mt64 mb32" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active" style="height:auto;">
+                    <div class="col-xs-12 col-sm-4 col-md-12 mb16 mt16" style="float:left">
+                        <div style="border-radius:10px" class="shadow-sm">
+                            <img class="img img-responsive center-block" style="border-top-left-radius:10px; border-top-right-radius:10px" src="images/ProcureMate/1.jpg" width="100%" height="100%">
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item" style="height:auto;">
+                    <div class="col-xs-12 col-sm-4 col-md-12 mb16 mt16" style="float:left">
+                        <div style="border-radius:10px" class="shadow-sm">
+                            <img class="img img-responsive center-block" style="border-top-left-radius:10px; border-top-right-radius:10px" src="images/ProcureMate/2.jpg" width="100%" height="100%">
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item" style="height:auto;">
+                    <div class="col-xs-12 col-sm-4 col-md-12 mb16 mt16" style="float:left">
+                        <div style="border-radius:10px" class="shadow-sm">
+                            <img class="img img-responsive center-block" style="border-top-left-radius:10px; border-top-right-radius:10px" src="images/ProcureMate/3.jpg" width="100%" height="100%">
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item" style="height:auto;">
+                    <div class="col-xs-12 col-sm-4 col-md-12 mb16 mt16" style="float:left">
+                        <div style="border-radius:10px" class="shadow-sm">
+                            <img class="img img-responsive center-block" style="border-top-left-radius:10px; border-top-right-radius:10px" src="images/ProcureMate/4.jpg" width="100%" height="100%">
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item" style="height:auto;">
+                    <div class="col-xs-12 col-sm-4 col-md-12 mb16 mt16" style="float:left">
+                        <div style="border-radius:10px" class="shadow-sm">
+                            <img class="img img-responsive center-block" style="border-top-left-radius:10px; border-top-right-radius:10px" src="images/ProcureMate/5.jpg" width="100%" height="100%">
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item" style="height:auto;">
+                    <div class="col-xs-12 col-sm-4 col-md-12 mb16 mt16" style="float:left">
+                        <div style="border-radius:10px" class="shadow-sm">
+                            <img class="img img-responsive center-block" style="border-top-left-radius:10px; border-top-right-radius:10px" src="images/ProcureMate/6.jpg" width="100%" height="100%">
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item" style="height:auto;">
+                    <div class="col-xs-12 col-sm-4 col-md-12 mb16 mt16" style="float:left">
+                        <div style="border-radius:10px" class="shadow-sm">
+                            <img class="img img-responsive center-block" style="border-top-left-radius:10px; border-top-right-radius:10px" src="images/ProcureMate/7.jpg" width="100%" height="100%">
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item" style="height:auto;">
+                    <div class="col-xs-12 col-sm-4 col-md-12 mb16 mt16" style="float:left">
+                        <div style="border-radius:10px" class="shadow-sm">
+                            <img class="img img-responsive center-block" style="border-top-left-radius:10px; border-top-right-radius:10px" src="images/ProcureMate/8.jpg" width="100%" height="100%">
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item" style="height:auto;">
+                    <div class="col-xs-12 col-sm-4 col-md-12 mb16 mt16" style="float:left">
+                        <div style="border-radius:10px" class="shadow-sm">
+                            <img class="img img-responsive center-block" style="border-top-left-radius:10px; border-top-right-radius:10px" src="images/ProcureMate/9.jpg" width="100%" height="100%">
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item" style="height:auto;">
+                    <div class="col-xs-12 col-sm-4 col-md-12 mb16 mt16" style="float:left">
+                        <div style="border-radius:10px" class="shadow-sm">
+                            <img class="img img-responsive center-block" style="border-top-left-radius:10px; border-top-right-radius:10px" src="images/ProcureMate/10.jpg" width="100%" height="100%">
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item" style="height:auto;">
+                    <div class="col-xs-12 col-sm-4 col-md-12 mb16 mt16" style="float:left">
+                        <div style="border-radius:10px" class="shadow-sm">
+                            <img class="img img-responsive center-block" style="border-top-left-radius:10px; border-top-right-radius:10px" src="images/ProcureMate/11.jpg" width="100%" height="100%">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <a class="carousel-control-prev" href="#procuremate" data-bs-slide="prev" style="margin-left:-30px; width:35px; color:#000">
+                <span class="carousel-control-prev-icon">
+                    <i class="fa fa-arrow-circle-left" style="font-size:24px; color:#704A66"></i>
+                </span>
+            </a>
+            <a class="carousel-control-next" href="#procuremate" data-bs-slide="next" style="margin-right:-30px; width:35px; color:#000">
+                <span class="carousel-control-next-icon">
+                    <i class="fa fa-arrow-circle-right" style="font-size:24px; color:#704A66"></i>
+                </span>
+            </a>
+        </div>
+    </div>
+</section>
+<!-- ProcureMate Pro Solution END-->
+
+<!-- Contact Details START-->
+<section class="index-banner shadow-sm position-relative mt40" style="border-top:4px solid #37bbf9; border-radius: 10px; margin-top: 20px;">
+    <img class="w-100 h-100 position-absolute img-fluid mb16" src="images/etc/1-background.jpg" style="border-radius: 10px;" />
+    <div class="container p-md-4 p-4 position-relative">
+        <div class="row align-items-center">
+            <div class="col-lg-4 text-center mb-5 mb-lg-0">
+                <div class="h3 p-2 mb-2 font-weight-bold">Contact Us</div> 
+                <div class="w-100 w-md-75 w-lg-100 my-1 pl-3 text-nowrap text-truncate btn btn-info rounded">
+                    <i class="fa fa-envelope fa-fw" style="font-size:1.2rem;"></i>
+                    <a href="mailto:support@setuconsulting.com" target="_blank" style="color:#ffffff; font-weight:600;">support@setuconsulting.com</a>
+                </div>
+                <div class="w-100 w-md-75 w-lg-100 my-1 pl-3 text-nowrap text-truncate btn btn-info rounded">
+                    <i class="fa fa-skype fa-fw" style="font-size:1.2rem;"></i>
+                    <span>Skype: </span>
+                    <a href="skype:live:.cid.7abebb3d4adef53f?chat" target="_blank" style="color:#ffffff; font-weight:600;">Setu Consulting</a>
+                </div>
+                <div class="w-100 w-md-75 w-lg-100 m-auto my-1 pl-3 text-nowrap text-truncate btn-light border border-dark rounded" style="line-height: 2.4rem;">
+                    <a href="https://setuconsulting.com/contactus" target="_blank">www.setuconsulting.com</a>
+                </div>
+            </div>
+            <div class="col-12 col-lg-4 border-left border-right" style="border-left: 10px;">
+                <div class="h3 p-2 mb-3 text-center font-weight-bold">Odoo Certified Partner</div> 
+                <div class="text-left">
+                    <div class="my-3 pl-3 text-nowrap text-truncate lead text-white" data-container="body" data-toggle="popover" data-placement="top">
+                        <img src="images/odoo15.png" width="100px" alt="Odoo 15 Certified" title="Odoo 15 Certified"> 
+                        <img src="images/odoo16.png" width="100px" alt="Odoo 16 Certified" title="Odoo 16 Certified"> 
+                        <img src="images/odoo17.png" width="100px" alt="Odoo 16 Certified" title="Odoo 17 Certified"> 
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-lg-4 mt-5 mt-lg-0">
+                <div class="h4 p-2 text-center font-weight-bold">Watch and subscribe</div> 
+                <div class="text-center">
+                    <a href="https://www.youtube.com/@setuconsulting" target="_blank">
+                        <img src="images/youtube.png" width="200px">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Contact Details END-->
+
+<section class="index-banner shadow-sm position-relative mt40" style="border-top:4px solid #37bbf9; border-radius: 10px; margin-top: 20px;">
+    <div class="container p-md-4 p-4 position-relative">   
+        <section class="oe_container mt32">
+            <h3 style='color:#091E42; font-family:"Montserrat"; text-align:center; margin:25px auto; text-transform:uppercase' class="oe_slogan">
+                <b>Suggested Solutions</b>
+            </h3> 
+            <div id="demo9" class="row carousel slide mt64 mb32" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active" style="height:40%;">
+                        <a href="mailto:sales@procuremate.pro" target="_blank">
+                        <div class="col-xs-12 col-sm-4 col-md-12 mb16 mt16" style="float:left">
+                            <div style="border-radius:10px" class="shadow-sm">
+                                <img class="img img-responsive center-block" style="border-top-left-radius:10px; border-top-right-radius:10px" src="images/solutions_images/procurement-management-system-setu-consulting-odoo-erp-consultant.jpg" width="100%" height="100%">
+                            </div>
+                        </div>
+                        </a>
+                    </div>
+                    <div class="carousel-item" style="height:40%;">
+                        <a href="https://apps.odoocdn.com/apps/modules/17.0/setu_advance_reordering" target="_blank">
+                        <div class="col-xs-12 col-sm-4 col-md-12 mb16 mt16" style="float:left">
+                            <div style="border-radius:10px" class="shadow-sm">
+                                <img class="img img-responsive center-block" style="border-top-left-radius:10px; border-top-right-radius:10px" src="images/solutions_images/advance-reordering-setu-consulting-odoo-erp-consultant.jpg" width="100%" height="100%">
+                            </div>
+                        </div>
+                        </a>
+                    </div>
+                    <div class="carousel-item" style="height:40%;">
+                        <div class="col-xs-12 col-sm-4 col-md-12 mb16 mt16" style="float:left">
+                            <div style="border-radius:10px" class="shadow-sm">
+                                <a href="https://apps.odoocdn.com/apps/modules/17.0/setu_advance_inventory_reports" target="_blank">
+                                <img class="img img-responsive center-block" style="border-top-left-radius:10px; border-top-right-radius:10px" src="images/solutions_images/advance-inventory-reports-setu-consulting-odoo-erp-consultant.jpg" width="100%" height="100%">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item" style="height:40%;">
+                        <div class="col-xs-12 col-sm-4 col-md-12 mb16 mt16" style="float:left">
+                            <div style="border-radius:10px" class="shadow-sm">
+                                <a href="https://apps.odoocdn.com/apps/modules/17.0/setu_inventory_count_management" target="_blank">
+                                <img class="img img-responsive center-block" style="border-top-left-radius:10px; border-top-right-radius:10px" src="images/solutions_images/inventory-count-setu-consulting-odoo-erp-consultant.jpg" width="100%" height="100%">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item" style="height:40%;">
+                        <div class="col-xs-12 col-sm-4 col-md-12 mb16 mt16" style="float:left">
+                            <div style="border-radius:10px" class="shadow-sm">
+                                <a href="https://apps.odoocdn.com/apps/modules/17.0/setu_cash_flow_forecasting" target="_blank">
+                                <img class="img img-responsive center-block" style="border-top-left-radius:10px; border-top-right-radius:10px" src="images/solutions_images/cashforecast-setu-consulting-odoo-erp-consultant.jpg" width="100%" height="100%">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item" style="height:40%;">
+                        <div class="col-xs-12 col-sm-4 col-md-12 mb16 mt16" style="float:left">
+                            <div style="border-radius:10px" class="shadow-sm">
+                                <a href="https://apps.odoocdn.com/apps/modules/17.0/setu_inventory_ledger_report" target="_blank">
+                                <img class="img img-responsive center-block" style="border-top-left-radius:10px; border-top-right-radius:10px" src="images/solutions_images/inventory-ledger-report-setu-consulting-odoo-erp-consultant.jpg" width="100%" height="100%">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item" style="height:40%;">
+                        <div class="col-xs-12 col-sm-4 col-md-12 mb16 mt16" style="float:left">
+                            <div style="border-radius:10px" class="shadow-sm">
+                                <a href="https://apps.odoocdn.com/apps/modules/17.0/setu_intercompany_transaction" target="_blank">
+                                <img class="img img-responsive center-block" style="border-top-left-radius:10px; border-top-right-radius:10px" src="images/solutions_images/inter-company-transfer-setu-consulting-odoo-erp-consultant.jpg" width="100%" height="100%">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item" style="height:40%;">
+                        <div class="col-xs-12 col-sm-4 col-md-12 mb16 mt16" style="float:left">
+                            <div style="border-radius:10px" class="shadow-sm">
+                                <a href="https://apps.odoocdn.com/apps/modules/17.0/setu_rfm_analysis" target="_blank">
+                                <img class="img img-responsive center-block" style="border-top-left-radius:10px; border-top-right-radius:10px" src="images/solutions_images/rfm-analysis-setu-consulting-odoo-erp-consultant.jpg" width="100%" height="100%">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item" style="height:40%;">
+                        <div class="col-xs-12 col-sm-4 col-md-12 mb16 mt16" style="float:left">
+                            <div style="border-radius:10px" class="shadow-sm">
+                                <a href="https://apps.odoocdn.com/apps/modules/17.0/setu_rma" target="_blank">
+                                <img class="img img-responsive center-block" style="border-top-left-radius:10px; border-top-right-radius:10px" src="images/solutions_images/rma-setu-consulting-odoo-erp-consultant.jpg" width="100%" height="100%">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item" style="height:40%;">
+                        <div class="col-xs-12 col-sm-4 col-md-12 mb16 mt16" style="float:left">
+                            <div style="border-radius:10px" class="shadow-sm">
+                                <a href="https://apps.odoocdn.com/apps/modules/17.0/setu_inventory_coverage_abc_analysis_report" target="_blank">
+                                <img class="img img-responsive center-block" style="border-top-left-radius:10px; border-top-right-radius:10px" src="images/solutions_images/ineventory-coverage-abc-analysis-setu-consulting-odoo-erp-consultant.jpg" width="100%" height="100%">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item" style="height:40%;">
+                        <div class="col-xs-12 col-sm-4 col-md-12 mb16 mt16" style="float:left">
+                            <div style="border-radius:10px" class="shadow-sm">
+                                <a href="https://apps.odoocdn.com/apps/modules/17.0/setu_inventory_coverage_report" target="_blank">
+                                <img class="img img-responsive center-block" style="border-top-left-radius:10px; border-top-right-radius:10px" src="images/solutions_images/inventory-coverage-analysis-setu-consulting-odoo-erp-consultant.jpg" width="100%" height="100%">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item" style="height:40%;">
+                        <div class="col-xs-12 col-sm-4 col-md-12 mb16 mt16" style="float:left">
+                            <div style="border-radius:10px" class="shadow-sm">
+                                <a href="https://apps.odoocdn.com/apps/modules/17.0/setu_customer_consignment" target="_blank">
+                                <img class="img img-responsive center-block" style="border-top-left-radius:10px; border-top-right-radius:10px" src="images/solutions_images/consignment-management-setu-consulting-odoo-erp-consultant.jpg" width="100%" height="100%">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item" style="height:40%;">
+                        <div class="col-xs-12 col-sm-4 col-md-12 mb16 mt16" style="float:left">
+                            <div style="border-radius:10px" class="shadow-sm">
+                                <a href="https://apps.odoocdn.com/apps/modules/17.0/setu_asset_tracking" target="_blank">
+                                <img class="img img-responsive center-block" style="border-top-left-radius:10px; border-top-right-radius:10px" src="images/solutions_images/asset-tracking-setu-consulting-odoo-erp-consultant.jpg" width="100%" height="100%">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item" style="height:40%;">
+                        <div class="col-xs-12 col-sm-4 col-md-12 mb16 mt16" style="float:left">
+                            <div style="border-radius:10px" class="shadow-sm">
+                                <a href="https://apps.odoocdn.com/apps/modules/17.0/setu_abc_analysis_reports" target="_blank">
+                                <img class="img img-responsive center-block" style="border-top-left-radius:10px; border-top-right-radius:10px" src="images/solutions_images/abc-sales-analysis-report-setu-consulting-odoo-erp-consultant.jpg" width="100%" height="100%">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item" style="height:40%;">
+                        <div class="col-xs-12 col-sm-4 col-md-12 mb16 mt16" style="float:left">
+                            <div style="border-radius:10px" class="shadow-sm">
+                                <a href="https://apps.odoocdn.com/apps/modules/17.0/setu_shopify_connector" target="_blank">
+                                <img class="img img-responsive center-block" style="border-top-left-radius:10px; border-top-right-radius:10px" src="images/solutions_images/odoo-shopify-setu-consulting-odoo-erp-consultant.jpg" width="100%" height="100%">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item" style="height:40%;">
+                        <div class="col-xs-12 col-sm-4 col-md-12 mb16 mt16" style="float:left">
+                            <div style="border-radius:10px" class="shadow-sm">
+                                <a href="https://apps.odoocdn.com/apps/modules/17.0/setu_woocommerce_connector" target="_blank">
+                                <img class="img img-responsive center-block" style="border-top-left-radius:10px; border-top-right-radius:10px" src="images/solutions_images/woocommerce-odoo-connector-setu-consulting-odoo-erp-consultant.jpg" width="100%" height="100%">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item" style="height:40%;">
+                        <div class="col-xs-12 col-sm-4 col-md-12 mb16 mt16" style="float:left">
+                            <div style="border-radius:10px" class="shadow-sm">
+                                <a href="https://apps.odoocdn.com/apps/modules/17.0/setu_wayfair_connector" target="_blank">
+                                <img class="img img-responsive center-block" style="border-top-left-radius:10px; border-top-right-radius:10px" src="images/solutions_images/wayfair-connector-setu-consulting-odoo-erp-consultant.jpg" width="100%" height="100%">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item" style="height:40%;">
+                        <div class="col-xs-12 col-sm-4 col-md-12 mb16 mt16" style="float:left">
+                            <div style="border-radius:10px" class="shadow-sm">
+                                <a href="https://apps.odoocdn.com/apps/modules/17.0/setu_sales_incentive" target="_blank">
+                                <img class="img img-responsive center-block" style="border-top-left-radius:10px; border-top-right-radius:10px" src="images/solutions_images/sales-incentive-commision-management-setu-consulting-odoo-erp-consultant.jpg" width="100%" height="100%">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item" style="height:40%;">
+                        <div class="col-xs-12 col-sm-4 col-md-12 mb16 mt16" style="float:left">
+                            <div style="border-radius:10px" class="shadow-sm">
+                                <a href="https://apps.odoocdn.com/apps/modules/17.0/setu_sales_product_performance_report" target="_blank">
+                                <img class="img img-responsive center-block" style="border-top-left-radius:10px; border-top-right-radius:10px" src="images/solutions_images/sales-product-perfomance-setu-consulting-odoo-erp-consultant.jpg" width="100%" height="100%">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item" style="height:40%;">
+                        <div class="col-xs-12 col-sm-4 col-md-12 mb16 mt16" style="float:left">
+                            <div style="border-radius:10px" class="shadow-sm">
+                                <a href="https://apps.odoocdn.com/apps/modules/17.0/setu_sales_purchase_price_tracker" target="_blank">
+                                <img class="img img-responsive center-block" style="border-top-left-radius:10px; border-top-right-radius:10px" src="images/solutions_images/sales-purchase-price-taker-setu-consulting-odoo-erp-consultant.jpg" width="100%" height="100%">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item" style="height:40%;">
+                        <div class="col-xs-12 col-sm-4 col-md-12 mb16 mt16" style="float:left">
+                            <div style="border-radius:10px" class="shadow-sm">
+                                <a href="https://apps.odoocdn.com/apps/modules/17.0/setu_shipengine_integration" target="_blank">
+                                <img class="img img-responsive center-block" style="border-top-left-radius:10px; border-top-right-radius:10px" src="images/solutions_images/ship-engine-setu-consulting-odoo-erp-consultant.jpg" width="100%" height="100%">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item" style="height:40%;">
+                        <div class="col-xs-12 col-sm-4 col-md-12 mb16 mt16" style="float:left">
+                            <div style="border-radius:10px" class="shadow-sm">
+                                <a href="https://apps.odoocdn.com/apps/modules/17.0/shopon_pos_theme" target="_blank">
+                                <img class="img img-responsive center-block" style="border-top-left-radius:10px; border-top-right-radius:10px" src="images/solutions_images/shop-on-pos-setu-consulting-odoo-erp-consultant.jpg" width="100%" height="100%">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <a class="carousel-control-prev" href="#demo9" data-bs-slide="prev" style="margin-left:-30px; width:35px; color:#000">
+                    <span class="carousel-control-prev-icon">
+                        <i class="fa fa-arrow-circle-left" style="font-size:24px; color:#704A66"></i>
+                    </span>
+                </a>
+                <a class="carousel-control-next" href="#demo9" data-bs-slide="next" style="margin-right:-30px; width:35px; color:#000">
+                    <span class="carousel-control-next-icon">
+                        <i class="fa fa-arrow-circle-right" style="font-size:24px; color:#704A66"></i>
+                    </span>
+                </a>
+            </div>
+        </section>
+    </div>
+</section>
+
+<section class="index-banner shadow-sm position-relative mt40" style="border-top:4px solid #37bbf9; border-radius: 10px; margin-top: 15px;">
+    <img class="w-100 h-100 position-absolute img-fluid mb16" src="images/etc/2-background.jpg" style="border-radius: 10px;" />
+    <div class="container p-md-3 p-4 position-relative">
+        <div class="row">
+            <div class="col-sm-6 col-md-6 mt-3 px-2 text-center">
+                <div style="border-radius:10px; border-left:4px solid #5A63A6; box-shadow: 0px 2px 9px 4px #d0cecb;">
+                    <h5 class="font-weight-bold">FREE SUPPORT</h5>
+                    <p class="m-auto w-75" style="line-height: 1.5;font-weight: 100;">We will provide free support for any issues, queries, and bug fixing upto 90 days from the date of purchase of this application. 
+                    <a href="mailto:support@setuconsulting.com?subject=Currency Forward Booking V17.0 - Support Request" target="_blank" class="btn btn-info mx-2 pr-sm-4 mb-2 mb-lg-0" style="text-transform: uppercase; font-size: 14px;"><i class="fa fa-envelope-square mr-sm-2" style="font-size: 20px;vertical-align: middle;"></i> <span class="d-none d-sm-inline">Request free support</span></a>
+                    </p>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-6 mt-3 px-2 text-center">
+                <div style="border-radius:10px; border-left:4px solid #5A63A6; height: 150px; box-shadow: 0px 2px 9px 4px #d0cecb;">
+                    <h3 class="font-weight-bold">NOTE</h3>
+                    <p class="m-auto w-75" style="line-height: 1.5;font-weight: 100;">
+                        Get notified about latest update. Please drop an email when you make purchase at
+                        <a href="mailto:info@setuconsulting.com?subject=Currency Forward Booking V17.0 - New Purchase" class="btn btn-info mx-2 pr-sm-4 mb-2 mb-lg-0" style="text-transform: uppercase; font-size: 14px;"><i class="fa fa-envelope-square mr-sm-2" style="font-size: 20px;vertical-align: middle;"></i> <span class="d-none d-sm-inline">Setu Consulting</span></a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="container mt-3 mb-4">
+    <div class="row">
+        <div class="col-sm-6 col-md-12 mt-3 px-2 text-center">
+            <div class="col-sm-6 col-md-12 mt-6 px-2 text-center">
+                <img src="images/odoo_images/odoo-services-1.png" class="responsive" style="margin:2px 2px 2px 2px; border-radius: 10px;  box-shadow: -1px 0px 10px 2px #888;" alt="Setu Consulting Services Private Limited | Odoo Certified Consultant | Offical Odoo Partner" title="Setu Consulting Services Private Limited | Odoo Certified Consultant | Offical Odoo Partner">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+</body>
+</html>

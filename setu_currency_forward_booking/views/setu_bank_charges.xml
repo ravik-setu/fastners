@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="setu_bank_charges_tree_view" model="ir.ui.view">
+        <field name="name">setu.bank.charges.tree.view</field>
+        <field name="model">setu.bank.charges</field>
+        <field name="arch" type="xml">
+            <tree editable="bottom">
+                <field name="name" required="1"/>
+                <field name="charges_type" required="1"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="setu_bank_charges_action" model="ir.actions.act_window">
+        <field name="name">Bank Charges</field>
+        <field name="res_model">setu.bank.charges</field>
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="setu_bank_charges_tree_view"/>
+    </record>
+
+    <menuitem id="bank_charges_menu"
+              name="Bank Charges"
+              parent="setu_currency_forward_booking.forward_booking_configuration_menu"
+              action="setu_currency_forward_booking.setu_bank_charges_action"
+              sequence="1"/>
+</odoo>

@@ -1,0 +1,463 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="setu_currency_forward_booking_search_view" model="ir.ui.view">
+        <field name="name">setu.currency.forward.booking.search.view</field>
+        <field name="model">setu.forward.booking</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="setu_currency_forward_booking_tree_view" model="ir.ui.view">
+        <field name="name">setu.currency.forward.booking.tree.view</field>
+        <field name="model">setu.forward.booking</field>
+        <field name="arch" type="xml">
+            <tree default_order="id desc" duplicate="false">
+                <field name="name"/>
+                <field name="bank_id"/>
+                <field name="start_date"/>
+                <field name="end_date"/>
+                <field name="booking_amount"/>
+                <field name="hash_rate"/>
+                <field name="remaining_amount"/>
+                <field name="profit_or_loss"/>
+                <field name="company_id"/>
+                <field name="company_currency_id" column_invisible="1"/>
+                <field name="currency_id" column_invisible="1"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="setu_currency_forward_booking_form_view" model="ir.ui.view">
+        <field name="name">setu.forward.booking.form.view</field>
+        <field name="model">setu.forward.booking</field>
+        <field name="arch" type="xml">
+            <form duplicate="false">
+                <header>
+                    <button name="action_confirm" string="Confirm" class="oe_highlight" type="object"
+                            invisible="state != 'draft'"/>
+                    <button name="action_cancel" string="Cancel" class="oe_highlight" type="object"
+                            invisible="state != 'running' or remaining_amount &lt;= 0"/>
+                    <button name="action_close" string="Close" class="oe_highlight" type="object"
+                            invisible="state != 'running' or remaining_amount > 0"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,running"
+                           invisible="state not in ('running', 'draft')"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,running,close"
+                           invisible="state != 'close'"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,running,cancelled"
+                           invisible="state != 'cancelled'"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" readonly="1"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="company_id" readonly="1" required="1"
+                                   options="{'no_create': True, 'no_create_edit':True}"/>
+                            <field name="company_currency_id" invisible="1"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group string="PERIOD">
+                            <field name="deal_date" readonly="state != 'draft'" required="1"/>
+                            <div class="o_td_label">
+                                <label for="start_date" string="Period"/>
+                            </div>
+                            <div class="d-flex">
+                                <field name="start_date" invisible="1"/>
+                                From
+                                <span style="margin-right:20px"/>
+                                <span style="margin-right:20px">
+                                    <field name="start_date" readonly="state != 'draft'"
+                                           required="1"/>
+                                </span>
+                                to
+                                <span style="margin-right:50px"/>
+                                <span style="margin-right:20px">
+                                    <field name="end_date" required="1" readonly="state != 'draft'"/>
+                                </span>
+                            </div>
+                        </group>
+                        <group string="BOOKING INFORMATION">
+                            <field name="bank_id" required="1" readonly="state != 'draft'"
+                                   options="{'no_create': True, 'no_create_edit':True}"/>
+                            <div class="o_td_label">
+                                <label for="booking_amount" string="Amount" required="1"/>
+                            </div>
+                            <div class="d-flex">
+                                <span class="o_form_label mx-0 oe_edit_only"/>
+                                <field name="booking_amount" required="1"
+                                       readonly="state != 'draft'"/>
+                                <field name="currency_id" placeholder="INR" required="1"
+                                       options="{'no_create': True, 'no_create_edit':True}"
+                                       readonly="state != 'draft'"/>
+                            </div>
+                            <field name="hash_rate" readonly="state != 'draft'"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group string="CANCELLATION DETAILS">
+                            <field name="cancellation_rate" string="Rate"
+                                   readonly="state not in ['draft', 'running'] or remaining_amount &lt;= 0"/>
+                            <field name="cancellation_profit_or_loss" string="Amount"/>
+                        </group>
+                        <group string="REMAINING &amp; P/L">
+                            <field name="remaining_amount"/>
+                            <field name="profit_or_loss"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group string="OTHER INFORMATION">
+                            <field name="remarks"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Orders" name="order_details" invisible="1">
+                            <field name="order_ids" readonly="state not in ['draft', 'running']"/>
+                        </page>
+                        <page string="Payment Schedule Lines" name="payment_schedule_lines">
+                            <field name="payment_schedule_line_ids">
+                                <tree editable="bottom" create="false" delete="false">
+                                    <field name="order_id" readonly="1"
+                                           options="{'no_create': True, 'no_create_edit':True}"/>
+                                    <field name="payment_date" required="1" readonly="1"/>
+                                    <!--                    <field name="picking_id"/>-->
+                                    <field name="amount" readonly="1" required="1" sum="Total"/>
+                                    <field name="currency_id" readonly="1"
+                                           options="{'no_create': True, 'no_create_edit':True}"/>
+                                    <field name="company_id" readonly="1"
+                                           options="{'no_create': True, 'no_create_edit':True}"/>
+                                    <field name="is_payment_received" column_invisible="1"/>
+                                    <button name="action_delete_schedule_line" type="object" icon="fa-trash"
+                                            role="img" title="Payment Schedule Lines"
+                                            invisible="is_payment_received == True"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <!--                        <page string="Payment Schedule" name="payment_schedule_details">-->
+                        <!--                            <field name="payment_schedule_ids" readonly="1">-->
+                        <!--                                <tree editable="bottom" create="false">-->
+                        <!--                                    <field name="order_id" readonly="1"-->
+                        <!--                                           options="{'no_create': True, 'no_create_edit':True}"/>-->
+                        <!--                                    <field name="payment_date" required="1" readonly="1"/>-->
+                        <!--                                    &lt;!&ndash;                    <field name="picking_id"/>&ndash;&gt;-->
+                        <!--                                    <field name="amount" readonly="1" required="1" sum="Total"/>-->
+                        <!--                                    <field name="currency_id" readonly="1"-->
+                        <!--                                           options="{'no_create': True, 'no_create_edit':True}"/>-->
+                        <!--                                    <field name="company_id" readonly="1"-->
+                        <!--                                           options="{'no_create': True, 'no_create_edit':True}"/>-->
+                        <!--                                    <field name="forward_booking_ids" column_invisible="True"/>-->
+                        <!--                                                            <button name="action_assign_payment_schedule_lines" type="object" icon="fa-list"-->
+                        <!--                                                                    role="img"-->
+                        <!--                                                                    title="Payment Schedule Lines"/>-->
+                        <!--                                </tree>-->
+                        <!--                            </field>-->
+                        <!--                        </page>-->
+                        <page string="Payment Received" name="payment_received_details">
+                            <field name="bank_received_amount_ids" domain="[('state','=','posted')]">
+                                <tree editable="bottom" create="false">
+                                    <field name="forward_booking_id" column_invisible="True"/>
+                                    <field name="order_id" readonly="1"/>
+                                    <field name="payment_id" readonly="1"
+                                           options="{'no_create': True, 'no_create_edit':True}"/>
+                                    <field name="state"/>
+                                    <field name="payment_received_date" readonly="1"/>
+                                    <field name="order_booking_rate"/>
+                                    <field name="company_currency_id" column_invisible="True"/>
+                                    <field name="received_amount_in_currency" readonly="1"
+                                           sum="Booking Amount"/>
+                                    <field name="received_amount" readonly="1" sum="Received Amount"/>
+                                    <field name="currency_id" readonly="1"
+                                           options="{'no_create': True, 'no_create_edit':True}"/>
+                                    <field name="hash_rate" readonly="1"/>
+                                    <field name="hashing_amount" readonly="1"
+                                           sum="Hashing Amount"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Bank Charges" name="bank_charges_details">
+                            <field name="bank_charges_details_ids" readonly="state not in ['draft', 'running']">
+                                <tree editable="bottom">
+                                    <field name="forward_booking_id" column_invisible="True"/>
+                                    <field name="charge_id" domain="[('charges_type','=','expense')]" required="1"
+                                           options="{'no_create': True, 'no_create_edit':True}"/>
+                                    <field name="company_currency_id" column_invisible="True"/>
+                                    <field name="charge_amount" sum="Total"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Bank Incomes" name="bank_incoming_details_ids" invisible="1">
+                            <field name="bank_incoming_details_ids" readonly="state not in ['draft', 'running']">
+                                <tree editable="bottom">
+                                    <field name="forward_booking_id" column_invisible="True"/>
+                                    <field name="charge_id" domain="[('charges_type','=','income')]" required="1"
+                                           options="{'no_create': True, 'no_create_edit':True}"/>
+                                    <field name="company_currency_id" column_invisible="True"/>
+                                    <field name="amount" sum="Total"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="setu_currency_forward_booking_kanban_view" model="ir.ui.view">
+        <field name="name">Forward Booking Kanban View</field>
+        <field name="model">setu.forward.booking</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <field name="name"/>
+                <field name="start_date"/>
+                <field name="end_date"/>
+                <field name="bank_id"/>
+                <field name="currency_id"/>
+                <field name="booking_amount"/>
+                <field name="remaining_amount"/>
+                <field name="profit_or_loss"/>
+                <field name="company_id"/>
+                <field name="company_currency_id"/>
+                <field name="state"/>
+                <field name="deal_date"/>
+                <field name="hash_rate"/>
+                <templates>
+                    <t t-name="kanban-tooltip">
+                        <ul class="oe_kanban_tooltip">
+                            <li>
+                                <t t-esc="record.name.value"/>
+                            </li>
+                        </ul>
+                    </t>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click oe_kanban_card d-flex flex-column">
+                            <div style="display : flex;flex-direction : row;">
+                                <div class="oe_kanban_details">
+                                    <strong class="o_kanban_record_title">
+                                        <field name="name"/>
+                                    </strong>
+                                </div>
+                                <div class="oe_kanban_bottom_right">
+                                    <field name="state" widget="label_selection"
+                                           options="{'classes': {'ongoing': 'info', 'cancel': 'default', 'close': 'success'}}"/>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="oe_kanban_details">
+                                    <p>
+                                        <strong>From :</strong>&#x2063;
+                                        <field name="start_date"/>&#x2063;
+                                        <strong>To :</strong>&#x2063;
+                                        <field name="end_date"/>
+                                    </p>
+                                </div>
+                                <div class="oe_kanban_bottom_right">
+                                    <strong>Booking Amount :</strong>&#x2063;
+                                    <field name="booking_amount"/>&#x2063;
+                                    <field name="currency_id" readonly="1"/>
+                                </div>
+                                <div class="oe_kanban_bottom_right">
+                                    <strong>Remaining Amount :</strong>&#x2063;
+                                    <field name="remaining_amount"/>
+                                </div>
+                                <div class="oe_kanban_bottom_right">
+                                    <strong>Profit &amp; Loss :</strong>&#x2063;
+                                    <field name="profit_or_loss"/>&#x2063;
+                                    <field name="company_currency_id" readonly="1"/>
+                                </div>
+                            </div>
+                            <div class="pt-3 fs-1 fw-bolder">
+                                <field name="received_amount"
+                                       widget="gauge"
+                                       options="{'max_field': 'booking_amount', 'style': 'width:160px; height: 120px;cursor:pointer;'}"/>
+                            </div>
+                            <div class="oe_kanban_footer">
+                                <div class="o_kanban_record_bottom">
+                                    <div class="oe_kanban_bottom_left">
+                                        <field name="activity_ids" widget="kanban_activity"/>
+                                    </div>
+                                    <!--                                    <div class="oe_kanban_bottom_right">-->
+                                    <!--                                        <field name="responsible_user_id" widget="many2one_avatar_user"-->
+                                    <!--                                               domain="[('share', '=', False)]"/>-->
+                                    <!--                                    </div>-->
+                                </div>
+                            </div>
+
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="setu_currency_forward_booking_view_pivot" model="ir.ui.view">
+        <field name="name">setu.forward.booking.pivot</field>
+        <field name="model">setu.forward.booking</field>
+        <field name="arch" type="xml">
+            <pivot string="Forward Booking Analysis" sample="1">
+                <!--                    <field name="end_date" interval="month" type="col"/>-->
+                <field name="name" type="row"/>
+                <!--                    <field name="order_id" type="row"/>-->
+                <field name="booking_amount" type="measure"/>
+                <field name="received_amount" type="measure"/>
+                <field name="remaining_amount" type="measure"/>
+                <field name="profit_or_loss" type="measure" string="Profit &amp; Loss(INR)"/>
+            </pivot>
+        </field>
+    </record>
+
+    <record id="setu_currency_forward_booking_view_graph" model="ir.ui.view">
+        <field name="name">setu.forward.booking.graph</field>
+        <field name="model">setu.forward.booking</field>
+        <field name="arch" type="xml">
+            <graph string="Forward Booking Analysis" sample="1">
+                <field name="name"/>
+                <!--                    <field name="order_id" type="row"/>-->
+                <field name="booking_amount" type="measure"/>
+                <field name="received_amount" type="measure"/>
+                <field name="remaining_amount" type="measure"/>
+                <field name="profit_or_loss" type="measure" string="Profit &amp; Loss(INR)"/>
+            </graph>
+        </field>
+    </record>
+
+    <record id="setu_currency_forward_booking_search_view" model="ir.ui.view">
+        <field name="name">setu.forward.booking.search</field>
+        <field name="model">setu.forward.booking</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="bank_id"/>
+                <field name="remarks"/>
+                <field name="order_ids"/>
+
+                <filter string="End In 3 Days" name="show_period_end_in_last_3_days"
+                        domain="[('end_date', '&gt;=', datetime.date.today()),('end_date', '&lt;=', datetime.date.today()+datetime.timedelta(days=3))]"/>
+                <filter string="End In 7 Days" name="show_period_end_in_last_7_days"
+                        domain="[('end_date', '&gt;=', datetime.date.today()),('end_date', '&lt;=', datetime.date.today()+datetime.timedelta(days=7))]"/>
+                <filter string="End In 15 Days" name="show_period_end_in_last_15_days"
+                        domain="[('end_date', '&gt;=', datetime.date.today()),('end_date', '&lt;=', datetime.date.today()+datetime.timedelta(days=15))]"/>
+                <filter string="End In 30 Days" name="show_period_end_in_last_30_days"
+                        domain="[('end_date', '&gt;=', datetime.date.today()),('end_date', '&lt;=', datetime.date.today()+datetime.timedelta(days=30))]"/>
+                <filter string="End In 60 Days" name="show_period_end_in_last_60_days"
+                        domain="[('end_date', '&gt;=', datetime.date.today()),('end_date', '&lt;=', datetime.date.today()+datetime.timedelta(days=60))]"/>
+
+                <group expand="0" string="Group By">
+                    <filter string="Company" name="group_by_company" context="{'group_by':'company_id'}"/>
+                    <filter string="Bank" name="group_by_bank" context="{'group_by':'bank_id'}"/>
+                    <filter string="State" name="group_by_state" context="{'group_by':'state'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!--    <record id="setu_forward_booking_kanban_view" model="ir.ui.view">-->
+    <!--        <field name="name">Forward Booking Kanban View</field>-->
+    <!--        <field name="model">setu.forward.booking</field>-->
+    <!--        <field name="arch" type="xml">-->
+    <!--            <kanban>-->
+    <!--                <field name="name"/>-->
+    <!--                <field name="bank_id"/>-->
+    <!--                <field name="company_id"/>-->
+    <!--                <field name="start_date"/>-->
+    <!--                <field name="end_date"/>-->
+    <!--                <templates>-->
+    <!--                    <t t-name="kanban-tooltip">-->
+    <!--                        <ul class="oe_kanban_tooltip">-->
+    <!--                            <li>-->
+    <!--                                <t t-esc="record.name.value"/>-->
+    <!--                            </li>-->
+    <!--                        </ul>-->
+    <!--                    </t>-->
+    <!--                    <t t-name="kanban-box">-->
+    <!--                        <div class="oe_kanban_global_click oe_kanban_card d-flex flex-column">-->
+    <!--                            <div style="display : flex;flex-direction : row;">-->
+    <!--                                <div class="oe_kanban_details">-->
+    <!--                                    <strong class="o_kanban_record_title">-->
+    <!--                                        <field name="name"/>-->
+    <!--                                    </strong>-->
+    <!--                                </div>-->
+    <!--                                <div class="oe_kanban_bottom_right">-->
+    <!--                                    <field name="state" widget="label_selection"-->
+    <!--                                           options="{'classes': {'ongoing': 'info', 'cancel': 'default', 'close': 'success'}}"/>-->
+    <!--                                </div>-->
+    <!--                            </div>-->
+    <!--                            <div>-->
+    <!--                                <div class="oe_kanban_details">-->
+    <!--                                    <strong>-->
+    <!--                                        <field name="product_id"/>-->
+    <!--                                    </strong>-->
+    <!--                                </div>-->
+    <!--                                <div class="oe_kanban_bottom_right">-->
+    <!--                                    Total Quantity :-->
+    <!--                                    <field name="quantity_in_kg"/>-->
+    <!--                                    KG-->
+    <!--                                </div>-->
+    <!--                            </div>-->
+    <!--                            <div class="pt-3 fs-1 fw-bolder">-->
+    <!--                                <field name="manufacturing_done_count"-->
+    <!--                                       widget="gauge"-->
+    <!--                                       options="{'max_field': 'quantity_in_kg', 'style': 'width:160px; height: 120px;cursor:pointer;'}"/>-->
+    <!--                            </div>-->
+    <!--                            <div class="oe_kanban_footer">-->
+    <!--                                <div class="o_kanban_record_bottom">-->
+    <!--                                    <div class="oe_kanban_bottom_left">-->
+    <!--                                        <field name="activity_ids" widget="kanban_activity"/>-->
+    <!--                                    </div>-->
+    <!--                                    <div class="oe_kanban_bottom_right">-->
+    <!--                                        <field name="responsible_user_id" widget="many2one_avatar_user"-->
+    <!--                                               domain="[('share', '=', False)]"/>-->
+    <!--                                    </div>-->
+    <!--                                </div>-->
+    <!--                            </div>-->
+
+    <!--                        </div>-->
+    <!--                    </t>-->
+    <!--                </templates>-->
+    <!--            </kanban>-->
+    <!--        </field>-->
+    <!--    </record>-->
+
+    <record id="setu_currency_forward_booking_action_view" model="ir.actions.act_window">
+        <field name="name">Forward Booking</field>
+        <field name="res_model">setu.forward.booking</field>
+        <field name="view_mode">kanban,tree,pivot,graph,form</field>
+        <field name="view_id" ref="setu_currency_forward_booking.setu_currency_forward_booking_kanban_view"/>
+    </record>
+
+    <menuitem id="forward_booking_main_menu"
+              name="Currency Forward Booking"
+              web_icon="setu_currency_forward_booking,static/description/icon.png"
+              groups="setu_currency_forward_booking.group_setu_forward_booking_user"
+              sequence="23"/>
+
+    <menuitem id="forward_booking_menu"
+              name="Forward Booking"
+              parent="setu_currency_forward_booking.forward_booking_main_menu"
+              action="setu_currency_forward_booking.setu_currency_forward_booking_action_view"
+              sequence="1"/>
+
+    <menuitem id="forward_booking_report_menu"
+              name="Report"
+              parent="setu_currency_forward_booking.forward_booking_main_menu"
+              sequence="2"/>
+
+    <menuitem id="forward_booking_configuration_menu"
+              name="Configuration"
+              parent="setu_currency_forward_booking.forward_booking_main_menu"
+              groups="setu_currency_forward_booking.group_setu_forward_booking_manager"
+              sequence="3"/>
+
+</odoo>

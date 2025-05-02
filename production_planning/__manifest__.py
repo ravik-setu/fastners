@@ -7,7 +7,7 @@
     'description': 'Production Planning',
     'author': "Setu Consulting Services Pvt. Ltd.",
     'website': 'https://www.setuconsulting.com',
-    'depends': ['mrp', 'stock_extended', 'sale_stock'],
+    'depends': ['mrp', 'stock_extended', 'sale_stock', 'stock_account'],
     'data': [
         'security/ir.model.access.csv',
         'views/mrp_production_planning_view.xml',
@@ -24,6 +24,11 @@
     ],
     'demo': [
     ],
+    'assets': {
+        'web.assets_backend': [
+            'production_planning/static/src/**/*.js',
+        ],
+    },
     'web': True,
     # 'installable': True,
     'application': True,

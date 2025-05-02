@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="setu_qc_parameters_search_view" model="ir.ui.view">
+        <field name="name">setu.qc.parameters.search.view</field>
+        <field name="model">setu.qc.parameters</field>
+        <field name="arch" type="xml">
+            <search string="Qc Parameters">
+                <field name="product_id"/>
+                <field name="worksheet_templ_id"/>
+                <filter name="active" string="Archived" domain="[('active','=',False)]"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="setu_qc_parameters_tree_view" model="ir.ui.view">
+        <field name="name">setu.qc.parameters.tree.view</field>
+        <field name="model">setu.qc.parameters</field>
+        <field name="arch" type="xml">
+            <tree string="QC Parameters">
+                <field name="product_id"/>
+                <field name="worksheet_templ_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="setu_qc_parameters_form_view" model="ir.ui.view">
+        <field name="name">setu.qc.parameters.form.view</field>
+        <field name="model">setu.qc.parameters</field>
+        <field name="arch" type="xml">
+            <form string="Quality Checks">
+                <header>
+                    <button name="generate_worksheet" string="Generate Worksheet" type="object" class="btn-primary"
+                            invisible="worksheet_templ_id != False"/>
+                    <button name="update_worksheet" string="Update Template" type="object" class="btn-primary"
+                            invisible="worksheet_templ_id == False"/>
+                </header>
+                <sheet>
+                    <widget name="web_ribbon" title="Archived" bg_color="bg-danger" invisible="active == True"/>
+                    <group>
+                        <group>
+                            <field name="active" invisible="1"/>
+                            <field name="product_id" readonly="worksheet_templ_id != False" required="1"/>
+                        </group>
+                        <group>
+                            <field name="worksheet_templ_id" options="{'no_create': True, 'no_open': True}"
+                                   readonly="1"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Parameters" name="parameters">
+                            <field name="parameter_line_ids">
+                                <tree string="Parameters" editable="bottom" delete="false">
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="parameter_name" required="1"/>
+                                    <field name="parameter_dt" required="1"/>
+                                    <field name="description"/>
+                                    <field name="base_property"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_qc_parameters" model="ir.actions.act_window">
+        <field name="name">QC Parameters</field>
+        <field name="res_model">setu.qc.parameters</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="qc_main_menu" name="Quality Checks"/>
+
+    <menuitem id="qc_configuration" name="Configuration" parent="setu_quality_checks.qc_main_menu" sequence="9"/>
+
+    <menuitem id="qc_parameter_menu" name="Create QC Parameters" action="setu_quality_checks.action_qc_parameters"
+              parent="setu_quality_checks.qc_configuration" sequence="1"/>
+</odoo>

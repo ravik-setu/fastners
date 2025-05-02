@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_setu_qc_parameters,setu.qc.parameters,model_setu_qc_parameters,,1,1,1,0
+access_setu_qc_parameter_lines,setu.qc.parameter.lines,model_setu_qc_parameter_lines,,1,1,1,0
+access_setu_quality_checks,setu.quality.checks,model_setu_quality_checks,,1,1,1,1

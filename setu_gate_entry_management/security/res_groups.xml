@@ -1,0 +1,17 @@
+<odoo>
+    <record id="module_catagory_setu_gate_entry" model="ir.module.category">
+        <field name="name">Gate Entry</field>
+        <field name="sequence">32</field>
+    </record>
+    <record id="group_setu_gate_entry_user" model="res.groups">
+        <field name="name">User</field>
+        <field name="category_id" ref="module_catagory_setu_gate_entry"/>
+        <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+    </record>
+    <record id="group_setu_gate_entry_manager" model="res.groups">
+        <field name="name">Administrator</field>
+        <field name="category_id" ref="module_catagory_setu_gate_entry"/>
+        <field name="implied_ids" eval="[(4, ref('setu_gate_entry_management.group_setu_gate_entry_user'))]"/>
+        <field name="users" eval="[(4, ref('base.user_admin'))]"/>
+    </record>
+</odoo>

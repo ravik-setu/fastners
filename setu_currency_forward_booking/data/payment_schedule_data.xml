@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="action_to_create_forward_booking" model="ir.actions.server">
+            <field name="name">Forward Booking</field>
+            <field name="type">ir.actions.server</field>
+            <field name="model_id" ref="model_setu_payment_schedule"/>
+            <field name="binding_model_id" ref="model_setu_payment_schedule"/>
+            <field name="state">code</field>
+            <field name="code">action = model.action_open_payment_schedule_wizard()
+            </field>
+        </record>
+    </data>
+</odoo>

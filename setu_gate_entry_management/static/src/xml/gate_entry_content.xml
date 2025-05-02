@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-name="SetuGateEntryDetailsDashboard" owl="1">
+        <style>
+            body {
+                overflow:auto;
+            }
+        </style>
+        <body>
+            <div style="height:2vw;width:8vw;margin-left:25%;margin-top:5%;position:absolute;" class="button_back">
+                <button class="btn btn-info" type="button"
+                        style="border-radius: 12px;
+                           background: #71639E;;
+                           border: none;
+                           color: white;
+                           font-size: 16px;
+                           padding: 10px 20px;
+                           box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3),
+                                       -3px -3px 6px rgba(255, 255, 255, 0.2);
+                           transition: all 0.2s ease-in-out;">
+                    <i class="fa fa-angle-double-left"></i>
+                    Back
+                </button>
+            </div>
+            <div style="margin-top:10%;text-align:center;" class="barcode_screen_inward">
+                   <div class="barcode_scanner"
+                        style="height: 50%;width: 50%;
+                                background: linear-gradient(145deg, #e0f7ff, #b0d4e3); /* Light blue gradient */
+                                box-shadow:
+                                    inset 4px 4px 8px rgba(0, 123, 255, 0.4),  /* Inner blue shadow */
+                                    inset -4px -4px 8px rgba(255, 255, 255, 0.6), /* Inner light shadow */
+                                    4px 4px 8px rgba(0, 0, 0, 0.2),  /* Outer dark shadow */
+                                    -4px -4px 8px rgba(255, 255, 255, 0.9); /* Outer highlight */
+                                border-radius: 12px;
+                                border: 1px solid #a0c4e2;
+                                padding: 15px;margin-left: 25%;">
+                        <div>
+                            <div style="place-self:center;">
+                                <h1 class="mb-4">Barcode Scanning</h1>
+                            </div>
+
+                            <div style="height:10%;width:22%;text-align:center;margin-left:38%;">
+                                <img src="/barcodes/static/img/barcode.png" alt="Barcode" class="img-fluid mb-1 mt-1"/>
+                            </div>
+                            <div style="place-self:center;">
+                                <button class="btn btn-primary o_stock_mobile_barcode" t-on-click="openMobileScanner"
+                                        style="place-self:center;">
+                                    <i class="fa fa-camera fa-2x o_mobile_barcode_camera"/>
+                                    Tap to scan
+                                </button>
+                            </div>
+
+                            <div style="height:10%;width:30%;margin-top:5%;margin-left:35%;">
+                                <span><b>Enter Manually :</b></span>
+                                <input type="text" class="manual_barcode"/>
+                            </div>
+                            <div style="margin-top:1%;">
+                                <button class="btn btn-primary" t-on-click="openView" style="place-self:center;">
+                                    Scan
+                                </button>
+                            </div>
+                        </div>
+                   </div>
+            </div>
+            <div class="main_div" style="
+                height: 98%;
+                background: #e6e6e6; /* Slightly lighter gray for a soft effect */
+                border-radius: 12px;
+                box-shadow: inset 3px 3px 6px rgba(0, 0, 0, 0.15),
+                            inset -3px -3px 6px rgba(255, 255, 255, 0.6),
+                            4px 4px 8px rgba(0, 0, 0, 0.15),
+                            -4px -4px 8px rgba(255, 255, 255, 0.7);
+                padding: 20px;
+                margin: 1%;">
+                <div style="display: flex; justify-content: space-between; width: 90%; margin-left: 5%; margin-top:2%;margin-right:2%;margin-bottom:2%;">
+                    <div class="inward"
+                         style="cursor:pointer;background-color:#71639E; height:10vw; width:28vw; color:white; border-radius: 10px; display: flex; justify-content: center;font-size:2vw;">
+                        <div style="height:3vw;margin-top:1vw;cursor:pointer" class="inward_screen">Inward</div>
+                        <div style="height:3vw;width:6vw;margin-top:4.5vw;position:absolute;text-align:center;" class="inward_value"/>
+                    </div>
+                    <div class="outward"
+                         style="background-color:#71639E; height:10vw; width:28vw; color:white; border-radius: 10px; display: flex;  justify-content: center;font-size:2vw;cursor:pointer">
+                        <div style="height:3vw;margin-top:1vw;">Outward</div>
+                        <div style="height:3vw;width:6vw;margin-top:4.5vw;position:absolute;text-align:center;" class="outward_value"/>
+                    </div>
+                    <div class="visitor"
+                         style="cursor:pointer;background-color:#71639E; height:10vw; width:28vw; color:white; border-radius: 10px; display: flex; justify-content: center;font-size:2vw;">
+                        <div style="height:3vw;margin-top:1vw;" class="visitor_screen">Visitor</div>
+                        <div style="height:3vw;width:6vw;margin-top:4.5vw;position:absolute;text-align:center;" class="visitor_value"/>
+                    </div>
+                </div>
+                <div style="display: flex; margin-top: 1%;">
+                    <div style="height: 1.5vw; width: 8vw; font-size: 1vw;margin-left:13%; ">
+                        <b>Today's Inward</b>
+                    </div>
+                    <div style="height: 1.5vw; width: 8vw; font-size: 1vw;margin-left:25%; ">
+                        <b>Today's Outward</b>
+                    </div>
+                    <div style=" height: 1.5vw; width: 8vw; font-size: 1vw;margin-left:24%;">
+                        <b>Today's Visitors</b>
+                    </div>
+                </div>
+
+                <div style="border-radius: 10px; height: 68%; width: 100%;  display: flex; justify-content: space-between; align-items: center; box-shadow:padding: 10px;">
+
+                    <div style="border: 1px solid #ccc; height: 98%;overflow-y: auto; width: 33%; box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2); border-radius: 10px; background: white;">
+                        <t t-if="this.data['inward_records']">
+                            <table id="inward_table" class="display table table-striped inward_details">
+                                <thead>
+                                    <tr>
+                                        <th>Visitor Name</th>
+                                        <th>Token</th>
+                                        <th>Date</th>
+                                        <th>Vehicle No.</th>
+                                        <th>Visitor Company</th>
+                                        <th>State</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="">
+                                    <t t-debug="pdb"/>
+                                    <t t-foreach="Object.entries(this.data['inward_records'])" t-as="data_objects"
+                                       t-key="data_objects[0]">
+                                        <tr>
+                                            <td class="text-start">
+                                                <a href="#" class="selected_row_inward">
+                                                    <t t-esc="data_objects[1].visitor_name or 'N/A'"/>
+                                                </a>
+                                            </td>
+                                            <td>
+                                                <t t-esc="data_objects[1].name or 'N/A'"/>
+                                            </td>
+                                            <td>
+                                                <t t-esc="data_objects[1].date or 'N/A'"/>
+                                            </td>
+                                            <td>
+                                                <t t-esc="data_objects[1].visitor_vehicle_no or 'N/A'"/>
+                                            </td>
+                                            <td>
+                                                <t t-esc="data_objects[1].visitor_company or 'N/A'"/>
+                                            </td>
+                                            <td>
+                                                <t t-esc="data_objects[1].state or 'N/A'"/>
+                                            </td>
+                                            <td class="id d-none">
+                                                <t t-esc="data_objects[1].id or 'N/A'"/>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                            </table>
+                        </t>
+                    </div>
+                    <div style="border: 1px solid #ccc; height: 98%;overflow-y: scroll; width: 33%; box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2); border-radius: 10px; background: white;">
+                        <t t-if="this.data['visitor_records']">
+                            <table id="outward_table" class="display table table-striped inward_details"
+                                   style="overflow-y: auto;">
+                                <thead>
+                                    <tr>
+                                        <th>Visitor Name</th>
+                                        <th>Date</th>
+                                        <th>Vehicle No.</th>
+                                        <th>Visitor Company</th>
+                                        <th>State</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="">
+                                    <t t-foreach="Object.entries(this.data['outward_records'])" t-as="data_objects"
+                                       t-key="data_objects[0]">
+                                        <tr class="">
+                                            <td class="text-start">
+                                                <a href="#" class="selected_row_outward">
+                                                    <t t-esc="data_objects[1].visitor_name or 'N/A'"/>
+                                                </a>
+                                            </td>
+                                            <td>
+                                                <t t-esc="data_objects[1].date or 'N/A'"/>
+                                            </td>
+                                            <td class="">
+                                                <t t-esc="data_objects[1].visitor_vehicle_no or 'N/A'"/>
+                                            </td>
+                                            <td>
+                                                <t t-esc="data_objects[1].visitor_company or 'N/A'"/>
+                                            </td>
+                                            <td>
+                                                <t t-esc="data_objects[1].state or 'N/A'"/>
+                                            </td>
+
+                                            <td class="id d-none">
+                                                <t t-esc="data_objects[1].id or 'N/A'"/>
+                                            </td>
+                                            <td class="in_button">
+                                                <t t-if=" data_objects[1].state != 'In' and data_objects[1].state != 'Out' and data_objects[1].state != 'cancel'">  <!-- Show button only if state is not 'out' -->
+                                                    <button class="btn btn-info in_button_click" type="button"
+                                                            style="border-radius: 8px;
+                                                               background: linear-gradient(145deg, #3b88c3, #1e5a8a);
+                                                               border: none;
+                                                               color: white;
+                                                               font-size: 10px;
+                                                               padding: 5px 12px;
+                                                               box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2),
+                                                                           -2px -2px 4px rgba(255, 255, 255, 0.2);
+                                                               transition: all 0.2s ease-in-out;">
+                                                        In
+                                                    </button>
+                                                </t>
+                                            </td>
+
+                                            <td class="out_button">
+                                                <t t-if="data_objects[1].state != 'Out' and data_objects[1].state != 'cancel' and data_objects[1].state != 'On way'">
+                                                    <button class="btn btn-info out_button_click" type="button"
+                                                            style="border-radius: 8px;
+                                                               background: linear-gradient(145deg, #3b88c3, #1e5a8a);
+                                                               border: none;
+                                                               color: white;
+                                                               font-size: 10px;
+                                                               padding: 5px 12px;
+                                                               box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2),
+                                                                           -2px -2px 4px rgba(255, 255, 255, 0.2);
+                                                               transition: all 0.2s ease-in-out;">
+                                                        Out
+                                                    </button>
+                                                </t>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                            </table>
+                        </t>
+                    </div>
+                    <div style="border: 1px solid #ccc; height: 98%; width: 33%; box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2); border-radius: 10px; background: white;overflow-y: auto;">
+                        <t t-if="this.data['visitor_records']">
+                            <table id="visitor_table" class="display table table-striped inward_details">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>In Time</th>
+                                        <th>Out Time</th>
+                                        <th>Vehicle No.</th>
+                                        <th>Contact</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="">
+                                    <t t-foreach="Object.entries(this.data['visitor_records'])" t-as="data_objects"
+                                       t-key="data_objects[0]">
+                                        <tr class="">
+                                            <td class="text-start">
+                                                <a href="#" class="selected_row">
+                                                    <t t-esc="data_objects[1].visitor_name or 'N/A'"/>
+                                                </a>
+                                            </td>
+                                            <!--                                            <td>-->
+                                            <!--                                                <t t-esc="data_objects[1].un_visitor_name or 'N/A'" />-->
+                                            <!--                                            </td>-->
+                                            <td>
+                                                <t t-esc="data_objects[1].in_time_visitor or 'N/A'"/>
+                                            </td>
+                                            <td class="">
+                                                <t t-esc="data_objects[1].out_time_visitor or 'N/A'"/>
+                                            </td>
+                                            <td>
+                                                <t t-esc="data_objects[1].visitor_vehicle_no or 'N/A'"/>
+                                            </td>
+                                            <td class="out_button">
+                                                <t t-if="data_objects[1].state != 'out'">  <!-- Show button only if state is not 'out' -->
+                                                    <button class="btn btn-info" type="button"
+                                                            style="border-radius: 8px;
+                                                               background: linear-gradient(145deg, #3b88c3, #1e5a8a);
+                                                               border: none;
+                                                               color: white;
+                                                               font-size: 10px;
+                                                               padding: 5px 12px;
+                                                               box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2),
+                                                                           -2px -2px 4px rgba(255, 255, 255, 0.2);
+                                                               transition: all 0.2s ease-in-out;">
+                                                        Out
+                                                    </button>
+                                                </t>
+                                            </td>
+                                            <td class="id d-none">
+                                                <t t-esc="data_objects[1].id or 'N/A'"/>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                            </table>
+                        </t>
+                    </div>
+                </div>
+            </div>
+        </body>
+    </t>
+</templates>
