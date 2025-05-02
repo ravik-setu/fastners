@@ -5,7 +5,7 @@
         <field name="name">Component Product Label</field>
         <field name="default" eval="True"/>
         <field name="format">custom</field>
-        <field name="page_height">35</field>
+        <field name="page_height">40</field>
         <field name="page_width">75</field>
         <field name="orientation">Portrait</field>
         <field name="margin_top">0</field>
@@ -24,6 +24,10 @@
         <field name="report_name">production_planning.component_product_label_template</field>
         <field name="report_file">production_planning.component_product_label_template</field>
         <field name="print_report_name">'Label_%s' % (object.product_id.default_code or '')</field>
+        <field name="binding_model_id" ref="setu_wip_stock_valuation.model_setu_raw_material_movement"/>
+        <field name="binding_type">report</field>
+        <field name="attachment"></field>
+        <field name="attachment_use" eval="True"/>
         <field name="paperformat_id" ref="production_planning.component_product_label_paperformat"/>
     </record>
 

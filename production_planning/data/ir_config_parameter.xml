@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo noupdate="1">
+    <record id="param_print_label" model="ir.config_parameter" forcecreate="True">
+        <field name="key">production_planning.print_label</field>
+        <field name="value">True</field>
+    </record>
+</odoo>

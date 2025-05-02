@@ -16,14 +16,14 @@ class SetuRawMaterialMovement(models.Model):
         param = self.env['ir.config_parameter'].sudo().get_param('production_planning.print_label', default='False')
         if param:
             report = self.env.ref('production_planning.action_component_product_label_report')
-            pdf_content, _ = report._render_qweb_pdf('production_planning.action_component_product_label_report',
-                                                     self.id)
+            pdf_content, _ = report.sudo()._render_qweb_pdf('production_planning.action_component_product_label_report',
+                                                            self.id)
 
             attachment = self.env['ir.attachment'].create({
                 'name': f"Label_{self.id}.pdf",
                 'type': 'binary',
                 'datas': base64.b64encode(pdf_content),
-                'res_model': 'stock.move.line',
+                'res_model': self._name,
                 'res_id': self.id,
                 'mimetype': 'application/pdf'
             })
@@ -31,7 +31,7 @@ class SetuRawMaterialMovement(models.Model):
                 'type': 'ir.actions.client',
                 'tag': 'close_add_product_wizard',
                 'params': {
-                    'url': '/web/content/%s?download=1' % attachment.id,
+                    'url': '/web/content/%s?download=true' % attachment.id,
                 }
             }
         return False

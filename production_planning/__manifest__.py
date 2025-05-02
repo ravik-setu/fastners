@@ -18,6 +18,7 @@
         'views/production_planing_line_view.xml',
         'views/register_daily_production_view.xml',
         "views/stock_picking_type_view.xml",
+        'data/ir_config_parameter.xml',
         'reports/label_template.xml'
     ],
     'demo': [
