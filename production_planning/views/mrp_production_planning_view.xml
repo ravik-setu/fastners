@@ -23,6 +23,14 @@
                         <field name="state" widget="statusbar" statusbar_visible="draft,confirm,forging,threading"/>
                     </header>
                     <sheet>
+                        <field name="subcontract_ids" invisible="1"/>
+                        <div class="oe_button_box" name="button_box">
+                            <button class="oe_stat_button" name="action_view_subcontracts" type="object" icon="fa-wrench" invisible="not subcontract_ids">
+                                <div class="o_field_widget o_stat_info">
+                                    <span class="o_stat_text">Subcontracts</span>
+                                </div>
+                            </button>
+                        </div>
                         <div class="oe_title">
                             <h1>
                                 <field name="priority" widget="priority" class="mr-3"/>

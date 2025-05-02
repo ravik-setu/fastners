@@ -43,6 +43,7 @@ class ProductionPlanning(models.Model):
     lot_name = fields.Char(string='Serial Number / Lot', copy=False)
     excel_file_data = fields.Binary()
     sale_order_ids = fields.Many2many("sale.order", "planing_id", "sale_id", string="Sale Orders")
+    subcontract_ids = fields.One2many('purchase.order', string='Subcontracts', compute='_compute_subcontract_ids')
 
     def action_confirm(self):
         """
@@ -55,7 +56,7 @@ class ProductionPlanning(models.Model):
         bom_id = self.find_bill_of_material(self.product_id.put_in_pack_product_id or self.product_id)
         if not bom_id:
             raise UserError(
-                "No Bill of Material found for product {}".format(self.product_id.put_in_pack_product_id.name))
+                "No Bill of Material found for product {}".format(self.product_id.put_in_pack_product_id.name or self.product_id.name))
         line_product_ids = []
         bom_ids = self.find_all_mo_type_bom(bom_id)
         for bom_id in bom_ids:
@@ -95,6 +96,9 @@ class ProductionPlanning(models.Model):
         previous_qty = 0
         for line in bom_id.bom_line_ids:
             first_bom_id = self.find_bill_of_material(product_id=line.product_id)
+            if not first_bom_id:
+                bom_ids.update({bom_id: bom_id.product_qty * self.qty})
+                return bom_ids
             if first_bom_id:
                 bom_ids.update({bom_id: (line.product_qty / line.bom_id.product_qty) * self.qty})
                 previous_qty = line.product_qty * self.qty
@@ -234,3 +238,17 @@ class ProductionPlanning(models.Model):
         for rec in self:
             lines = self.sale_order_ids.order_line.filtered(lambda line:line.product_id.id == self.product_id.id)
             rec.qty = sum(lines.mapped('product_uom_qty')) - sum(lines.mapped('qty_delivered'))
+
+    def _compute_subcontract_ids(self):
+        for rec in self:
+            subcontracts = self.env['purchase.order'].search([('state', '!=', 'cancel'), ('is_outsourcing', '=', True), ('planning_id', '=', rec.id)])
+            rec.write({'subcontract_ids': [(6, 0, subcontracts.ids)]})
+
+    def action_view_subcontracts(self):
+        return {
+            'type': 'ir.actions.act_window',
+            'name': 'Subcontracts',
+            'view_mode': 'tree',
+            'res_model': 'purchase.order',
+            'domain': [('id', 'in', self.subcontract_ids.ids)],
+        }

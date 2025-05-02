@@ -10,7 +10,21 @@
                 <xpath expr="//button[@name='272']" position="attributes">
                     <attribute name="string">Movement</attribute>
                 </xpath>
+                <xpath expr="//field[@name='outgoing_qty']" position="after">
+                    <field name="forecast_qty" optional="show"/>
+                </xpath>
+                <xpath expr="//tree" position="attributes">
+                    <attribute name="decoration-danger">forecast_qty &lt; 0</attribute>
+                </xpath>
             </field>
+        </record>
+
+        <record id="action_create_purchase_order" model="ir.actions.server">
+            <field name="name">Purchase Products</field>
+            <field name="model_id" ref="stock.model_product_product"/>
+            <field name="binding_model_id" ref="stock.model_product_product"/>
+            <field name="state">code</field>
+            <field name="code">action = records.action_create_purchase_order()</field>
         </record>
 
     </data>

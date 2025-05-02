@@ -20,7 +20,8 @@
         "views/stock_picking_type_view.xml",
         'data/ir_config_parameter.xml',
         'reports/label_template.xml',
-        'wizard/additional_product_view.xml',
+        'wizards/additional_product_view.xml',
+        'wizards/action_register_subcontract_views.xml',
     ],
     'demo': [
     ],

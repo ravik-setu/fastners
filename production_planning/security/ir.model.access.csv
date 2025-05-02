@@ -5,3 +5,4 @@
 "access_register_daily_production","access.register.daily.production","model_register_daily_production",,1,1,1,0
 "access_mrp_workorder_additional_product","access.mrp_workorder.additional.product","model_mrp_workorder_additional_product","mrp.group_mrp_user",1,1,1,0
 "access_setu_raw_material_movement","access.set","model_setu_raw_material_movement",,1,1,1,0
+"access_register_subcontract","access.register.subcontract","model_register_subcontract",,1,1,1,0

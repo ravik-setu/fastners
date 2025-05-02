@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from odoo import models, fields, api, _
+from odoo.exceptions import UserError
 
 
 class MrpProductionPlanning(models.Model):
@@ -38,6 +39,7 @@ class MrpProductionPlanning(models.Model):
     lot_name = fields.Char(string="Lot/Serial")
     reserved_qty = fields.Float(string='Reserved Qty', compute='_compute_mo_count')
     component_status = fields.Selection(related='running_production_id.components_availability_state')
+    subcontract_ids = fields.One2many('purchase.order', string='Subcontracts', compute='_compute_subcontract_ids')
 
     @api.depends('planning_id.mo_ids')
     def _compute_mo_count(self):
@@ -86,3 +88,36 @@ class MrpProductionPlanning(models.Model):
     def find_latest_backorder(self):
         return self.running_production_id.procurement_group_id.mrp_production_ids.filtered(
             lambda mo: mo.state != 'done')[:1]
+
+    def action_register_subcontract(self):
+        subcontract_bom_id = self.env['mrp.production.planning'].find_bill_of_material(product_id=self.product_id, type='subcontract')
+        if not subcontract_bom_id:
+            raise UserError('Subcontract BOM is missing for this product!')
+        return {
+            'type': 'ir.actions.act_window',
+            'res_model': 'register.subcontract',
+            'views': [[self.env.ref('production_planning.default_register_subcontract_view_form').id, 'form']],
+            'name': _('Subcontract'),
+            'target': 'new',
+            'context': {
+                'default_planning_id': self.planning_id.id,
+                'default_planning_line': self.id,
+                'default_production_id': self.running_production_id.id,
+                'default_product_id': self.product_id.id,
+                'default_bom_id': subcontract_bom_id.id,
+            }
+        }
+
+    def _compute_subcontract_ids(self):
+        for rec in self:
+            subcontracts = self.env['purchase.order'].search([('state', '!=', 'cancel'), ('is_outsourcing', '=', True), ('planning_line_id', '=', rec.id)])
+            rec.write({'subcontract_ids': [(6, 0, subcontracts.ids)]})
+
+    def action_view_subcontracts(self):
+        return {
+            'type': 'ir.actions.act_window',
+            'name': 'Subcontracts',
+            'view_mode': 'tree',
+            'res_model': 'purchase.order',
+            'domain': [('id', 'in', self.subcontract_ids.ids)],
+        }
