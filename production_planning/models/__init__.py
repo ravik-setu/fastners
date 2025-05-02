@@ -9,3 +9,4 @@ from . import res_partner
 from . import register_daily_production
 from . import stock_picking_type
 from . import sale_order
+from . import setu_raw_material_movement

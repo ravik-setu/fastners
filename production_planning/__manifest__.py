@@ -19,7 +19,8 @@
         'views/register_daily_production_view.xml',
         "views/stock_picking_type_view.xml",
         'data/ir_config_parameter.xml',
-        'reports/label_template.xml'
+        'reports/label_template.xml',
+        'wizard/additional_product_view.xml',
     ],
     'demo': [
     ],

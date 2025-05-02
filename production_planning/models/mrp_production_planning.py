@@ -78,12 +78,9 @@ class ProductionPlanning(models.Model):
     def finish_planning(self):
         for rec in self:
             inprogress_mos = rec.mo_ids.filtered(lambda x: x.state not in ['done', 'cancel'])
-            if inprogress_mos:
-                raise UserError(
-                    _('Please Validate Given Manufacturing Orders {}'.format(
-                        '\n'.join(mo.name for mo in inprogress_mos))))
-            else:
-                self.state = 'done'
+            inprogress_mos.action_cancel()
+            rec.planning_lines.button_stop()
+            self.state = 'done'
 
     def find_bill_of_material(self, product_id=False, type=False):
         domain = ['|', ('product_id', '=', product_id.id), ('product_tmpl_id', '=', product_id.product_tmpl_id.id)]
@@ -169,6 +166,7 @@ class ProductionPlanning(models.Model):
                     _('Sorry you can not cancel Planning given manufacturing order is processed {}'.format(
                         '\n'.join(mo.name for mo in mo_ids))))
             rec.mo_ids.action_cancel()
+            rec.planning_lines.button_stop()
             rec.state = 'cancel'
 
     def get_available_qty_on_location(self, product_id, location_id=False, find_quant=False):

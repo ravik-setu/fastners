@@ -166,7 +166,7 @@ class MrpProduction(models.Model):
             'type': 'ir.actions.act_window',
             'res_model': 'mrp_workorder.additional.product',
             'views': [
-                [self.env.ref('setu_wip_stock_valuation.view_mrp_workorder_additional_product_wizard').id, 'form']],
+                [self.env.ref('production_planning.view_mrp_workorder_additional_product_wizard').id, 'form']],
             'name': _('Add Component'),
             'target': 'new',
             'context': {

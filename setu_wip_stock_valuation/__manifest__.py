@@ -14,9 +14,7 @@
     'sequence': 20,
     'depends': ['stock_account', 'production_planning'],
     'data': [
-        'security/ir.model.access.csv',
         'views/stock_location_view.xml',
-        'wizard/additional_product_view.xml',
         'views/mrp_production_view.xml'
     ],
     'assets': {

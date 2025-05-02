@@ -20,7 +20,7 @@ class RegisterDailyProduction(models.Model):
     product_id = fields.Many2one("product.product", related="planning_line.product_id", string="Product")
 
     def register_daily_production(self):
-        need_reserve_in_backorder = 0
+        action = {}
         mo = self.production_id
         mo.raise_error_if_multiple_lot_found()
         if mo.product_id.tracking != 'none' and not mo.lot_producing_id:
@@ -62,9 +62,9 @@ class RegisterDailyProduction(models.Model):
                 move.move_line_ids.write({'quantity': to_consume})
                 mo.move_raw_ids.write({'picked': True})
             action = mo.with_context(avoid_warning=True).mark_done_and_create_backorder_if_needed()
-            self.planning_line.running_production_id =self.planning_line.find_latest_backorder() or mo.id
-            if self.planning_line.running_production_id and mo.id != self.planning_line.running_production_id.id:
-                self.reserve_backorder_based_on_pending_qty(pending_data)
+            self.planning_line.running_production_id = self.planning_line.find_latest_backorder() or mo.id
+            self.reserve_backorder_based_on_pending_qty(
+                pending_data) if self.planning_line.running_production_id and mo.id != self.planning_line.running_production_id.id else self.planning_line.button_stop()
         if self.return_to_stock and self.return_quantity:
             try:
                 return self.planning_line.running_production_id.return_product_to_stock(self.return_quantity)

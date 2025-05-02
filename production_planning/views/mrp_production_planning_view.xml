@@ -73,9 +73,9 @@
                                         <field name="company_id" column_invisible="1"/>
                                         <field name="pending_qty" readonly="1" string="Pending Qty"/>
                                         <button name="button_start" type="object" string="Start" class="bg-success"
-                                                invisible="parent.state != 'in_progress' or in_progress"/>
+                                                invisible="parent.state != 'in_progress' or in_progress or not pending_qty"/>
                                         <button name="button_stop" type="object" string="Stop" class="bg-warning"
-                                                invisible="parent.state != 'in_progress' or not in_progress"/>
+                                                invisible="parent.state != 'in_progress' or not in_progress or not pending_qty"/>
                                         <field name="mo_count" column_invisible="1"/>
                                         <button class="oe_stat_button" name="open_manufacturing_orders" type="object"
                                                 invisible="not mo_count" attrs="{'invisible': [('mo_count', '=', 0)]}"
