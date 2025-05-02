@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="setu_stock_report_extended_inherited_product_product_stock_tree" model="ir.ui.view">
+            <field name="name">setu_stock_report_extended.product_product_stock_tree</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="stock.product_product_stock_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='272']" position="attributes">
+                    <attribute name="string">Movement</attribute>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

@@ -57,10 +57,15 @@
                             <page string="Planning Lines" name="planning_lines">
                                 <field name="planning_lines">
                                     <tree create="false" editable="bottom" delete="false">
+                                        <field name="running_production_id" column_invisible="1"/>
                                         <field name="planning_id" column_invisible="1"/>
                                         <field name="product_id" options="{'no_open': True}" readonly="1"
                                                column_invisible="1"/>
                                         <field name="bom_id" required="1"/>
+                                        <field name="component_status" optional="show"
+                                               decoration-success="running_production_id.reservation_state == 'assigned' or component_status == 'available'"
+                                               decoration-warning="running_production_id.reservation_state != 'assigned' and component_status in ('expected', 'available')"
+                                               decoration-danger="running_production_id.reservation_state != 'assigned' and component_status in ('late', 'unavailable')"/>
                                         <field name="available_qty" readonly="1"/>
                                         <field name="qty" string="Manufacture Qty in KG"/>
                                         <field name="in_progress" column_invisible="1"/>

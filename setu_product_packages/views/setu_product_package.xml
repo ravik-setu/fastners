@@ -135,7 +135,7 @@
                             <field name="inner_package_type" invisible="1"/>
                         </group>
                         <group>
-                            <field name="plastic_weight" invisible="not outer_box"
+                            <field name="plastic_weight" string="Packing Material Weight" invisible="not outer_box"
                                    readonly="package_state not in ['draft']"/>
                             <field name="total_qty"/>
                             <field name="package_count" invisible="not outer_box" readonly="1"/>

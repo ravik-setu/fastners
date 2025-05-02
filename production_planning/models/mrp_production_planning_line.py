@@ -37,6 +37,7 @@ class MrpProductionPlanning(models.Model):
     in_progress = fields.Boolean(string="In Progress", copy=False)
     lot_name = fields.Char(string="Lot/Serial")
     reserved_qty = fields.Float(string='Reserved Qty', compute='_compute_mo_count')
+    component_status = fields.Selection(related='running_production_id.components_availability_state')
 
     @api.depends('planning_id.mo_ids')
     def _compute_mo_count(self):

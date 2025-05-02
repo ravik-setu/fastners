@@ -14,7 +14,7 @@ class ProductionPlanning(models.Model):
     _order = 'id desc'
 
 
-    name = fields.Char("Name", default=lambda x: _('New'))
+    name = fields.Char("Name", default=lambda x: _('New'), copy=False)
     order_date = fields.Date(string="Order Date")
     customer_id = fields.Many2one("res.partner", string="Customer")
     workcenter_id = fields.Many2one("mrp.workcenter", string="Machine Name")
@@ -52,7 +52,7 @@ class ProductionPlanning(models.Model):
         self.ensure_one()
         self.planning_lines.unlink()
         lst = []
-        bom_id = self.find_bill_of_material(self.product_id.put_in_pack_product_id)
+        bom_id = self.find_bill_of_material(self.product_id.put_in_pack_product_id or self.product_id)
         if not bom_id:
             raise UserError(
                 "No Bill of Material found for product {}".format(self.product_id.put_in_pack_product_id.name))
@@ -62,7 +62,7 @@ class ProductionPlanning(models.Model):
             if bom_id.type == 'packaging':
                 continue
             product_id = bom_id.product_id or bom_id.product_tmpl_id.product_variant_ids[0]
-            qty = 0 if product_id.id != self.product_id.id else self.production_kg
+            qty = bom_ids.get(bom_id)
             if product_id.id == self.product_id.put_in_pack_product_id.id:
                 available_qty = sum(
                     self.get_available_qty_on_location(self.product_id, find_quant=True).mapped('quantity'))
@@ -91,17 +91,25 @@ class ProductionPlanning(models.Model):
         return self.env["mrp.bom"].search(domain, limit=1)
 
     def find_all_mo_type_bom(self, bom_id):
-        bom_ids = bom_id
+        """
+        Purpose: To find all the child boms of normal type and also set the quantity to be produced based on the plan.
+        """
+        bom_ids = {}
+        previous_qty = 0
+        for line in bom_id.bom_line_ids:
+            first_bom_id = self.find_bill_of_material(product_id=line.product_id)
+            if first_bom_id:
+                bom_ids.update({bom_id: (line.product_qty / line.bom_id.product_qty) * self.qty})
+                previous_qty = line.product_qty * self.qty
+
         child_lines = bom_id.bom_line_ids
         while (child_lines):
             for line in child_lines:
-                bom_id = self.find_bill_of_material(line.product_id, type='normal')
-                if not bom_id:
-                    bom_id = self.find_bill_of_material(line.product_id)
-                if bom_id:
-                    if bom_id.type == 'normal':
-                        bom_ids += bom_id
-                    child_lines += bom_id.bom_line_ids
+                bill_of_material_ids = self.find_bill_of_material(product_id=line.product_id)
+                for bom_id in bill_of_material_ids:
+                    bom_ids.update({bom_id: (line.product_qty / line.bom_id.product_qty) * previous_qty})
+                    previous_qty *= (line.product_qty / line.bom_id.product_qty)
+                child_lines += bom_id.bom_line_ids
                 child_lines -= line
         return bom_ids
 
