@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="production_planning_inherited_view_picking_type_form" model="ir.ui.view">
+            <field name="name">production.planning.inherited.view.picking.type.form</field>
+            <field name="model">stock.picking.type</field>
+            <field name="inherit_id" ref="stock.view_picking_type_form"/>
+            <field name="arch" type="xml">
+                <field name="create_backorder" position="after">
+                    <field name="use_parent_mo_lot"/>
+                </field>
+            </field>
+        </record>
+    </data>
+</odoo>

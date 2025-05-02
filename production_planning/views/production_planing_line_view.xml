@@ -1,0 +1,82 @@
+<odoo>
+    <data>
+        <!--  Tree View : Mrp Production Planning  -->
+        <record id="view_mrp_production_planning_line_tree" model="ir.ui.view">
+            <field name="name">mrp.production.planning.line.tree</field>
+            <field name="model">mrp.production.planning.line</field>
+            <field name="arch" type="xml">
+                <tree string="Production Planning">
+                    <field name="planning_id"/>
+                    <field name="product_id"/>
+                    <field name="running_production_id"/>
+                    <field name="workcenter_id"/>
+                    <field name="bom_id"/>
+                    <field name="done_qty"/>
+                    <button name="action_add_product" type="object" string="Add Component"/>
+                    <button name="action_register_production" type="object" string="Register Production"/>
+                </tree>
+            </field>
+        </record>
+        <record id="view_mrp_production_planning_line_kanban" model="ir.ui.view">
+            <field name="name">mrp.production.planning.line.kanban</field>
+            <field name="model">mrp.production.planning.line</field>
+            <field name="arch" type="xml">
+                <kanban class="o_kanban_small_column">
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban_global_click o_kanban_card">
+                                <div class="o_kanban_primary_left">
+                                    <div class="mt-2 mb-2 text-center">
+                                        <span class="btn btn-primary btn-sm w-100 me-2"
+                                              style="pointer-events: none; cursor: default;">
+                                            <field name="planning_id"/>
+                                        </span>
+                                    </div>
+                                    <strong>
+                                        <field name="product_id"/>
+                                    </strong>
+                                    <div class="mt-2 mb-2">
+                                        <span class="btn btn-primary btn-sm mt-4 mb-2 px-4"
+                                              style="pointer-events: none; cursor: default;" align="left">
+                                            <field name="reserved_qty"/>
+                                        </span>
+                                        <span class="mt-10 mb-10"></span>
+                                        <span class="float-end btn btn-warning btn-sm mt-4 mb-2 px-4"
+                                              style="pointer-events: none; cursor: default;" align="right">
+                                            <field name="pending_qty"/>
+                                            <field name="in_progress" invisible="1"/>
+                                        </span>
+                                    </div>
+                                    <div>
+                                        <field name="running_production_id"/>
+                                    </div>
+                                    <div>
+                                        <field name="workcenter_id"/>
+                                    </div>
+                                </div>
+                                <div class="d-flex">
+                                    <button type="object" name="action_add_product" string="Add Component"
+                                            class="btn btn-primary btn-sm w-100 me-2 mt-3"/>
+                                    <button type="object" name="action_register_production" string="Register Production"
+                                            class="btn btn-success btn-sm w-100 mt-3"/>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <!--  Menu Action : Mrp Production Planning  -->
+        <record id="mrp_production_planning_line_action" model="ir.actions.act_window">
+            <field name="name">Register Production</field>
+            <field name="res_model">mrp.production.planning.line</field>
+            <field name="view_mode">kanban,tree</field>
+            <field name="domain">[('in_progress','=',True)]</field>
+        </record>
+        <!--  Root Menu : Planning  -->
+        <menuitem id="menu_register_production_root" name="Register Production"
+                  web_icon="production_planning,static/description/register_production.png" groups="mrp.group_mrp_manager"
+                  action="mrp_production_planning_line_action" sequence="138"/>
+    </data>
+</odoo>

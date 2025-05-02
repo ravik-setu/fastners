@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="default_register_daily_production_view_form" model="ir.ui.view">
+            <field name="name">register.daily.production.view.form</field>
+            <field name="model">register.daily.production</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="planning_id" readonly="1"/>
+                                <field name="product_id" readonly="1"/>
+                                <field name="production_id" readonly="1"/>
+                                <field name="qty_produced" required="1"/>
+                                <field name="return_to_stock"/>
+                                <field name="return_quantity" invisible="not return_to_stock"/>
+                            </group>
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button type="object" name="register_daily_production" data-hotkey="q"
+                                string="Register Production"
+                                class="btn btn-primary"/>
+                        <button string="Discard" class="btn-secondary" special="cancel" data-hotkey="x"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Product Variant -->
+        <record id="stock_extended_inherited_product_normal_form_view" model="ir.ui.view">
+            <field name="name">stock.extended.inherited.product.normal.form.view</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_normal_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[@name='inventory']" position="after">
+                    <page string="Product Configuration" name="product_configuration">
+                        <group>
+                            <group>
+                                <field name="source_location_id" domain="[('usage','=','internal')]"
+                                       options="{'no_open':True,'no_create':True}"/>
+                                <field name="destination_location_id" domain="[('usage','=','internal')]"
+                                       options="{'no_open':True,'no_create':True}"/>
+                                <field name="is_raw_material"/>
+                                <field name="show_qty_in_pcs"/>
+                                <field name="grade_id"/>
+                            </group>
+                        </group>
+                    </page>
+                </xpath>
+                <field name="default_code" position="after">
+                    <field name="size"/>
+                </field>
+                <field name="categ_id" position="before">
+                <field name="production_cost" widget='monetary'
+                       options="{'currency_field': 'cost_currency_id', 'field_digits': True}"
+                       invisible="is_raw_material"
+                       groups="base.group_system"/>
+            </field>
+            </field>
+        </record>
+    </data>
+</odoo>

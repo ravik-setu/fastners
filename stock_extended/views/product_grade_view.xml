@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="product_grade_tree_view" model="ir.ui.view">
+            <field name="name">product.grade.tree.view</field>
+            <field name="model">product.grade</field>
+            <field name="arch" type="xml">
+                <tree string="Grade" editable="bottom">
+                    <field name="name" required="1"/>
+                </tree>
+            </field>
+        </record>
+        <record id="grade_action" model="ir.actions.act_window">
+            <field name="name">Grade</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">product.grade</field>
+            <field name="view_mode">tree</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    There is no Grade.
+                </p>
+            </field>
+        </record>
+        <menuitem name="Grade" id="product_grade_menu" parent="stock.menu_stock_inventory_control"
+                  action="grade_action" sequence="10"/>
+
+    </data>
+</odoo>

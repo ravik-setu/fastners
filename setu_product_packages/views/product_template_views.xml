@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- Inherited view: Product template form view to add a field to enable auto packaging -->
+        <record id="setu_product_packages_inherited_product_template_form_view" model="ir.ui.view">
+            <field name="name">setu_product_packages.product_template_form_view</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group[@name='group_lots_and_weight']" position="after">
+                    <group string="Auto Package" name="auto_package">
+                        <label for="auto_package"/>
+                        <div>
+                            <field name="auto_package" class="mb-0"/>
+                        </div>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="setu_product_packages_inherited_product_template_only_form_view" model="ir.ui.view">
+            <field name="name">setu.product.packages.inherited.product.template.only.form.view</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_only_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[@name='inventory']" position="after">
+                    <page string="Packaging" name="setu_packaging">
+                        <group>
+                            <group>
+                                <field name="put_in_pack"/>
+                                <field name="put_in_pack_product_id"
+                                       required="put_in_pack" invisible="not put_in_pack"/>
+                            </group>
+                            <group name="packaging" string="Packaging" colspan="4"
+                                   invisible="(type not in ['product', 'consu'] or product_variant_count &gt; 1) and not is_product_variant"
+                                   groups="product.group_stock_packaging">
+                                <field colspan="2" name="packaging_ids" nolabel="1"
+                                       context="{'tree_view_ref':'product.product_packaging_tree_view2', 'default_company_id': company_id}">
+                                    <tree editable="bottom">
+                                        <field name="name"/>
+                                        <field name="package_type_id" required="1"/>
+                                        <field name="qty"/>
+                                        <field name="company_id"/>
+                                    </tree>
+                                </field>
+                            </group>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="setu_product_packages_inherited_product_normal_form_view" model="ir.ui.view">
+            <field name="name">setu.product.packages.inherited.product.normal.form.view</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_normal_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[@name='inventory']" position="after">
+                    <page string="Packaging" name="setu_packaging">
+                        <group>
+                            <group>
+                                <field name="put_in_pack"/>
+                                <field name="put_in_pack_product_id"
+                                       required="put_in_pack" invisible="not put_in_pack"/>
+                            </group>
+                        </group>
+                        <group name="packaging" string="Packaging" colspan="4"
+                               invisible="(type not in ['product', 'consu'] or product_variant_count &gt; 1) and not is_product_variant"
+                               groups="product.group_stock_packaging">
+                            <field colspan="2" name="packaging_ids" nolabel="1"
+                                   context="{'tree_view_ref':'product.product_packaging_tree_view2', 'default_company_id': company_id}"/>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

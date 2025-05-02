@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!--Inherited view: Picking Type form view to add a field to enable auto packaging-->
+        <record id="setu_product_packages_inherited_view_picking_type_form" model="ir.ui.view">
+            <field name="name">setu_product_packages.view_picking_type_form</field>
+            <field name="model">stock.picking.type</field>
+            <field name="inherit_id" ref="stock.view_picking_type_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group[@name='second']" position="after">
+                    <group string="Auto Packages">
+                        <field name="auto_package" invisible="code in ['incoming', 'outgoing', 'internal']"/>
+                        <field name="show_create_package"/>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

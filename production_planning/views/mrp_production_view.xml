@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="production_planning_inherit_mrp_production_form_view" model="ir.ui.view">
+            <field name="name">production.planning.inherit.mrp.production.form.view</field>
+            <field name="model">mrp.production</field>
+            <field name="inherit_id" ref="mrp.mrp_production_form_view"/>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <field name="user_id" position="after">
+                    <field name="workcenter_id" readonly="state in ['to_close','done']"/>
+                    <field name="planning_lot_id" readonly="1" invisible="not planning_lot_id"/>
+                </field>
+
+                <xpath expr="//field[@name='lot_producing_id']" position="attributes">
+                    <attribute name="readonly">state != 'confirmed'</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="production_planning_inherit_mrp_production_tree_view" model="ir.ui.view">
+            <field name="name">production.planning.inherit.mrp.production.tree.view</field>
+            <field name="model">mrp.production</field>
+            <field name="inherit_id" ref="mrp.mrp_production_tree_view"/>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <field name="product_id" position="after">
+                    <field name="planning_lot_id"/>
+                </field>
+            </field>
+        </record>
+    </data>
+</odoo>

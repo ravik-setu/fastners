@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Inherited view:   report_package_barcode_small for customizing the barcode pdf.  -->
+        <template inherit_id="stock.report_package_barcode_small"
+                  id="setu_product_package_inherits_report_package_barcode_small">
+            <!-- Added configuration based field visibility in pdf report -->
+            <xpath expr="//t[@t-else='']//div[@t-if='o.pack_date']" position="before">
+<!--                <div class="col-12 text-center"-->
+<!--                     style="font-size:24px; font-weight:bold;">Product Name:-->
+<!--                    <span t-field="o.quant_ids[0].product_id.name"/>-->
+<!--                </div>-->
+                <div t-if="o.quant_ids and o.package_type_id and o.package_type_id.is_visible_package_qty"
+                     class="col-12 text-center"
+                     style="font-size:24px; font-weight:bold;">Product Qty:<span t-field="o.contained_qty"/>
+                </div>
+                <div t-if="o.quant_ids and o.package_type_id and o.package_type_id.is_visible_package_qty"
+                     class="col-12 text-center"
+                     style="font-size:24px; font-weight:bold;">Product Weight:<span t-field="o.net_weight"/> <span
+                        t-field="o.weight_uom_name"/>
+                </div>
+                <div t-if="o.package_type_id and o.package_type_id.is_visible_package_weight" class="col-12 text-center"
+                     style="font-size:24px; font-weight:bold;">Product Package Weight:
+                    <span t-field="o.package_type_id.base_weight"/><span
+                        t-field="o.weight_uom_name"/>
+                </div>
+                <div t-if="o.quant_ids and o.package_type_id and o.package_type_id.is_visible_package_qty"
+                     class="col-12 text-center"
+                     style="font-size:24px; font-weight:bold;">Total Weight:<span t-field="o.total_weight"/> <span
+                        t-field="o.weight_uom_name"/>
+                </div>
+            </xpath>
+        </template>
+    </data>
+</odoo>

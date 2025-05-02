@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="setu_product_package_tree" model="ir.ui.view">
+        <field name="name">setu.product.package.view.tree</field>
+        <field name="model">setu.product.package</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="create_date"/>
+                <field name="create_uid"/>
+                <field name="source_location_id"/>
+                <field name="outer_box" invisible="1"/>
+                <field name="total_qty"/>
+                <field name="net_weight"/>
+                <field name="total_weight"/>
+                <field name="package_state"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="setu_product_package_form" model="ir.ui.view">
+        <field name="name">setu.product.package.view.form</field>
+        <field name="model">setu.product.package</field>
+        <field name="arch" type="xml">
+            <form>
+                <div class="alert alert-info" role="alert" invisible="not current_scanning_location_id">
+                    <strong>Currently scanned Details :</strong>
+                    <div invisible="not current_scanning_location_id">
+                        <strong>Location :</strong>
+                        <strong>
+                            <field name="current_scanning_location_id" readonly="1" force_save="1"/>
+                        </strong>
+                    </div>
+                    <div invisible="not current_scanning_lot_id">
+                        <strong>Lot :</strong>
+                        <strong>
+                            <field name="current_scanning_lot_id" readonly="1" force_save="1"/>
+                        </strong>
+                    </div>
+                    <div invisible="not current_scanning_product_id">
+                        <strong>Product :</strong>
+                        <strong>
+                            <field name="current_scanning_product_id" readonly="1" force_save="1"/>
+                        </strong>
+                    </div>
+                    <div invisible="not current_package_type_id">
+                        <strong>Package Type :</strong>
+                        <strong>
+                            <field name="current_package_type_id" readonly="1" force_save="1"/>
+                        </strong>
+                    </div>
+                </div>
+                <header>
+                    <button name="do_package_weight" type="object" data-hotkey="shift+g"
+                            string="Manual Weight" class="oe_highlight"
+                            invisible="inner_package_type != 'convert_and_pack' or outer_box or package_state != 'draft'"/>
+                    <button name="create_package" type="object" string="Create Package" class="btn-primary"
+                            invisible="package_state not in ['draft'] or outer_box"/>
+                    <button name="put_in_outer_package" type="object" string="Create Package" class="btn-primary"
+                            invisible="package_state not in ['draft'] or not outer_box"/>
+                    <button name="action_generate_and_print_barcodes" type="object" string="Print Package Barcodes"
+                            class="oe_highlight" invisible="package_state !='done'"/>
+                    <field name="package_state" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <widget id="outer_box_ribbon" name="web_ribbon" title="Outer Box" bg_color="text-bg-success"
+                            invisible="not outer_box"/>
+                    <widget id="inner_box_ribbon" name="web_ribbon" title="Inner Box" bg_color="text-bg-success"
+                            invisible="outer_box"/>
+                    <div class="oe_button_box" name="button_box" invisible="not setu_package_ids">
+                        <button name="action_see_created_packages" string="Packages" type="object"
+                                class="oe_stat_button" icon="fa-cubes"/>
+                        <button name="action_see_product_moves" string="Product Moves" type="object"
+                                class="oe_stat_button" icon="fa-exchange"/>
+                    </div>
+                    <div class="container-fluid p-2">
+                        <table class="bg-warning bg-gradient bg-opacity-25"
+                               style="word-wrap: break-word;border: 1px dotted; width:100%">
+                            <tbody invisible="outer_box or inner_package_type != 'regular'">
+                                <tr>
+                                    <td>
+                                        <strong>1.</strong>
+                                    </td>
+                                    <td>Scan the product first</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong>2.</strong>
+                                    </td>
+                                    <td>Scan the package type</td>
+                                </tr>
+                                <tr>
+                                    <td valign="top">
+                                        <strong>3.</strong>
+                                    </td>
+                                    <td>
+                                        <ul>
+                                            <li>If "No Tracking" type product then directly scan the product's
+                                                Barcode.
+                                            </li>
+                                            <li>If "Serial" type product then scan Barcode of the serial number</li>
+                                            <li>If "Lot" type product then scan Barcode of lot and then scan product's
+                                                Barcode.
+                                            </li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong>4.</strong>
+                                    </td>
+                                    <td>
+                                        Scan the lot/serial number product to increase package quantity in
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tbody invisible="not outer_box">
+                                <tr>
+                                    <td>Scan Corrugated Box</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="container-fluid" invisible="inner_package_type == 'convert_and_pack'">
+                        <group>
+                            <field name="source_location_id"
+                                   domain="[('usage','=','internal'),'|',('company_id', '=', False), ('company_id', '=', company_id)]"
+                                   required="1"
+                                   readonly="package_state not in ['draft']"/>
+                            <field name="setu_package_ids" invisible="1"/>
+                            <field name="outer_box" invisible="1"/>
+                            <field name="outer_box_type" readonly="package_state not in ['draft']"
+                                   invisible="not outer_box" required="outer_box" domain="[('is_outer_box','=', True)]"/>
+                            <field name="company_id"/>
+                            <field name="inner_package_type" invisible="1"/>
+                        </group>
+                        <group>
+                            <field name="plastic_weight" invisible="not outer_box"
+                                   readonly="package_state not in ['draft']"/>
+                            <field name="total_qty"/>
+                            <field name="package_count" invisible="not outer_box" readonly="1"/>
+                            <field name="net_weight"/>
+                            <field name="total_weight"/>
+                            <field name="create_date" strring="Created On"/>
+                        </group>
+                    </div>
+                    <div class="container-fluid" invisible="inner_package_type != 'convert_and_pack'">
+                        <group>
+                            <field name="product_id" domain="[('put_in_pack', '=', True)]"/>
+                            <field name="packaging_id" required="not outer_box and inner_package_type == 'convert_and_pack'" invisible="outer_box"
+                                   domain="[('product_id', '=', product_id)]"/>
+                            <field name="source_location_id"
+                                   domain="[('usage','=','internal'),'|',('company_id', '=', False), ('company_id', '=', company_id)]"
+                                   required="inner_package_type == 'convert_and_pack'"
+                                   readonly="package_state not in ['draft']"/>
+                            <label for="min_weight" string="Weight"
+                                   invisible="outer_box" required="not outer_box and inner_package_type == 'convert_and_pack'"/>
+                            <div class="o_row" invisible="outer_box">
+                                <span>Min</span>
+                                <field name="min_weight" required="not outer_box"/>
+                                <span>Max</span>
+                                <field name="max_weight" required="not outer_box"/>
+                            </div>
+                            <field name="put_in_pack_product_id" invisible="1"/>
+                            <field name="product_tracking" invisible="1"/>
+                            <field name="lot_id" domain="[('product_id','=',put_in_pack_product_id)]"
+                                   required="not outer_box and product_id.product_tracking != 'none' and inner_package_type == 'convert_and_pack'"
+                                   invisible="outer_box or product_id.product_tracking == 'none'"
+                                   context="{'product_id': put_in_pack_product_id}"
+                                   options="{'no_create_edit': True,
+                                                 'no_open': True,
+                                                 'no_create': True}"/>
+                        </group>
+                        <group>
+                            <field name="plastic_weight" invisible="not outer_box"
+                                   readonly="package_state not in ['draft']"/>
+                            <field name="total_qty"/>
+                            <field name="package_count" invisible="not outer_box" readonly="1"/>
+                            <field name="net_weight"/>
+                            <field name="total_weight"/>
+                            <field name="create_date" strring="Created On"/>
+                        </group>
+                    </div>
+                    <notebook>
+                        <page string="Packages" invisible="outer_box">
+                            <field name="inner_package_line_ids" readonly="package_state not in ['draft'] or outer_box"
+                                   invisible="inner_package_type == 'convert_and_pack'">
+                                <tree editable="bottom">
+                                    <field name="product_id"
+                                           domain="[('packaging_ids','!=', False),'|',('company_id', '=', False), ('company_id', '=', company_id)]"/>
+                                    <field name="company_id" column_invisible="True"/>
+                                    <field name="product_package_id"
+                                           domain="[('product_id','=',product_id),'|',('company_id', '=', False), ('company_id', '=', company_id)]"
+                                           required="1"/>
+                                    <field name="package_id" column_invisible="True"/>
+                                    <field name="location_id" column_invisible="True"/>
+                                    <field name="tracking" column_invisible="True"/>
+                                    <field name="lot_ids" widget="many2many_tags"
+                                           context="{'product_id': product_id,'location_id':location_id}"
+                                           required="tracking in ['lot']"
+                                           domain="[('product_id','=',product_id)]"/>
+                                    <field name="package_qty"/>
+                                </tree>
+                            </field>
+                            <field name="inner_package_line_ids" readonly="package_state not in ['draft'] or outer_box"
+                                   invisible="inner_package_type != 'convert_and_pack'">
+                                <tree create="false">
+                                    <field name="quant_package_id" readonly="1"/>
+                                    <field name="weight" readonly="1"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Outer Packages" invisible="not outer_box">
+                            <field name="outer_package_line_ids" readonly="package_state not in ['draft']">
+                                <tree editable="bottom">
+                                    <field name="company_id" column_invisible="1"/>
+                                    <field name="product_id"
+                                           domain="[('packaging_ids','!=', False),'|',('company_id', '=', False), ('company_id', '=', company_id)]"/>
+                                    <field name="product_package_ids" widget="many2many_tags"
+                                           context="{'product_id': product_id}"
+                                           domain="[('package_type_id','!=', parent.outer_box_type),'|',('company_id', '=', False), ('company_id', '=', company_id)]"/>
+                                    <field name="package_count" readonly="1"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <field name="_barcode_scanned" widget="barcode_handler"/>
+            </form>
+        </field>
+    </record>
+    <record id="setu_product_inner_packages_action" model="ir.actions.act_window">
+        <field name="name">Inner Box</field>
+        <field name="res_model">setu.product.package</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('outer_box','=', False),('inner_package_type','=', 'regular')]</field>
+        <field name="context">{'default_outer_box': False, 'default_inner_package_type': 'regular'}</field>
+    </record>
+
+    <record id="setu_product_inner_packages_convert_action" model="ir.actions.act_window">
+        <field name="name">Convert Inner Box</field>
+        <field name="res_model">setu.product.package</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('outer_box','=', False),('inner_package_type','=', 'convert_and_pack')]</field>
+        <field name="context">{'default_outer_box': False, 'default_inner_package_type': 'convert_and_pack'}</field>
+    </record>
+
+    <record id="setu_product_outer_packages_action" model="ir.actions.act_window">
+        <field name="name">Outer Box</field>
+        <field name="res_model">setu.product.package</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('outer_box','=', True)]</field>
+        <field name="context">{'default_outer_box': True}</field>
+    </record>
+
+    <menuitem id="setu_product_package_main" name="Packages"
+              web_icon="setu_product_packages,static/description/package.png" groups="product.group_stock_packaging"/>
+    <menuitem id="setu_product_package"
+              name="Product Package"
+              parent="setu_product_packages.setu_product_package_main"
+              sequence="1" groups="product.group_stock_packaging"
+              action="setu_product_packages.setu_product_inner_packages_action"/>
+
+    <menuitem id="setu_product_inner_package_main"
+              name="Inner Box"
+              parent="setu_product_packages.setu_product_package"
+              sequence="1"
+              groups="product.group_stock_packaging"/>
+
+    <menuitem id="setu_product_inner_package"
+              name="Regular"
+              parent="setu_product_packages.setu_product_inner_package_main"
+              action="setu_product_packages.setu_product_inner_packages_action" sequence="1"
+              groups="product.group_stock_packaging"/>
+
+    <menuitem id="setu_product_inner_convert_package"
+              name="Convert and Pack"
+              parent="setu_product_packages.setu_product_inner_package_main"
+              action="setu_product_packages.setu_product_inner_packages_convert_action" sequence="2"
+              groups="product.group_stock_packaging"/>
+
+    <menuitem id="setu_product_outer_package"
+              name="Outer Box"
+              parent="setu_product_packages.setu_product_package"
+              action="setu_product_packages.setu_product_outer_packages_action" sequence="2"
+              groups="product.group_stock_packaging"/>
+
+    <menuitem id="setu_product_package_configuration" name="Configuration" parent="setu_product_package_main"
+              sequence="2" groups="product.group_stock_packaging"/>
+    <menuitem id="setu_menu_packaging_types" name="Package Types" parent="setu_product_package_configuration"
+              action="stock.action_package_type_view" groups="stock.group_tracking_lot" sequence="1"/>
+
+    <menuitem id="setu_menu_product_packagings" name="Product Packagings" parent="setu_product_package_configuration"
+              action="product.action_packaging_view" groups="product.group_stock_packaging" sequence="2"/>
+
+</odoo>

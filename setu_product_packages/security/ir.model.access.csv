@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_setu_product_package,access_setu_product_package,model_setu_product_package,,1,1,1,1
+access_setu_package_line,access_setu_package_line,model_setu_package_line,,1,1,1,1
+access_setu_outer_package_line,access_setu_outer_package_line,model_setu_outer_package_line,,1,1,1,1
+access_package_weight_wizard,access.package.weight.wizard,model_package_weight_wizard,,1,1,1,1

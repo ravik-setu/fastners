@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <!-- Form View : Mrp Production Planning -->
+        <record id="view_mrp_production_planning_form" model="ir.ui.view">
+            <field name="name">mrp.production.planning.form</field>
+            <field name="model">mrp.production.planning</field>
+            <field name="arch" type="xml">
+                <form string="Production Planning">
+                    <header>
+                        <button name="action_confirm" id="action_confirm" string="Confirm" type="object"
+                                invisible="state != 'draft'" class="oe_highlight"/>
+                        <button name="finish_planning" string="Finish Planning" type="object"
+                                invisible="state != 'in_progress'" class="oe_highlight"/>
+                        <button name="action_create_mo" id="action_create_mo" string="Create Manufacturing Order"
+                                type="object"
+                                invisible="state != 'confirm'" class="oe_highlight"/>
+                        <button name="get_lines_available_qty" string="Check Availability" type="object"
+                                invisible="state != 'confirm'" class="oe_highlight"/>
+                        <button name="cancel_planning" id="cancel_planning" string="Cancel"
+                                type="object"
+                                invisible="state in ['cancel','done']" class="oe_highlight"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,confirm,forging,threading"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="priority" widget="priority" class="mr-3"/>
+                                <field name="name" placeholder="Manufacturing Reference" nolabel="1" readonly="1"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group readonly="state != 'draft'">
+                                <field name="order_date" required="1" readonly="state != 'draft'"/>
+                                <field name="customer_id" readonly="state != 'draft'"
+                                       required="1"/>
+                                <field name="product_id" required="1"/>
+                                <field name="sale_order_ids" widget="many2many_tags"  context="{'customer_id': customer_id, 'product_id': product_id}"/>
+                            </group>
+                            <group readonly="state != 'draft'">
+                                <field name="available_qty" readonly="1"/>
+                                <field name="qty" required="1"/>
+                                <field name="production_kg" required="1"/>
+                                <label for="lot_name" invisible="lot_id"/>
+                                <div class="o_row" invisible="lot_id">
+                                    <field name="lot_name"/>
+                                    <button name="action_generate_serial" type="object"
+                                            class="btn btn-primary fa fa-plus-square-o"
+                                            aria-label="Creates a new serial/lot number"
+                                            title="Creates a new serial/lot number" role="img"/>
+                                </div>
+                                <field name="lot_id"
+                                       invisible="not lot_id" readonly="lot_id"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Planning Lines" name="planning_lines">
+                                <field name="planning_lines">
+                                    <tree create="false" editable="bottom" delete="false">
+                                        <field name="planning_id" column_invisible="1"/>
+                                        <field name="product_id" options="{'no_open': True}" readonly="1"
+                                               column_invisible="1"/>
+                                        <field name="bom_id" required="1"/>
+                                        <field name="available_qty" readonly="1"/>
+                                        <field name="qty" string="Manufacture Qty in KG"/>
+                                        <field name="in_progress" column_invisible="1"/>
+                                        <field name="state" column_invisible="1"/>
+                                        <field name="company_id" column_invisible="1"/>
+                                        <field name="pending_qty" readonly="1" string="Pending Qty"/>
+                                        <button name="button_start" type="object" string="Start" class="bg-success"
+                                                invisible="parent.state != 'in_progress' or in_progress"/>
+                                        <button name="button_stop" type="object" string="Stop" class="bg-warning"
+                                                invisible="parent.state != 'in_progress' or not in_progress"/>
+                                        <field name="mo_count" column_invisible="1"/>
+                                        <button class="oe_stat_button" name="open_manufacturing_orders" type="object"
+                                                invisible="not mo_count" attrs="{'invisible': [('mo_count', '=', 0)]}"
+                                                string="Mo's"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Tree View : Mrp Production Planning -->
+        <record id="view_mrp_production_planning_tree" model="ir.ui.view">
+            <field name="name">mrp.production.planning.tree</field>
+            <field name="model">mrp.production.planning</field>
+            <field name="arch" type="xml">
+                <tree string="Production Planning">
+                    <field name="priority"/>
+                    <field name="name"/>
+                    <field name="order_date"/>
+                    <field name="product_id"/>
+                    <field name="qty"/>
+                    <field name="production_kg"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Menu Action : Mrp Production Planning -->
+        <record id="mrp_production_planning_action" model="ir.actions.act_window">
+            <field name="name">Planning</field>
+            <field name="res_model">mrp.production.planning</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!-- Root Menu : Planning -->
+        <menuitem id="menu_manufacturing_process_root"
+                  name="Planning"
+                  web_icon="production_planning,static/description/planning.png"
+                  groups="mrp.group_mrp_manager"
+                  sequence="137"/>
+
+        <!-- Menu: Planning -->
+        <menuitem id="menu_manufacturing_production_planning" name="Planning"
+                  parent="menu_manufacturing_process_root"
+                  groups="mrp.group_mrp_manager"
+                  action="mrp_production_planning_action" sequence="1"/>
+
+    </data>
+</odoo>

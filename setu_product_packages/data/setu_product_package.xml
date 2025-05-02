@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <record id="setu_product_package_Sequence" model="ir.sequence">
+            <field name="name">Setu Product Package Sequence</field>
+            <field name="code">setu.product.package.seq</field>
+            <field name="prefix">SPP</field>
+            <field name="padding">5</field>
+            <field name="number_increment">1</field>
+            <field name="company_id" eval="False"/>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Quatation Report Paper Format Set -->
+    <data noupdate="1">
+        <record id="sale.action_report_saleorder" model="ir.actions.report">
+            <field name="paperformat_id" ref="sale_extended.paperformat_report_invoice"/>
+        </record>
+    </data>
+
+    <data>
+        <template id="sale_extended_inherit_saleorder_document" inherit_id="sale.report_saleorder_document">
+            <xpath expr="//t[@t-set='information_block']/strong" position="replace"/>
+            <xpath expr="//div[@t-field='doc.partner_invoice_id']" position="replace"/>
+
+            <xpath expr="//div[@class='page']/table" position="replace">
+                <table class="table table-sm o_main_table table-borderless mt-4">
+                    <!-- In case we want to repeat the header, remove "display: table-row-group" -->
+                    <thead style="display: table-row-group">
+                        <tr class="text-center">
+                            <th name="th_sr_no">Sr.</th>
+                            <th name="th_description" class="text-start">Description</th>
+                            <th name="th_hsn_code">HSN Code</th>
+                            <th name="th_quantity">Quantity</th>
+                            <th name="th_priceunit">Unit Price</th>
+                            <th name="th_amount">Amount</th>
+                            <th name="th_discount" t-if="display_discount"
+                                groups="product.group_discount_per_so_line">
+                                <span>Disc.%</span>
+                            </th>
+                            <th name="th_tax_amount">Taxable Amount</th>
+                            <th name="th_taxes">Taxes</th>
+                            <th name="th_central_tax_amount">Central</th>
+                            <th name="th_state_tax_amount">State/UT</th>
+                            <th name="th_subtotal" class="text-end">
+                                <span groups="account.group_show_line_subtotals_tax_excluded">Amount</span>
+                                <span groups="account.group_show_line_subtotals_tax_included">Total Price</span>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody class="sale_tbody">
+                        <t t-set="current_subtotal" t-value="0"/>
+                        <t t-set="count" t-value="0"/>
+                        <t t-set="total_qty" t-value="0"/>
+                        <t t-set="total_amount" t-value="0"/>
+                        <t t-set="taxable_amount" t-value="0"/>
+                        <t t-set="tax_central" t-value="0"/>
+                        <t t-set="tax_state" t-value="0"/>
+                        <t t-foreach="lines_to_report" t-as="line">
+                            <t t-set="current_subtotal" t-value="current_subtotal + line.price_subtotal"
+                               groups="account.group_show_line_subtotals_tax_excluded"/>
+                            <t t-set="current_subtotal" t-value="current_subtotal + line.price_total"
+                               groups="account.group_show_line_subtotals_tax_included"/>
+                            <t t-set="count" t-value="count + 1"/>
+                            <tr t-att-class="'bg-200 fw-bold o_line_section' if line.display_type == 'line_section' else 'fst-italic o_line_note' if line.display_type == 'line_note' else ''">
+                                <t t-if="not line.display_type">
+                                    <td name="td_sr_no" class="text-center">
+                                        <span t-esc="count"/>
+                                    </td>
+                                    <td name="td_name">
+                                        <span t-field="line.product_id.name" class="text-end"/>
+                                    </td>
+                                    <td name="td_hsncode" class="text-center">
+                                        <span t-field="line.product_id.l10n_in_hsn_code"/>
+                                    </td>
+                                    <td name="td_quantity" class="text-center">
+                                        <span t-field="line.product_uom_qty"/>
+                                        <t t-set="total_qty" t-value="total_qty+line.product_uom_qty"/>
+                                    </td>
+                                    <td name="td_priceunit" class="text-center">
+                                        <span t-field="line.price_unit"/>
+                                    </td>
+                                    <td name="td_amount" class="text-center">
+                                        <span t-esc="line.untaxed_amount_to_invoice"/>
+                                        <t t-set="total_amount" t-value="total_amount+line.untaxed_amount_to_invoice"/>
+                                    </td>
+                                    <td t-if="display_discount" class="text-center"
+                                        groups="product.group_discount_per_so_line">
+                                        <span t-field="line.discount"/>
+                                    </td>
+                                    <td name="td_taxable_amount" class="text-center">
+                                        <span t-esc="line.untaxed_amount_to_invoice"/>
+                                        <t t-set="taxable_amount" t-value="taxable_amount+line.untaxed_amount_to_invoice"/>
+                                    </td>
+                                    <td name="td_taxes" class="text-center">
+                                        <span t-out="', '.join(map(lambda x: (x.description or x.name), line.tax_id))"/>
+                                    </td>
+                                    <td name="td_central" class="text-center">
+                                        <span t-esc="line.get_tax_amount('CGST')" class="tax-center"/>
+                                        <t t-set="tax_central" t-value="tax_central+line.get_tax_amount('CGST')"/>
+                                    </td>
+                                    <td name="td_state" class="text-center">
+                                        <span t-esc="line.get_tax_amount('SGST')" class="tax-center"/>
+                                        <t t-set="tax_state" t-value="tax_state+line.get_tax_amount('SGST')"/>
+                                    </td>
+                                    <td t-if="not line.is_downpayment" name="td_subtotal" class="text-center o_price_total">
+                                        <span t-field="line.price_subtotal"
+                                              groups="account.group_show_line_subtotals_tax_excluded"/>
+                                        <span t-field="line.price_total"
+                                              groups="account.group_show_line_subtotals_tax_included"/>
+                                    </td>
+                                </t>
+                                <t t-elif="line.display_type == 'line_section'">
+                                    <td name="td_section_line" colspan="99">
+                                        <span t-field="line.name"/>
+                                    </td>
+                                    <t t-set="current_section" t-value="line"/>
+                                    <t t-set="current_subtotal" t-value="0"/>
+                                </t>
+                                <t t-elif="line.display_type == 'line_note'">
+                                    <td name="td_note_line" colspan="99">
+                                        <span t-field="line.name"/>
+                                    </td>
+                                </t>
+                            </tr>
+
+                            <t t-if="current_section and (line_last or doc.order_line[line_index+1].display_type == 'line_section') and not line.is_downpayment">
+                                <tr class="is-subtotal text-center">
+                                    <td name="td_section_subtotal">
+                                        <strong class="mr16">Subtotal</strong>
+                                        <span
+                                                t-out="current_subtotal"
+                                                t-options='{"widget": "monetary", "display_currency": doc.pricelist_id.currency_id}'
+                                        />
+                                    </td>
+                                </tr>
+                            </t>
+                        </t>
+                        <tr class="text-center">
+                            <td colspan="2">GSTIN:
+                                <span t-field="doc.company_id.vat"/>
+                            </td>
+                            <td/>
+                            <td>
+                                <t t-esc="total_qty"/>
+                            </td>
+                            <td/>
+                            <td>
+                                <t t-esc="total_amount"/>
+                            </td>
+                            <td/>
+                            <td>
+                                <t t-esc="taxable_amount"/>
+                            </td>
+                            <td/>
+                            <td>
+                                <t t-esc="round(tax_central,2)"/>
+                            </td>
+                            <td>
+                                <t t-esc="round(tax_state,2)"/>
+                            </td>
+                            <td>
+                                <span t-field="doc.amount_total"/>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </xpath>
+            <xpath expr="//div[@id='total']/div[1]" position="before">
+                <div class="col-6">
+                    <div>
+                        <span style="font-weight:700">Total GST :</span>
+                        <t t-esc="doc.get_tax_in_words()"/>
+                    </div>
+                    <div>
+                        <span style="font-weight:700">Bill Amount :</span>
+                        <t t-esc="doc.currency_id.amount_to_text(doc.amount_total)"/>
+                    </div>
+                </div>
+            </xpath>
+            <xpath expr="//div[@name='signature']" position="before">
+                <div class="text-end">
+                    For,
+                    <span t-field="doc.company_id"/>
+                </div>
+            </xpath>
+
+        </template>
+    </data>
+</odoo>
