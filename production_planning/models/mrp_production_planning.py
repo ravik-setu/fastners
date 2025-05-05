@@ -248,7 +248,8 @@ class ProductionPlanning(models.Model):
         return {
             'type': 'ir.actions.act_window',
             'name': 'Subcontracts',
-            'view_mode': 'tree',
+            'view_mode': 'tree,form',
             'res_model': 'purchase.order',
             'domain': [('id', 'in', self.subcontract_ids.ids)],
+            'context': {'create': False}
         }

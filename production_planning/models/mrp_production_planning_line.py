@@ -39,15 +39,16 @@ class MrpProductionPlanning(models.Model):
     lot_name = fields.Char(string="Lot/Serial")
     reserved_qty = fields.Float(string='Reserved Qty', compute='_compute_mo_count')
     component_status = fields.Selection(related='running_production_id.components_availability_state')
-    subcontract_ids = fields.One2many('purchase.order', string='Subcontracts', compute='_compute_subcontract_ids')
+    subcontract_id = fields.Many2one('purchase.order', string='Subcontract', compute='_compute_subcontract_id')
+    subcontract_bom_id = fields.Many2one('mrp.bom', compute='_compute_subcontract_id')
 
-    @api.depends('planning_id.mo_ids')
+    @api.depends('planning_id.mo_ids', 'subcontract_id')
     def _compute_mo_count(self):
         for rec in self:
             product_mos = rec.find_product_mos()
             rec.mo_count = len(product_mos)
             rec.done_qty = sum(product_mos.mapped('qty_produced'))
-            rec.pending_qty = rec.qty - rec.done_qty
+            rec.pending_qty = rec.qty - rec.done_qty - sum(rec.subcontract_id.filtered(lambda sub: sub.state != 'cancel').order_line.mapped('product_qty'))
             rec.reserved_qty = product_mos.get_available_component_qty_for_return()
 
     def open_manufacturing_orders(self):
@@ -108,16 +109,21 @@ class MrpProductionPlanning(models.Model):
             }
         }
 
-    def _compute_subcontract_ids(self):
+    def _compute_subcontract_id(self):
         for rec in self:
-            subcontracts = self.env['purchase.order'].search([('state', '!=', 'cancel'), ('is_outsourcing', '=', True), ('planning_line_id', '=', rec.id)])
-            rec.write({'subcontract_ids': [(6, 0, subcontracts.ids)]})
+            subcontract_bom = self.env['mrp.production.planning'].find_bill_of_material(product_id=rec.product_id,
+                                                                                           type='subcontract')
+            rec.subcontract_bom_id = subcontract_bom.id
+            subcontract = self.env['purchase.order'].search([('state', '!=', 'cancel'), ('is_outsourcing', '=', True), ('planning_lines_id', '=', rec.id)])
+            rec.write({'subcontract_id': subcontract.id})
 
-    def action_view_subcontracts(self):
+    def action_view_subcontract(self):
         return {
             'type': 'ir.actions.act_window',
-            'name': 'Subcontracts',
-            'view_mode': 'tree',
+            'name': 'Subcontract',
+            'view_mode': 'form',
             'res_model': 'purchase.order',
-            'domain': [('id', 'in', self.subcontract_ids.ids)],
+            'res_id': self.subcontract_id.id,
+            'domain': [('id', '=', self.subcontract_id.id)],
+            'context': {'create': False}
         }

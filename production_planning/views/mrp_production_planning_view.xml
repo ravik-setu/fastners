@@ -25,7 +25,7 @@
                     <sheet>
                         <field name="subcontract_ids" invisible="1"/>
                         <div class="oe_button_box" name="button_box">
-                            <button class="oe_stat_button" name="action_view_subcontracts" type="object" icon="fa-wrench" invisible="not subcontract_ids">
+                            <button class="oe_stat_button btn-primary" name="action_view_subcontracts" type="object" icon="fa-truck" invisible="not subcontract_ids">
                                 <div class="o_field_widget o_stat_info">
                                     <span class="o_stat_text">Subcontracts</span>
                                 </div>
@@ -80,6 +80,9 @@
                                         <field name="state" column_invisible="1"/>
                                         <field name="company_id" column_invisible="1"/>
                                         <field name="pending_qty" readonly="1" string="Pending Qty"/>
+                                        <field name="subcontract_id" column_invisible="1"/>
+                                        <button name="action_view_subcontract" type="object" string="Subcontract" class="bg-info"
+                                                invisible="not subcontract_id"/>
                                         <button name="button_start" type="object" string="Start" class="bg-success"
                                                 invisible="parent.state != 'in_progress' or in_progress or not pending_qty"/>
                                         <button name="button_stop" type="object" string="Stop" class="bg-warning"

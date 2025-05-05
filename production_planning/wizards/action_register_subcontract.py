@@ -10,8 +10,6 @@ class RegisterSubcontract(models.Model):
     planning_line = fields.Many2one("mrp.production.planning.line")
     workorder_id = fields.Many2one("mrp.workorder")
     subcontract_qty = fields.Float("Subcontract Qty")
-    # return_to_stock = fields.Boolean(string="Move Product To Raw Material?")
-    # return_quantity = fields.Float(string="Return Quantity")
     product_id = fields.Many2one("product.product", related="planning_line.product_id", string="Product")
     bom_id = fields.Many2one('mrp.bom')
 
