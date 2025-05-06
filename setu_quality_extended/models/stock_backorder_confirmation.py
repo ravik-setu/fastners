@@ -23,10 +23,10 @@ class StockBackorderConfirmation(models.TransientModel):
 
                 if len(sheets) == 1:
                     self.env.cr.execute(
-                        """update inspection_sheet set state = 'cancel' where id = {}""".format(sheets[0].id))
+                        """update setu_quality_check_sheet set state = 'cancel' where id = {}""".format(sheets[0].id))
                 else:
                     self.env.cr.execute(
-                        """update inspection_sheet set state = 'cancel' where id in {}""".format(tuple(sheets.ids)))
+                        """update setu_quality_check_sheet set state = 'cancel' where id in {}""".format(tuple(sheets.ids)))
 
         return value
 
@@ -45,10 +45,10 @@ class StockBackorderConfirmation(models.TransientModel):
 
                 if len(sheets) == 1:
                     self.env.cr.execute(
-                        """update inspection_sheet set state = 'cancel' where id = {}""".format(sheets[0].id))
+                        """update setu_quality_check_sheet set state = 'cancel' where id = {}""".format(sheets[0].id))
                 else:
                     self.env.cr.execute(
-                        """update inspection_sheet set state = 'cancel' where id in {}""".format(tuple(sheets.ids)))
+                        """update setu_quality_check_sheet set state = 'cancel' where id in {}""".format(tuple(sheets.ids)))
 
         return res
 
