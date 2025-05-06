@@ -59,7 +59,7 @@ class SetuGateEntryRegister(models.Model):
                 vals['type'] = 'visitor'
             elif self.env.context.get('type') == 'outward':
                 vals['type'] = 'outward'
-            return super(SetuGateEntryRegister, self).create(vals_list)
+        return super(SetuGateEntryRegister, self).create(vals_list)
 
     @api.constrains('in_time_visitor', 'out_time_visitor')
     def _check_end_date(self):
