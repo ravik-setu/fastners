@@ -2,7 +2,7 @@
 {
     # App information
     'name': 'Gate Entry Management',
-    'version': '1.0',
+    'version': '17.1',
     'category': 'Purchase',
     'license': 'OPL-1',
     'description': """This module helps to manage gate entries""",

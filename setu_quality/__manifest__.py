@@ -4,7 +4,7 @@
 
 {
     'name': 'Setu Quality Base',
-    'version': '17.0',
+    'version': '17.1',
     'category': 'Manufacturing/Quality',
     'sequence': 50,
     'summary': 'Basic Feature for Quality',

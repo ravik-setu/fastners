@@ -11,7 +11,7 @@ class SetuProductPackage(models.Model):
     _name = 'setu.product.package'
     _order = 'id desc'
     _inherit = ['barcodes.barcode_events_mixin']
-    description = 'Setu Product Package'
+    _description = 'Setu Product Package'
 
     name = fields.Char(string='Package Reference', copy=False, required=True,
                        default=lambda self: self.env['ir.sequence'].next_by_code('setu.product.package.seq'))

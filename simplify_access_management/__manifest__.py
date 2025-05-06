@@ -10,8 +10,10 @@
 #################################################################################
 
 {
+
     'name': 'Setu Simplify Access Management',
-    'version': '17.0.4.3.1',
+    'version': '17.1',
+
     'sequence': 5,
     'author': 'Setu Consulting Services Pvt. Ltd.',
     'maintainer': 'Setu Consulting Services Pvt. Ltd.',

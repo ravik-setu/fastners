@@ -20,7 +20,7 @@ class SetuPaymentSchedule(models.Model):
     payment_schedule_line_ids = fields.One2many('setu.payment.schedule.lines', 'payment_schedule_id',
                                                 string="Payment Schedule Lines",
                                                 domain="[('forward_booking_id', 'in', forward_booking_ids)]")
-    remaining_amount = fields.Float(String="Remaining Amount", default=0.0)
+    remaining_amount = fields.Float(string="Remaining Amount", default=0.0)
 
     @api.model_create_multi
     def create(self, vals_list):

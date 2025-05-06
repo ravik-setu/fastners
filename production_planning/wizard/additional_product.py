@@ -6,6 +6,7 @@ import base64
 
 class MrpWorkorderAdditionalProduct(models.TransientModel):
     _name = "mrp_workorder.additional.product"
+    _description = "MRP Workorder Additional Product"
 
     product_id = fields.Many2one(
         'product.product',

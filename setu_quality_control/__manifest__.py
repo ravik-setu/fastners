@@ -3,7 +3,7 @@
 
 {
     'name': 'Setu Quality',
-    'version': '17.0',
+    'version': '17.1',
     'category': 'Manufacturing/Quality',
     'sequence': 120,
     'summary': 'Control the quality of your products',

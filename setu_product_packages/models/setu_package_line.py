@@ -3,7 +3,7 @@ from odoo import models, fields, api
 
 class SetuPackageLine(models.Model):
     _name = 'setu.package.line'
-    description = 'Setu Package Line'
+    _description = 'Setu Package Line'
 
     product_id = fields.Many2one('product.product')
     tracking = fields.Selection(related='product_id.tracking')

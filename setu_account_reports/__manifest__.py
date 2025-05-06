@@ -1,6 +1,6 @@
 {
     'name': "Setu Account Reports",
-    'version': '17.0',
+    'version': '17.1',
     'category': 'Accounting/Accounting',
     'description': 'Setu Reports',
     'author': "Setu Consulting Services Pvt. Ltd.",

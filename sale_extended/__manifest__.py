@@ -1,6 +1,6 @@
 {
     'name': 'Sale Extendedsdsdsdsd',
-    'version': '16.0',
+    'version': '17.1',
     'category': 'sale',
     'description': 'sale_extended',
     'author': 'Setu Consulting Services Pvt. Ltd.',
