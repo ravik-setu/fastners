@@ -5,8 +5,10 @@
     'version': '16.0',
     'category': 'MRP',
     'description': 'Production Planning',
-    'author': "Setu Consulting Services Pvt. Ltd.",
-    'website': 'https://www.setuconsulting.com',
+    'author': 'Setu Consulting Services Pvt. Ltd.',
+    'maintainer': 'Setu Consulting Services Pvt. Ltd.',
+    'website': 'https://www.setuconsulting.com/',
+    'support': 'support@setuconsulting.com',
     'depends': ['mrp', 'stock_extended', 'sale_stock', 'stock_account'],
     'data': [
         'security/ir.model.access.csv',

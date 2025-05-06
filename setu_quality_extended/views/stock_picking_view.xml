@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="stock_picking_quality_check_status_tree" model="ir.ui.view">
+            <field name="name">stock.picking.tree.view.quality.check.status</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.vpicktree"/>
+            <field name="arch" type="xml">
+                <field name="state" position="after">
+                    <field name="quality_sheet_status" optional="show" widget="badge"
+                           decoration-info="quality_sheet_status== 'partial'"
+                           decoration-muted="quality_sheet_status in ('not_completed','accepted')"
+                           decoration-success="quality_sheet_status == 'fully_completed'"/>
+                </field>
+            </field>
+        </record>
+    </data>
+</odoo>

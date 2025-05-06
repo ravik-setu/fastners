@@ -1,0 +1,13 @@
+<odoo>
+    <data noupdate="1">
+        <record id="setu_quality_control.test_type_passfail" model="setu.quality.point.test_type">
+            <field name="name">Pass - Fail</field>
+            <field name="technical_name">passfail</field>
+        </record>
+
+        <record id="setu_quality_control.test_type_measure" model="setu.quality.point.test_type">
+            <field name="name">Measure</field>
+            <field name="technical_name">measure</field>
+        </record>
+    </data>
+</odoo>

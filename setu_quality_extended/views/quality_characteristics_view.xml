@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+         <record id="quality_characteristic_search_view" model="ir.ui.view">
+            <field name="name">quality characteristic serarch view</field>
+            <field name="model">setu.quality.characteristic</field>
+            <field name="arch" type="xml">
+                <search>
+                    <filter name="archived" string="Archived" domain="[('active', '=', False)]"/>
+                </search>
+            </field>
+        </record>
+        <record id="quality_characteristic_tree_view" model="ir.ui.view">
+            <field name="name">quality characteristic tree view</field>
+            <field name="model">setu.quality.characteristic</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="code"/>
+                    <field name="description"/>
+                </tree>
+            </field>
+        </record>
+        <record id="quality_characteristic_form_view" model="ir.ui.view">
+            <field name="name">quality characteristic form view</field>
+            <field name="model">setu.quality.characteristic</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="code"/>
+                                <field name="description"/>
+                            </group>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+        <record id="quality_characteristic_action" model="ir.actions.act_window">
+            <field name="name">Characteristics</field>
+            <field name="res_model">setu.quality.characteristic</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        <menuitem id="menu_quality_characteristic" name="Characteristics"
+                  parent="setu_quality_control.menu_quality_configuration" action="quality_characteristic_action"
+                  sequence="30"/>
+        <record id="quality_point_view_form_characteristic" model="ir.ui.view">
+            <field name="name">quality point view form characteristic</field>
+            <field name="model">setu.quality.point</field>
+            <field name="inherit_id" ref="setu_quality.setu_quality_point_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='product_category_ids']" position="after">
+                    <field name="is_readonly" invisible="1"/>
+                </xpath>
+                <xpath expr="//field[@name='product_ids']" position="attributes">
+                    <attribute name="options">{'no_create': True,'no_edit':True}</attribute>
+                    <attribute name="readonly">is_readonly == True</attribute>
+                    <!--             {'readonly':('is_readonly','!=',False)} -->
+                </xpath>
+                <xpath expr="//field[@name='product_category_ids']" position="attributes">
+                    <attribute name="options">{'no_create': True,'no_edit':True}</attribute>
+                    <attribute name="readonly">product_ids or is_readonly == True</attribute>
+                    <!--           {'readonly':['|',('product_ids','!=',[]),('is_readonly','!=',False)]} -->
+                </xpath>
+                <xpath expr="//field[@name='picking_type_ids']" position="attributes">
+                    <attribute name="readonly">is_readonly == True</attribute>
+                    <!--             {'readonly':[('is_readonly','!=',False)]} -->
+                </xpath>
+                <field name="picking_type_ids" position="after">
+                    <field name="test_method_id" options="{'no_create': True, 'no_create_edit':True}"/>
+                </field>
+                <field name="title" position="replace">
+                    <field name="characteristic" options="{'no_create': True, 'no_create_edit':True, 'no_open': True}"/>
+                    <field name="title"/>
+                </field>
+            </field>
+        </record>
+    </data>
+</odoo>
