@@ -10,8 +10,10 @@
 #################################################################################
 
 {
-    'name': 'Simplify Access Management',
-    'version': '17.0.4.3.1',
+
+    'name': 'Setu Simplify Access Management',
+    'version': '17.1',
+
     'sequence': 5,
     'author': 'Terabits Technolab',
     'license': 'OPL-1',

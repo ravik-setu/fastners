@@ -2,8 +2,13 @@
     'name': "Setu Product Packages",
     'summary': "",
     'category': 'Inventory',
-    "author": "Setu Consulting Services Pvt. Ltd.",
-    "version": "17.0",
+
+    'author': 'Setu Consulting Services Pvt. Ltd.',
+    'maintainer': 'Setu Consulting Services Pvt. Ltd.',
+    'website': 'https://www.setuconsulting.com/',
+    'support': 'support@setuconsulting.com',
+    "version": "17.1",
+
     'depends': ['stock_extended', 'barcodes', 'mrp'],
     "license": "LGPL-3",
     'data': [

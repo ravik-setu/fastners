@@ -2,7 +2,7 @@
 {
     # App information
     'name': 'Quality Checks',
-    'version': '1.0',
+    'version': '17.1',
     'category': '',
     'license': 'OPL-1',
     'description': """This module helps to manage quality checks""",

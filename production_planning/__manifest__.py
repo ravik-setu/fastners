@@ -2,7 +2,7 @@
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 {
     'name': 'Production Planning',
-    'version': '16.0',
+    'version': '17.1',
     'category': 'MRP',
     'description': 'Production Planning',
     'author': "Setu Consulting Services Pvt. Ltd.",
