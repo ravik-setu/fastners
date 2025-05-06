@@ -3,6 +3,7 @@ from odoo import fields, models, api
 
 class QualityCheckRevision(models.Model):
     _name = "setu.quality.check.revision"
+    _inherit =['mail.thread']
     _description = "Quality Check Revision"
 
     inspection_sheet_id = fields.Many2one('setu.quality.check.sheet.revision')

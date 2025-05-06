@@ -62,7 +62,7 @@
                                         <field name="product_id" options="{'no_open': True}" readonly="1"
                                                column_invisible="1"/>
                                         <field name="bom_id" required="1"/>
-                                        <field name="component_status" optional="show"
+                                        <field name="component_status" optional="show" widget="badge"
                                                decoration-success="running_production_id.reservation_state == 'assigned' or component_status == 'available'"
                                                decoration-warning="running_production_id.reservation_state != 'assigned' and component_status in ('expected', 'available')"
                                                decoration-danger="running_production_id.reservation_state != 'assigned' and component_status in ('late', 'unavailable')"/>
@@ -72,13 +72,13 @@
                                         <field name="state" column_invisible="1"/>
                                         <field name="company_id" column_invisible="1"/>
                                         <field name="pending_qty" readonly="1" string="Pending Qty"/>
-                                        <button name="button_start" type="object" string="Start" class="bg-success"
+                                        <button name="button_start" type="object" string="Start" class="btn btn-success"
                                                 invisible="parent.state != 'in_progress' or in_progress or not pending_qty"/>
-                                        <button name="button_stop" type="object" string="Stop" class="bg-warning"
+                                        <button name="button_stop" type="object" string="Stop" class="btn btn-warning"
                                                 invisible="parent.state != 'in_progress' or not in_progress or not pending_qty"/>
                                         <field name="mo_count" column_invisible="1"/>
-                                        <button class="oe_stat_button" name="open_manufacturing_orders" type="object"
-                                                invisible="not mo_count" attrs="{'invisible': [('mo_count', '=', 0)]}"
+                                        <button class="btn btn-primary" name="open_manufacturing_orders" type="object"
+                                                invisible="not mo_count"
                                                 string="Mo's"/>
                                     </tree>
                                 </field>

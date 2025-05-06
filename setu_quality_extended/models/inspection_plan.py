@@ -28,7 +28,7 @@ class SetuQualityCheckPlan(models.Model):
                          'Inspection Plan for this Operation type and Product already exist.')]
     product_category_ids = fields.Many2many(
         'product.category', string="Product Categories")
-    is_workorder_step = fields.Boolean(defualt=False)
+    is_workorder_step = fields.Boolean(default=False)
     start_date = fields.Date(tracking=True)
     end_date = fields.Date(tracking=True)
     picking_type_ids = fields.Many2many(

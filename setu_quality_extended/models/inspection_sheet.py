@@ -43,10 +43,7 @@ class SetuQualityCheckSheet(models.Model):
 
     revised_sheet_ids = fields.One2many(
         'setu.quality.check.sheet.revision', 'inspection_sheet_id')
-    code = fields.Selection([('incoming', 'Receipt'),
-                            ('outgoing', 'Delivery'),
-                            ('internal', 'Internal Transfer'),
-                            ('mrp_operation', 'Manufacturing')], related="picking_id.picking_type_code")
+    code = fields.Selection(related="picking_id.picking_type_code")
     plan_id = fields.Many2one(
         'setu.quality.check.plan', compute="compute_inspection_plan", store=True)
     is_editable = fields.Boolean(compute="compute_is_editable")
@@ -187,14 +184,19 @@ class SetuQualityCheckSheet(models.Model):
             raise ValidationError(
                 _("""Sum of Quantities (Accepeted, Rejected, Destructive) "MUST" be equal to Recieved Quantity"""))
 
-    @api.model
-    def create(self, vals):
-        sequence = self.env['stock.picking'].browse(vals.get('picking_id')).picking_type_id.sequence_for_inspection_sheet or \
-            self.env['mrp.production'].browse(
-                vals.get('production_id')).picking_type_id.sequence_for_inspection_sheet
-        if sequence:
-            vals['name'] = sequence.next_by_id()
-        return super(SetuQualityCheckSheet, self).create(vals)
+    @api.model_create_multi
+    def create(self, vals_list):
+        for vals in vals_list:
+            sequence = None
+            if vals.get('picking_id'):
+                sequence = self.env['stock.picking'].browse(
+                    vals['picking_id']).picking_type_id.sequence_for_inspection_sheet
+            elif vals.get('production_id'):
+                sequence = self.env['mrp.production'].browse(
+                    vals['production_id']).picking_type_id.sequence_for_inspection_sheet
+            if sequence:
+                vals['name'] = sequence.next_by_id()
+        return super(SetuQualityCheckSheet, self).create(vals_list)
 
     def process_quantities(self):
         if self.picking_id:
