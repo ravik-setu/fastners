@@ -38,7 +38,9 @@ class MrpProductionPlanning(models.Model):
     in_progress = fields.Boolean(string="In Progress", copy=False)
     lot_name = fields.Char(string="Lot/Serial")
     reserved_qty = fields.Float(string='Reserved Qty', compute='_compute_mo_count')
-    component_status = fields.Selection(related='running_production_id.components_availability_state')
+    component_status = fields.Selection([
+        ('available', 'Available'),
+        ('unavailable', 'Not Available')], compute='_compute_component_status', store=True)
     subcontract_id = fields.Many2one('purchase.order', string='Subcontract', compute='_compute_subcontract_id')
     subcontract_bom_id = fields.Many2one('mrp.bom', compute='_compute_subcontract_id')
 
@@ -129,3 +131,11 @@ class MrpProductionPlanning(models.Model):
             'domain': [('id', '=', self.subcontract_id.id)],
             'context': {'create': False}
         }
+
+    @api.depends('running_production_id.components_availability_state')
+    def _compute_component_status(self):
+        for rec in self:
+            if rec.running_production_id.components_availability_state == 'available':
+                rec.component_status = 'available'
+            else:
+                rec.component_status = 'unavailable'
