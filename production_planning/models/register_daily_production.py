@@ -57,7 +57,7 @@ class RegisterDailyProduction(models.Model):
         if self.qty_produced > 0:
             pending_data = {}
             for move in mo.move_raw_ids:
-                if need_reserve_in_backorder:
+                if need_reserve_in_backorder > 0:
                     product_id = move.product_id
                     if product_id.id not in pending_data.keys():
                         pending_data.update({product_id.id: {'lot_ids': [], 'quantity': need_reserve_in_backorder}})
