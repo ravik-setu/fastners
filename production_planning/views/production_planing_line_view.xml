@@ -21,7 +21,7 @@
             <field name="name">mrp.production.planning.line.kanban</field>
             <field name="model">mrp.production.planning.line</field>
             <field name="arch" type="xml">
-                <kanban class="o_kanban_small_column">
+                <kanban class="o_kanban_small_column" default_group_by="planning_id">
                     <templates>
                         <t t-name="kanban-box">
                             <div class="oe_kanban_global_click o_kanban_card">
