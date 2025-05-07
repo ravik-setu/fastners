@@ -15,6 +15,7 @@
                                 <field name="qty_produced" required="1"/>
                                 <field name="return_to_stock"/>
                                 <field name="return_quantity" invisible="not return_to_stock"/>
+                                <field name="scrap_qty" invisible="not return_to_stock"/>
                             </group>
                         </group>
                     </sheet>
