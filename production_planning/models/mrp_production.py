@@ -52,7 +52,7 @@ class MrpProduction(models.Model):
     @api.model_create_multi
     def create(self, vals_list):
         for vals in vals_list:
-            if vals.get('product_id') and not self.env.context.get('is_subcontract'):
+            if vals.get('product_id') and not vals.get('subcontractor_id'):
                 product = self.env["product.product"].browse(vals.get('product_id'))
                 if product.destination_location_id:
                     vals.update({'location_dest_id': product.destination_location_id.id})
@@ -60,7 +60,7 @@ class MrpProduction(models.Model):
                     vals.update({'location_src_id': product.source_location_id.id})
         res = super(MrpProduction, self).create(vals_list)
         for rec in res:
-            if not self.env.context.get('is_subcontract') and not self.env.context.get('skip_confirm'):
+            if not vals.get('subcontractor_id') and not self.env.context.get('skip_confirm'):
                 if rec.product_id.destination_location_id:
                     rec._onchange_location_dest()
                 if rec.product_id.source_location_id:
