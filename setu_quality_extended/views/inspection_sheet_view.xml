@@ -119,9 +119,12 @@
                                         <field name="measure" invisible="test_type != 'measure'"/>
                                         <field name="confirm_measurement" column_invisible="1"/>
                                         <button name="confirm_measure_btn" type="object" class="btn btn-success" icon="fa-lg fa-check-circle"
-                                               string="Pass" invisible="parent.state == 'cancel' or quality_state != 'none' or confirm_measurement"/>
+                                               string="Pass" invisible="parent.state == 'cancel' or quality_state != 'none' or test_type == 'measure'"/>
                                         <button name="fail_btn" class="btn btn-danger" type="object" icon="fa-lg fa-times-circle" string="Fail"
                                                 invisible="parent.state == 'cancel' or quality_state != 'none' or test_type == 'measure'"/>
+                                        <button name="do_measure" type="object" class="btn btn-success"
+                                                invisible="test_type != 'measure' or quality_state != 'none'"
+                                                string="Measure" data-hotkey="v"/>
                                         <field name="norm" readonly="1" invisible="test_type != 'measure'"/>
                                         <field name="norm_unit" readonly="1" invisible="test_type != 'measure'"/>
                                         <field name="tolerance_min" readonly="1" invisible="test_type != 'measure'"/>

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from odoo import models, fields, api, _
-
+from odoo.exceptions import UserError
 
 class MrpProductionPlanning(models.Model):
     _name = 'mrp.production.planning.line'
@@ -60,6 +60,8 @@ class MrpProductionPlanning(models.Model):
         return self.running_production_id.action_add_product()
 
     def action_register_production(self):
+        if not self.running_production_id:
+            raise UserError("No any production order found!")
         return {
             'type': 'ir.actions.act_window',
             'res_model': 'register.daily.production',

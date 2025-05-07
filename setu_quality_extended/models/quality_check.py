@@ -1,5 +1,5 @@
 from odoo import fields, models, api, _
-
+from odoo.exceptions import UserError, ValidationError
 
 class QualityCheck(models.Model):
     _inherit = "setu.quality.check"
@@ -153,3 +153,8 @@ class QualityCheck(models.Model):
 
     def fail_btn(self):
         self.quality_state = 'fail'
+
+    def do_measure(self):
+        if self.measure <= 0:
+            raise UserError("Please fill data in Measure")
+        return super(QualityCheck, self).do_measure()

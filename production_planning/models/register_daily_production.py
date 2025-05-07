@@ -22,6 +22,8 @@ class RegisterDailyProduction(models.Model):
     def register_daily_production(self):
         action = {}
         mo = self.production_id
+        if not mo:
+            raise UserError("No any production order found!")
         mo.raise_error_if_multiple_lot_found()
         if mo.product_id.tracking != 'none' and not mo.lot_producing_id:
             mo.action_generate_serial()
