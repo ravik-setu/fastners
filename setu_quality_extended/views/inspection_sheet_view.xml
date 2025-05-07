@@ -90,7 +90,7 @@
                                 <field name="sampled_quantity" readonly="processed or state != 'open'"/>
                                 <field name="quantity_accepted" readonly="processed or state != 'open'"/>
                                 <field name="quantity_rejected" readonly="processed or state != 'open'"/>
-                                <field name="quality_inspector" widget="many2many_tags" required="1"
+                                <field name="quality_inspector" widget="many2many_tags"
                                        readonly="processed or state != 'open'"
                                        options="{'no_create': True, 'no_create_edit':True}"/>
                                 <field name="quality_inspector_id" invisible="1"
@@ -118,10 +118,9 @@
                                         <field name="test_type_id" readonly="1"/>
                                         <field name="measure" invisible="test_type != 'measure'"/>
                                         <field name="confirm_measurement" column_invisible="1"/>
-                                        <button name="confirm_measure_btn" type="object" icon="fa-check-circle"
-                                                style="color:green"
-                                                invisible="parent.state == 'cancel' or quality_state != 'none' or confirm_measurement"/>
-                                        <button name="fail_btn" type="object" icon="fa-times-circle" style="color:red"
+                                        <button name="confirm_measure_btn" type="object" class="btn btn-success" icon="fa-lg fa-check-circle"
+                                               string="Pass" invisible="parent.state == 'cancel' or quality_state != 'none' or confirm_measurement"/>
+                                        <button name="fail_btn" class="btn btn-danger" type="object" icon="fa-lg fa-times-circle" string="Fail"
                                                 invisible="parent.state == 'cancel' or quality_state != 'none' or test_type == 'measure'"/>
                                         <field name="norm" readonly="1" invisible="test_type != 'measure'"/>
                                         <field name="norm_unit" readonly="1" invisible="test_type != 'measure'"/>
