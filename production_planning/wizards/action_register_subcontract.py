@@ -24,3 +24,11 @@ class RegisterSubcontract(models.Model):
                                                                               planning_line_id=self.planning_line)
             if hasattr(purchase_id, 'is_outsourcing'):
                 purchase_id.is_outsourcing = True
+            return {
+                'type': 'ir.actions.act_window',
+                'view_mode': 'form',
+                'res_model': 'purchase.order',
+                'res_id': purchase_id.id,
+                'target': 'current',
+            }
+        return False

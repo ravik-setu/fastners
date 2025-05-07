@@ -52,6 +52,8 @@ class MrpProductionPlanning(models.Model):
             rec.done_qty = sum(product_mos.mapped('qty_produced'))
             rec.pending_qty = rec.qty - rec.done_qty - sum(rec.subcontract_id.filtered(lambda sub: sub.state != 'cancel').order_line.mapped('product_qty'))
             rec.reserved_qty = product_mos.get_available_component_qty_for_return()
+            if not rec.pending_qty:
+                rec.button_stop()
 
     def open_manufacturing_orders(self):
         action = self.env.ref('mrp.mrp_production_action').sudo().read()[0]
