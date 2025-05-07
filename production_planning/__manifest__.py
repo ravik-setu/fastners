@@ -9,7 +9,7 @@
     'maintainer': 'Setu Consulting Services Pvt. Ltd.',
     'website': 'https://www.setuconsulting.com/',
     'support': 'support@setuconsulting.com',
-    'depends': ['mrp', 'stock_extended', 'sale_stock', 'stock_account'],
+    'depends': ['mrp', 'stock_extended', 'sale_stock', 'stock_account','purchase'],
     'data': [
         'security/ir.model.access.csv',
         'views/mrp_production_planning_view.xml',

@@ -10,9 +10,6 @@ class StockPicking(models.Model):
         move_ids = move_ids or self.move_ids
         assigned_moves_ids = OrderedSet()
         partially_available_moves_ids = OrderedSet()
-        if not lot_ids:
-            purchase = self.find_purchase_based_on_origin()
-            lot_ids = purchase.source_picking_id.mapped('move_line_nosuggest_ids').mapped('lot_id')
         if not avoid_unreserve:
             move_ids._do_unreserve()
         for move in move_ids or self.move_ids:

@@ -100,8 +100,8 @@ class ProductionPlanning(models.Model):
                 bom_ids.update({bom_id: bom_id.product_qty * self.qty})
                 return bom_ids
             if first_bom_id:
-                bom_ids.update({bom_id: (line.product_qty / line.bom_id.product_qty) * self.qty})
-                previous_qty = line.product_qty * self.qty
+                bom_ids.update({bom_id: (line.product_qty / line.bom_id.product_qty) * self.production_kg})
+                previous_qty = line.product_qty * self.production_kg
 
         child_lines = bom_id.bom_line_ids
         while (child_lines):
