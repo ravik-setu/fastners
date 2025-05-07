@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<templates id="template" xml:space="preserve">
-    <t t-inherit="mrp_workorder.MenuPopup" t-inherit-mode="extension" owl="1">
-        <xpath expr="//button[@name='addByProduct']" position="before">
-            <button class="btn btn-primary" t-on-click="() => this.callAction('action_return_component')">Move To Raw Material</button>
-        </xpath>
-    </t>
-</templates>

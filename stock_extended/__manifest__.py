@@ -1,6 +1,6 @@
 {
     'name': "Stock Extended",
-    'version': '17.0',
+    'version': '17.1',
     'category': 'Inventory/Inventory',
     'description': 'Stock Extended',
     'author': "Setu Consulting Services Pvt. Ltd.",

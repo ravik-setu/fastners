@@ -327,6 +327,8 @@ class MrpProduction(models.Model):
         return self.action_add_component()
 
     def action_add_component(self):
+        if not self:
+            raise UserError("No any production order found!")
         self.ensure_one()
         return {
             'type': 'ir.actions.act_window',

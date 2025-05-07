@@ -123,7 +123,7 @@ class ProductionPlanning(models.Model):
         lines = self.planning_lines.filtered(lambda line: line.qty > 0 and not line.product_id.id == self.product_id.id)
         if not lines and self.product_id.put_in_pack_product_id:
             raise UserError("Please Add Quantity into lines!")
-        for line in self.planning_lines.filtered(lambda line: line.qty > 0):
+        for line in self.planning_lines.filtered(lambda line: line.qty > 0 and line.bom_id.type != 'subcontract'):
             vals = {'product_id': line.product_id.id,
                     'planning_id': self.id,
                     'product_tmpl_id': line.product_id.product_tmpl_id.id,

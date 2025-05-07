@@ -52,13 +52,14 @@ class SetuGateEntryRegister(models.Model):
     def cancel_button(self):
         self.write({'state': 'cancel'})
 
-    @api.model
-    def create(self, vals):
-        if self.env.context.get('type') == 'visitor':
-            vals['type'] = 'visitor'
-        elif self.env.context.get('type') == 'outward':
-            vals['type'] = 'outward'
-        return super(SetuGateEntryRegister, self).create(vals)
+    @api.model_create_multi
+    def create(self, vals_list):
+        for vals in vals_list:
+            if self.env.context.get('type') == 'visitor':
+                vals['type'] = 'visitor'
+            elif self.env.context.get('type') == 'outward':
+                vals['type'] = 'outward'
+        return super(SetuGateEntryRegister, self).create(vals_list)
 
     @api.constrains('in_time_visitor', 'out_time_visitor')
     def _check_end_date(self):

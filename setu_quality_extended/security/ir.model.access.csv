@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_setu_quality_check_plan,setu_quality_check_plan,model_setu_quality_check_plan,base.group_user,1,1,1,0
+access_setu_quality_check_sheet,setu_quality_check_sheet,model_setu_quality_check_sheet,base.group_user,1,1,1,0
+access_setu_quality_test_method,setu_quality_test_method,model_setu_quality_test_method,base.group_user,1,1,1,1
+access_setu_quality_characteristic,setu_quality_characteristic,model_setu_quality_characteristic,base.group_user,1,1,1,0
+access_setu_quality_check_revision,setu_quality_check_revision,model_setu_quality_check_revision,base.group_user,1,1,1,1
+access_setu_quality_check_sheet_revision,setu_quality_check_sheet_revision,model_setu_quality_check_sheet_revision,base.group_user,1,1,1,1

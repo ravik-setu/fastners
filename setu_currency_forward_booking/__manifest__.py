@@ -2,7 +2,7 @@
 {
     # App information
     'name': 'Currency Forward Booking / Currency Hedging',
-    'version': '1.0',
+    'version': '17.1',
     'license': 'LGPL-3',
 
     'summary': """

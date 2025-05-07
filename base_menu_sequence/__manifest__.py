@@ -1,6 +1,7 @@
 {
     'name': 'Base Menu Sequence',
-    'version': '17.0',
+    'version': '17.1',
+    'license': 'LGPL-3',
     'summary': 'Rearranges main menu sequence and renames Discuss to Messages',
     'author': "Setu Consulting Services Pvt. Ltd.",
     'website': 'https://www.setuconsulting.com',

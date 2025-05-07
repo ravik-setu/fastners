@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="inspection_quality_check_access" model="res.groups">
+        <field name="name">Inspection Sheet Quality Check</field>
+    </record>
+</odoo>

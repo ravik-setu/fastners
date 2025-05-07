@@ -39,7 +39,7 @@ class SetuForwardBooking(models.Model):
 
     bank_received_amount_ids = fields.One2many(comodel_name="setu.bank.received.amount.details",
                                                inverse_name='forward_booking_id', string="Payment Received Details")
-    booking_amount = fields.Float(string="Booking Amount", currency_field='currency_id')
+    booking_amount = fields.Monetary(string="Booking Amount", currency_field='currency_id')
     remaining_amount = fields.Monetary(string="Remaining Amount",
                                        help="Total Booking Amount - Received Amount",
                                        compute="_compute_remaining_amount_and_cancellation_pnl",

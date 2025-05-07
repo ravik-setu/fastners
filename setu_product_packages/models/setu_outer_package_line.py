@@ -3,7 +3,7 @@ from odoo import models, fields, api
 
 class SetuOuterPackageLine(models.Model):
     _name = 'setu.outer.package.line'
-    description = 'Setu Outer Package Line'
+    _description = 'Setu Outer Package Line'
 
     product_id = fields.Many2one('product.product')
     outer_package_id = fields.Many2one('setu.product.package')

@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="quality_alert_action_team_inspection_sheet" model="ir.actions.act_window">
+            <field name="name">Inspection Sheet</field>
+            <field name="res_model">setu.quality.check.sheet</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('state','in',('open','accept')),('processed', '=',False),('team_id', '=',
+                active_id)]
+            </field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">Nothing To Inspect</p>
+            </field>
+        </record>
+        <record id="quality_alert_team_dashboard_view_kanban_inspection_sheet" model="ir.ui.view">
+            <field name="name">quality alert team dashboard view kanban inspection sheet</field>
+            <field name="model">setu.quality.alert.team</field>
+            <field name="inherit_id" ref="setu_quality_control.setu_quality_alert_team_dashboard_view_kanban"/>
+            <field name="arch" type="xml">
+                <xpath expr="//templates//div[hasclass('o_kanban_card_content')]/div" position="inside">
+                    <div class="col-6 o_kanban_primary_left" style="padding-top:5px;">
+                        <button class="btn btn-primary" name="%(quality_alert_action_team_inspection_sheet)d"
+                                type="action">
+                            <span>
+                                <field name="inspection_sheet_count"/>
+                                Inspection Sheets
+                            </span>
+                        </button>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="view_picking_type_form_quality_control_base">
+            <field name="name">view picking type form quality control base</field>
+            <field name="model">stock.picking.type</field>
+            <field name="inherit_id" ref="stock.view_picking_type_form"/>
+            <field name="arch" type="xml">
+                <field name="code" position="attributes">
+                    <attribute name="required">1</attribute>
+                </field>
+            </field>
+        </record>
+        <record id="inspection_sheet_view_search" model="ir.ui.view">
+            <field name="name">inspection.sheet.view.search</field>
+            <field name="model">setu.quality.check.sheet</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="picking_id"/>
+                    <field name="production_id"/>
+                </search>
+            </field>
+        </record>
+        <record id="quality_inspection_sheet_action_picking" model="ir.actions.act_window">
+            <field name="name">Inspection Sheet</field>
+            <field name="res_model">setu.quality.check.sheet</field>
+            <field name="view_mode">tree,form</field>
+            <field name="context">{ 'search_default_picking_id': [active_id], 'default_picking_id': active_id}</field>
+        </record>
+        <record model="ir.ui.view" id="view_picking_form_quality_control_base">
+            <field name="name">view picking form quality control base</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form//field[@name='company_id']" position="after">
+                    <field name="state" invisible="1"/>
+                </xpath>
+                <xpath expr="//form//button[@name='button_validate'][1]" position="attributes">
+                    <attribute name="invisible">state in ('waiting', 'confirmed','assigned')</attribute>
+                </xpath>
+                <xpath expr="//form//button[@name='button_validate'][2]" position="attributes">
+                    <attribute name="invisible">state not in ('waiting', 'confirmed','assigned')</attribute>
+                </xpath>
+                <xpath expr="//form//div[@name='button_box']//button[@icon='fa-check']" position="replace">
+                    <button name="view_inspection_sheet" invisible="not check_ids" type="object" class="oe_stat_button"
+                            icon="fa-check" groups="setu_quality.group_setu_quality_user">
+                        <span class="o_stat_text text-success">Inspection Sheet</span>
+                    </button>
+                </xpath>
+                <xpath expr="//field[@name='backorder_id']" position="after">
+                    <field name="inspection_sheet_ids" invisible="1"/>
+                    <field name="quality_sheet_status" widget="badge" invisible="inspection_sheet_ids"
+                           decoration-info="quality_sheet_status== 'partial'"
+                           decoration-muted="quality_sheet_status in ('not_completed','accepted')"
+                           decoration-success="quality_sheet_status == 'fully_completed'"/>
+                </xpath>
+            </field>
+        </record>
+        <record id="quality_inspection_sheet_action_mrp" model="ir.actions.act_window">
+            <field name="name">Inspection Sheet</field>
+            <field name="res_model">setu.quality.check.sheet</field>
+            <field name="view_mode">tree,form</field>
+            <field name="context">{ 'search_default_production_id': [active_id], 'default_production_id': active_id}
+            </field>
+        </record>
+        <record model="ir.ui.view" id="mrp_production_form_view_inherit">
+            <field name="name">mrp production form inherit</field>
+            <field name="model">mrp.production</field>
+            <field name="inherit_id" ref="mrp.mrp_production_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//header" position="inside">
+                    <field name="valid_inspection_sheet_count" invisible="1"/>
+                    <field name="check_ids" invisible="1"/>
+                    <button name="button_genarate_inpection_sheet" type="object" string="Generate Inspection Sheet"
+                            invisible="check_ids or valid_inspection_sheet_count > 0" class="oe_highlight"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

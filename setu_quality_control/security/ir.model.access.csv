@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_setu_quality_check_wizard,access.setu_quality_check_wizard,model_setu_quality_check_wizard,setu_quality.group_setu_quality_user,1,1,1,0
