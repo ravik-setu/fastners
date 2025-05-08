@@ -253,3 +253,13 @@ class ProductionPlanning(models.Model):
             'domain': [('id', 'in', self.subcontract_ids.ids)],
             'context': {'create': False}
         }
+
+    def action_view_mos(self):
+        return {
+            'type': 'ir.actions.act_window',
+            'name': 'Manufacturing Orders',
+            'view_mode': 'tree,form',
+            'res_model': 'mrp.production',
+            'domain': [('id', 'in', self.mo_ids.ids)],
+            'context': {'create': False}
+        }
