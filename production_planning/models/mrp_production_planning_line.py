@@ -30,14 +30,14 @@ class MrpProductionPlanning(models.Model):
                 ('company_id', '=', False)
             ]""",
         check_company=True)
-    mo_count = fields.Integer("Manufacturing Orders", compute='_compute_mo_count')
-    done_qty = fields.Float(string="Quantity", compute='_compute_mo_count')
-    pending_qty = fields.Float(string="Quantity", compute='_compute_mo_count')
+    mo_count = fields.Integer("Manufacturing Orders", compute='_compute_mo_count',store=True)
+    done_qty = fields.Float(string="Quantity", compute='_compute_mo_count', store=True)
+    pending_qty = fields.Float(string="Quantity", compute='_compute_mo_count',store=True)
     running_production_id = fields.Many2one("mrp.production", string="Running Production")
     state = fields.Selection(related="planning_id.state", store=True)
     in_progress = fields.Boolean(string="In Progress", copy=False)
     lot_name = fields.Char(string="Lot/Serial")
-    reserved_qty = fields.Float(string='Reserved Qty', compute='_compute_mo_count')
+    reserved_qty = fields.Float(string='Reserved Qty', compute='_compute_mo_count',store=True)
     component_status = fields.Selection([
         ('available', 'Available'),
         ('unavailable', 'Not Available'),
@@ -50,8 +50,8 @@ class MrpProductionPlanning(models.Model):
         for rec in self:
             product_mos = rec.find_product_mos()
             rec.mo_count = len(product_mos)
-            rec.done_qty = sum(product_mos.mapped('qty_produced'))
-            rec.pending_qty = rec.qty - rec.done_qty - sum(rec.subcontract_id.filtered(lambda sub: sub.state != 'cancel').order_line.mapped('product_qty'))
+            rec.done_qty = sum(product_mos.mapped('qty_produced')) + sum(rec.subcontract_id.filtered(lambda sub: sub.state != 'cancel').order_line.mapped('product_qty'))
+            rec.pending_qty = rec.qty - min(rec.done_qty, rec.qty)
             rec.reserved_qty = product_mos.get_available_component_qty_for_return()
             if not rec.pending_qty:
                 rec.button_stop()

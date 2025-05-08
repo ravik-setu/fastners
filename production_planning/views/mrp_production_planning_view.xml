@@ -25,9 +25,15 @@
                     <sheet>
                         <field name="subcontract_ids" invisible="1"/>
                         <div class="oe_button_box" name="button_box">
-                            <button class="oe_stat_button btn-primary" name="action_view_subcontracts" type="object" icon="fa-truck" invisible="not subcontract_ids">
+                            <button class="oe_stat_button" name="action_view_subcontracts" type="object" icon="fa-truck" invisible="not subcontract_ids">
                                 <div class="o_field_widget o_stat_info">
                                     <span class="o_stat_text">Subcontracts</span>
+                                </div>
+                            </button>
+                            <field name="mo_ids" invisible="1"/>
+                            <button class="oe_stat_button" name="action_view_mos" type="object" icon="fa-industry" invisible="not mo_ids">
+                                <div class="o_field_widget o_stat_info">
+                                    <span class="o_stat_text">Manufacturing</span>
                                 </div>
                             </button>
                         </div>
@@ -80,17 +86,10 @@
                                         <field name="state" column_invisible="1"/>
                                         <field name="company_id" column_invisible="1"/>
                                         <field name="pending_qty" readonly="1" string="Pending Qty"/>
-                                        <field name="subcontract_id" column_invisible="1"/>
-                                        <button name="action_view_subcontract" type="object" string="Subcontract" class="bg-info"
-                                                invisible="not subcontract_id"/>
                                         <button name="button_start" type="object" string="Start" class="btn btn-success"
                                                 invisible="parent.state != 'in_progress' or in_progress or not pending_qty"/>
                                         <button name="button_stop" type="object" string="Stop" class="btn btn-warning"
                                                 invisible="parent.state != 'in_progress' or not in_progress or not pending_qty"/>
-                                        <field name="mo_count" column_invisible="1"/>
-                                        <button class="btn btn-primary" name="open_manufacturing_orders" type="object"
-                                                invisible="not mo_count"
-                                                string="Mo's"/>
                                     </tree>
                                 </field>
                             </page>
