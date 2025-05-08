@@ -20,6 +20,10 @@
                         <button name="cancel_planning" id="cancel_planning" string="Cancel"
                                 type="object"
                                 invisible="state in ['cancel','done']" class="oe_highlight"/>
+                        <button name="button_start" type="object" string="Start" class="btn btn-success"
+                                                invisible="state != 'in_progress'"/>
+                        <button name="button_stop" type="object" string="Stop" class="btn btn-warning"
+                                                invisible="state != 'in_progress'"/>
                         <field name="state" widget="statusbar" statusbar_visible="draft,confirm,forging,threading"/>
                     </header>
                     <sheet>

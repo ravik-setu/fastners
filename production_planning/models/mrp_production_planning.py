@@ -263,3 +263,9 @@ class ProductionPlanning(models.Model):
             'domain': [('id', 'in', self.mo_ids.ids)],
             'context': {'create': False}
         }
+
+    def button_start(self):
+        self.planning_lines.button_start()
+
+    def button_stop(self):
+        self.planning_lines.button_stop()
