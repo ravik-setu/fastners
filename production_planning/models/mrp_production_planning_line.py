@@ -40,7 +40,8 @@ class MrpProductionPlanning(models.Model):
     reserved_qty = fields.Float(string='Reserved Qty', compute='_compute_mo_count')
     component_status = fields.Selection([
         ('available', 'Available'),
-        ('unavailable', 'Not Available')], compute='_compute_component_status', store=True)
+        ('unavailable', 'Not Available'),
+        ('partially_available', 'Partially Available')], compute='_compute_component_status')
     subcontract_id = fields.Many2one('purchase.order', string='Subcontract', compute='_compute_subcontract_id')
     subcontract_bom_id = fields.Many2one('mrp.bom', compute='_compute_subcontract_id')
 
@@ -134,10 +135,18 @@ class MrpProductionPlanning(models.Model):
             'context': {'create': False}
         }
 
-    @api.depends('running_production_id.components_availability_state')
     def _compute_component_status(self):
         for rec in self:
-            if rec.running_production_id.components_availability_state == 'available':
+            bom_id = rec.bom_id
+            if all(sum(self.env['stock.quant'].search(
+                    [('product_id', '=', line.product_id.id),
+                     ('location_id', '=', line.product_id.destination_location_id.id),
+                     ('quantity', '>', 0)]).mapped('quantity')) >= (rec.pending_qty * line.product_qty) for line in bom_id.bom_line_ids):
                 rec.component_status = 'available'
+            elif any(sum(self.env['stock.quant'].search(
+                    [('product_id', '=', line.product_id.id),
+                     ('location_id', '=', line.product_id.destination_location_id.id),
+                     ('quantity', '>', 0)]).mapped('quantity')) >= (rec.pending_qty * line.product_qty) for line in bom_id.bom_line_ids):
+                rec.component_status = 'partially_available'
             else:
                 rec.component_status = 'unavailable'
