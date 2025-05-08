@@ -95,7 +95,7 @@ class ProductionPlanning(models.Model):
         bom_ids = {}
         previous_qty = 0
         for line in bom_id.bom_line_ids:
-            first_bom_id = self.find_bill_of_material(product_id=line.product_id)
+            first_bom_id = self.find_bill_of_material(product_id=line.product_id, type='normal') or self.find_bill_of_material(product_id=line.product_id)
             if not first_bom_id:
                 bom_ids.update({bom_id: bom_id.product_qty * self.qty})
                 return bom_ids
@@ -106,7 +106,7 @@ class ProductionPlanning(models.Model):
         child_lines = bom_id.bom_line_ids
         while (child_lines):
             for line in child_lines:
-                bill_of_material_ids = self.find_bill_of_material(product_id=line.product_id)
+                bill_of_material_ids = self.find_bill_of_material(product_id=line.product_id, type='normal') or self.find_bill_of_material(product_id=line.product_id)
                 for bom_id in bill_of_material_ids:
                     bom_ids.update({bom_id: (line.product_qty / line.bom_id.product_qty) * previous_qty})
                     previous_qty *= (line.product_qty / line.bom_id.product_qty)
