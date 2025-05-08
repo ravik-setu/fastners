@@ -15,7 +15,6 @@
         'views/mrp_production_planning_view.xml',
         'views/mrp_production_view.xml',
         'views/ir_sequence_view.xml',
-        'views/mrp_workorder_view.xml',
         'views/res_partner_view.xml',
         'views/production_planing_line_view.xml',
         'views/register_daily_production_view.xml',
