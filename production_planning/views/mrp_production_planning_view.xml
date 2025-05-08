@@ -27,7 +27,7 @@
                         <div class="oe_button_box" name="button_box">
                             <button class="oe_stat_button" name="action_view_subcontracts" type="object" icon="fa-truck" invisible="not subcontract_ids">
                                 <div class="o_field_widget o_stat_info">
-                                    <span class="o_stat_text">Subcontracts</span>
+                                    <span class="o_stat_text">Job Work</span>
                                 </div>
                             </button>
                             <field name="mo_ids" invisible="1"/>
