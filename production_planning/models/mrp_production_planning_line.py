@@ -31,13 +31,13 @@ class MrpProductionPlanning(models.Model):
             ]""",
         check_company=True)
     mo_count = fields.Integer("Manufacturing Orders", compute='_compute_mo_count',store=True)
-    done_qty = fields.Float(string="Quantity", compute='_compute_mo_count', store=True)
-    pending_qty = fields.Float(string="Quantity", compute='_compute_mo_count',store=True)
+    done_qty = fields.Float(string="Quantity", compute='_compute_mo_count', store=False)
+    pending_qty = fields.Float(string="Quantity", compute='_compute_mo_count',store=False)
     running_production_id = fields.Many2one("mrp.production", string="Running Production")
     state = fields.Selection(related="planning_id.state", store=True)
     in_progress = fields.Boolean(string="In Progress", copy=False)
     lot_name = fields.Char(string="Lot/Serial")
-    reserved_qty = fields.Float(string='Reserved Qty', compute='_compute_mo_count',store=True)
+    reserved_qty = fields.Float(string='Reserved Qty', compute='_compute_mo_count',store=False)
     component_status = fields.Selection([
         ('available', 'Available'),
         ('unavailable', 'Not Available'),
