@@ -64,12 +64,6 @@
                 <xpath expr="//form//field[@name='company_id']" position="after">
                     <field name="state" invisible="1"/>
                 </xpath>
-                <xpath expr="//form//button[@name='button_validate'][1]" position="attributes">
-                    <attribute name="invisible">state in ('waiting', 'confirmed','assigned')</attribute>
-                </xpath>
-                <xpath expr="//form//button[@name='button_validate'][2]" position="attributes">
-                    <attribute name="invisible">state not in ('waiting', 'confirmed','assigned')</attribute>
-                </xpath>
                 <xpath expr="//form//div[@name='button_box']//button[@icon='fa-check']" position="replace">
                     <button name="view_inspection_sheet" invisible="not check_ids" type="object" class="oe_stat_button"
                             icon="fa-check" groups="setu_quality.group_setu_quality_user">

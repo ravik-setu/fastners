@@ -340,7 +340,8 @@ class MrpProduction(models.Model):
             'context': {
                 'production_id': self.id,
                 'default_type': 'component',
-                'product_ids': self.move_raw_ids.mapped('product_id').ids
+                'product_ids': self.move_raw_ids.mapped('product_id').ids,
+                'default_product_id': self.move_raw_ids.mapped('product_id')[:1].id
             }
         }
 
