@@ -60,7 +60,7 @@ class RegisterDailyProduction(models.Model):
                 mo.move_raw_ids.write({'picked': True})
             action = mo.with_context(avoid_warning=True).mark_done_and_create_backorder_if_needed()
             self.planning_line.running_production_id = self.planning_line.find_latest_backorder() or mo.id
-            if self.planning_line.running_production_id and mo.id != self.planning_line.running_production_id.id:
+            if self.planning_line.running_production_id and mo.id == self.planning_line.running_production_id.id:
                 self.planning_line.button_stop()
         if self.return_to_stock and self.return_quantity:
             try:
