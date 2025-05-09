@@ -80,10 +80,10 @@
                                         <field name="product_id" options="{'no_open': True}" readonly="1"
                                                column_invisible="1"/>
                                         <field name="bom_id" required="1"/>
-                                        <field name="component_status" optional="show" widget="badge" invisible="not running_production_id"
-                                               decoration-success="running_production_id.reservation_state == 'assigned' or component_status == 'available'"
-                                               decoration-warning="running_production_id.reservation_state != 'assigned' and component_status == 'available'"
-                                               decoration-danger="running_production_id.reservation_state != 'assigned' and component_status == 'unavailable'"/>
+                                        <field name="component_status" optional="show" widget="badge" invisible="state in ['draft', 'confirm', 'cancel']"
+                                               decoration-success="component_status == 'available'"
+                                               decoration-warning="component_status == 'partially_available'"
+                                               decoration-danger="component_status == 'unavailable'"/>
                                         <field name="available_qty" readonly="1"/>
                                         <field name="qty" string="Manufacture Qty in KG"/>
                                         <field name="in_progress" column_invisible="1"/>

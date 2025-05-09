@@ -40,16 +40,17 @@ class MrpProductionPlanning(models.Model):
     reserved_qty = fields.Float(string='Reserved Qty', compute='_compute_mo_count',store=True)
     component_status = fields.Selection([
         ('available', 'Available'),
-        ('unavailable', 'Not Available')], compute='_compute_component_status', store=True)
-    subcontract_id = fields.Many2one('purchase.order', string='Subcontract', compute='_compute_subcontract_id')
-    subcontract_bom_id = fields.Many2one('mrp.bom', compute='_compute_subcontract_id')
+        ('unavailable', 'Not Available'),
+        ('partially_available', 'Partially Available')], compute='_compute_component_status')
+    subcontract_ids = fields.One2many('purchase.order', 'planning_lines_id', string='Subcontract')
+    subcontract_bom_id = fields.Many2one('mrp.bom')
 
-    @api.depends('planning_id.mo_ids', 'subcontract_id')
+    @api.depends('planning_id.mo_ids', 'subcontract_ids')
     def _compute_mo_count(self):
         for rec in self:
             product_mos = rec.find_product_mos()
             rec.mo_count = len(product_mos)
-            rec.done_qty = sum(product_mos.mapped('qty_produced')) + sum(rec.subcontract_id.filtered(lambda sub: sub.state != 'cancel').order_line.mapped('product_qty'))
+            rec.done_qty = sum(product_mos.mapped('qty_produced')) + sum(rec.subcontract_ids.filtered(lambda sub: sub.state != 'cancel').order_line.mapped('product_qty'))
             rec.pending_qty = rec.qty - min(rec.done_qty, rec.qty)
             rec.reserved_qty = product_mos.get_available_component_qty_for_return()
             if not rec.pending_qty:
@@ -115,29 +116,18 @@ class MrpProductionPlanning(models.Model):
             }
         }
 
-    def _compute_subcontract_id(self):
-        for rec in self:
-            subcontract_bom = self.env['mrp.production.planning'].find_bill_of_material(product_id=rec.product_id,
-                                                                                           type='subcontract')
-            rec.subcontract_bom_id = subcontract_bom.id
-            subcontract = self.env['purchase.order'].search([('state', '!=', 'cancel'), ('is_outsourcing', '=', True), ('planning_lines_id', '=', rec.id)])
-            rec.write({'subcontract_id': subcontract.id})
-
-    def action_view_subcontract(self):
-        return {
-            'type': 'ir.actions.act_window',
-            'name': 'Subcontract',
-            'view_mode': 'form',
-            'res_model': 'purchase.order',
-            'res_id': self.subcontract_id.id,
-            'domain': [('id', '=', self.subcontract_id.id)],
-            'context': {'create': False}
-        }
-
-    @api.depends('running_production_id.components_availability_state')
     def _compute_component_status(self):
         for rec in self:
-            if rec.running_production_id.components_availability_state == 'available':
+            bom_id = rec.bom_id
+            if all(sum(self.env['stock.quant'].search(
+                    [('product_id', '=', line.product_id.id),
+                     ('location_id', '=', line.product_id.destination_location_id.id),
+                     ('quantity', '>', 0)]).mapped('quantity')) >= (rec.pending_qty * line.product_qty) for line in bom_id.bom_line_ids):
                 rec.component_status = 'available'
+            elif any(sum(self.env['stock.quant'].search(
+                    [('product_id', '=', line.product_id.id),
+                     ('location_id', '=', line.product_id.destination_location_id.id),
+                     ('quantity', '>', 0)]).mapped('quantity')) >= (rec.pending_qty * line.product_qty) for line in bom_id.bom_line_ids):
+                rec.component_status = 'partially_available'
             else:
                 rec.component_status = 'unavailable'

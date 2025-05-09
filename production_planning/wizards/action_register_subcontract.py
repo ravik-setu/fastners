@@ -1,4 +1,5 @@
 from odoo import fields, models, api
+from odoo.exceptions import UserError
 
 
 class RegisterSubcontract(models.Model):
@@ -15,7 +16,7 @@ class RegisterSubcontract(models.Model):
 
     def register_subcontract(self):
         subcontractor_id = self.bom_id.subcontractor_ids and self.bom_id.subcontractor_ids[-1]
-        if subcontractor_id:
+        if subcontractor_id and self.subcontract_qty > 0:
             purchase_id = self.env['purchase.order'].prepare_vals_and_create_purchase_order(vendor_id=subcontractor_id,
                                                                               product_id=self.product_id,
                                                                               product_uom_id=self.product_id.uom_id,
@@ -24,6 +25,7 @@ class RegisterSubcontract(models.Model):
                                                                               planning_line_id=self.planning_line)
             if hasattr(purchase_id, 'is_outsourcing'):
                 purchase_id.is_outsourcing = True
+            self.planning_line.write({'subcontract_bom_id': self.bom_id})
             return {
                 'type': 'ir.actions.act_window',
                 'view_mode': 'form',

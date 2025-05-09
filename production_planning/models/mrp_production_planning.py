@@ -43,7 +43,7 @@ class ProductionPlanning(models.Model):
     lot_name = fields.Char(string='Serial Number / Lot', copy=False)
     excel_file_data = fields.Binary()
     sale_order_ids = fields.Many2many("sale.order", "planing_id", "sale_id", string="Sale Orders")
-    subcontract_ids = fields.One2many('purchase.order', string='Subcontracts', compute='_compute_subcontract_ids')
+    subcontract_ids = fields.One2many('purchase.order', 'planning_id', string='Subcontracts')
 
     def action_confirm(self):
         """
@@ -70,8 +70,9 @@ class ProductionPlanning(models.Model):
             else:
                 available_qty = self.get_available_qty_on_location(product_id)
             if product_id and product_id not in line_product_ids:
+                subcontract_bom_id = self.find_bill_of_material(product_id, type='subcontract')
                 lst.append((0, 0, {'product_id': product_id.id, 'bom_id': bom_id.id,
-                                   'available_qty': available_qty, 'qty': qty}))
+                                   'available_qty': available_qty, 'qty': qty, 'subcontract_bom_id': subcontract_bom_id.id}))
                 line_product_ids.append(bom_id.product_id.id)
         if lst:
             self.write({'planning_lines': lst, 'state': 'confirm'})
@@ -239,18 +240,13 @@ class ProductionPlanning(models.Model):
             lines = self.sale_order_ids.order_line.filtered(lambda line:line.product_id.id == self.product_id.id)
             rec.qty = sum(lines.mapped('product_uom_qty')) - sum(lines.mapped('qty_delivered'))
 
-    def _compute_subcontract_ids(self):
-        for rec in self:
-            subcontracts = self.env['purchase.order'].search([('state', '!=', 'cancel'), ('is_outsourcing', '=', True), ('planning_id', '=', rec.id)])
-            rec.write({'subcontract_ids': [(6, 0, subcontracts.ids)]})
-
     def action_view_subcontracts(self):
         return {
             'type': 'ir.actions.act_window',
             'name': 'Subcontracts',
             'view_mode': 'tree,form',
             'res_model': 'purchase.order',
-            'domain': [('id', 'in', self.subcontract_ids.ids)],
+            'domain': [('planning_id', '=', self.id)],
             'context': {'create': False}
         }
 
